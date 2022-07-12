@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/11 19:22:38 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/12 19:36:31 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ RM			=	rm -rf
 
 SRCS		=	main.c
 
-LIBFT		=	../libft/libft.a
+LIBFT		=	./libft/libft.a
 
 OBJ			=	$(SRCS:%.c=%.o)
 
@@ -32,7 +32,7 @@ $(NAME)		:	$(OBJ) $(LIBFT)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
 $(LIBFT)	:
-	make -C ../libft
+	make -C ./libft
 
 %.o			:	%.c $(HEADER)
 	$(CC) $(CFLAGS) -c  $<  -o $@
@@ -41,10 +41,10 @@ $(LIBFT)	:
 
 clean		:
 	$(RM) $(OBJ) $(OBJ_CHECKER)
-	make clean -C ../libft
+	make clean -C ./libft
 
 fclean		: clean
 	$(RM) $(NAME) $(NAME_CHECKER)
-	make fclean -C ../libft
+	make fclean -C ./libft
 
 re			:	fclean all
