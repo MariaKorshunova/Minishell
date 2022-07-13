@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/13 17:03:06 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/13 17:26:00 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADER		=	./include/minishell.h
 
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-LDFLAGS		=	-lreadline -L/Users/jmabel/.brew/opt/readline/lib
+LDFLAGS		=	-lreadline -L~/.brew/opt/readline/lib
 
 RM			=	rm -rf
 
