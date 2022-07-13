@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/12 19:36:31 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/13 17:03:06 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(NAME)		:	$(OBJ) $(LIBFT)
 $(LIBFT)	:
 	make -C ./libft
 
-%.o			:	%.c $(HEADER)
+%.o			:	%.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -c  $<  -o $@
 
 .PHONY		:	all clean fclean re
