@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/14 15:32:53 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/14 15:33:44 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSER_H
+# define PARSER_H
 
-# include <unistd.h>
-# include <stdlib.h> 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "parser.h"
+# include "minishell.h"
 
-typedef struct s_data
-{
-	char	**env;
-}	t_data;
+typedef struct s_data	t_data;
 
 #endif

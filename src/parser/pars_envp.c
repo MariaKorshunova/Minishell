@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pars_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/14 15:32:53 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/14 15:24:23 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/14 16:32:03 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
 
-# include <unistd.h>
-# include <stdlib.h> 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "parser.h"
-
-typedef struct s_data
+void	pars_envp(t_data *data)
 {
-	char	**env;
-}	t_data;
-
-#endif
+	(void)data;
+	return ;
+}
