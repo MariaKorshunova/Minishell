@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/12 16:09:09 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/14 17:28:28 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/15 10:32:45 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME)		:	$(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o			: %.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean 		:
 	$(RM) $(OBJ)

@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/14 17:24:30 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/14 18:14:55 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME)		:	$(OBJ) $(LIBFT)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
 $(LIBFT)	:
-	@make -C ./libft
+	make -C ./libft
 
 $(FOLDER)	:
 	mkdir -p $@

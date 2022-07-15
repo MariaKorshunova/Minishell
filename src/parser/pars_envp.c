@@ -6,14 +6,30 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:24:23 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/14 16:32:03 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/15 11:17:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	pars_envp(t_data *data)
+/* in progress. The function have a leak */
+void	pars_envp(t_env *list_env, char **envp)
 {
-	(void)data;
-	return ;
+	int		i;
+	int		j;
+	char	*name;
+
+	(void)list_env;
+	i = 0;
+	while (envp[i])
+	{
+		j = 0;
+		while (envp[i][j] != '=')
+			j++;
+		// handle error with '=' в envp (j=0 or j=len(str))
+		name = ft_substr(envp[i], 0, j);
+		printf("%d\t%s\t%s\n", j, name, envp[i++]);
+	}
 }
+
+// static void	lstnew_env(char *name, char *content);
