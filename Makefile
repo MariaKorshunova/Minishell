@@ -6,27 +6,37 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/13 17:26:00 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/14 18:14:55 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	minishell
 
-HEADER		=	./include/minishell.h
+INCLUDES	=	include/
+HEADER		=	$(addprefix include/,\
+				minishell.h\
+				parser.h)
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
-LDFLAGS		=	-lreadline -L~/.brew/opt/readline/lib
+CFLAGS		=	-I include
+CFLAGS		+=	-Wall -Wextra -Werror
+LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
 RM			=	rm -rf
 
-SRCS		=	main.c
-
 LIBFT		=	./libft/libft.a
 
-OBJ			=	$(SRCS:%.c=%.o)
+FILE_C		=	main.c
+FILE_C		+=	$(addprefix parser/,\
+				pars_envp.c)
 
-all			:	$(NAME)
+SRCS		=	$(addprefix src/, $(FILE_C))
+
+OBJ			=	$(addprefix objects/, $(FILE_C:%.c=%.o))
+
+FOLDER		=	$(sort $(dir objects/ $(OBJ)))
+
+all			:	$(FOLDER) $(NAME)
 
 $(NAME)		:	$(OBJ) $(LIBFT)
 	$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
@@ -34,17 +44,21 @@ $(NAME)		:	$(OBJ) $(LIBFT)
 $(LIBFT)	:
 	make -C ./libft
 
-%.o			:	%.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -c  $<  -o $@
+$(FOLDER)	:
+	mkdir -p $@
+
+objects/%.o	:	./src/%.c $(HEADER) Makefile
+	$(CC) $(CFLAGS) -I $(INCLUDES) -c  $<  -o $@
 
 .PHONY		:	all clean fclean re
 
 clean		:
-	$(RM) $(OBJ) $(OBJ_CHECKER)
+	$(RM) $(OBJ)
+	$(RM) $(FOLDER)
 	make clean -C ./libft
 
 fclean		: clean
-	$(RM) $(NAME) $(NAME_CHECKER)
+	$(RM) $(NAME)
 	make fclean -C ./libft
 
 re			:	fclean all
