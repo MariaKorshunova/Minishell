@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/15 11:15:27 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/17 21:43:00 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@
 # include "../libft/libft.h"
 # include "parser.h"
 
-/* struct for environment */
-typedef struct s_env
+/* struct for list key-value */
+typedef struct s_key_value
 {
-	char			*name;
-	char			*content;
+	void			*key;
+	void			*value;
 	struct s_env	*next;
-}	t_env;
+}	t_key_value;
 
 /* Struct with common var in minishell */
 typedef struct s_data
 {
-	t_env	*env;
+	t_key_value	*env;
 }	t_data;
 
 #endif
