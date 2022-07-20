@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+.PHONY		:	all clean fclean re
+
 NAME		=	minishell
 
 HEADER		=	$(addprefix include/,\
@@ -42,7 +44,7 @@ all			:	$(FOLDER) $(NAME)
 $(NAME)		:	$(OBJ) $(LIBFT)
 				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
-$(LIBFT)	:	libft_obj
+$(LIBFT)	:	libft_obj ./libft/Makefile
 				make -C ./libft
 
 libft_obj	:
@@ -51,10 +53,8 @@ libft_obj	:
 $(FOLDER)	:
 				mkdir -p $@
 
-objects/%.o	:	./src/%.c $(HEADER) Makefile
-				$(CC) $(CFLAGS) -c  $<  -o $@
-
-.PHONY		:	all clean fclean re
+objects/%.o	:	./src/%.c $(HEADER) Makefile ./libft/Makefile
+				$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
 				$(RM) $(OBJ)
