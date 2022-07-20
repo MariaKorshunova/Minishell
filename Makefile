@@ -12,14 +12,14 @@
 
 NAME		=	minishell
 
-INCLUDES	=	include/
 HEADER		=	$(addprefix include/,\
-				minishell.h\
-				parser.h)
+							minishell.h\
+							parser.h)
 
-CC			=	cc
 CFLAGS		=	-I include
+
 CFLAGS		+=	-Wall -Wextra -Werror
+
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
 RM			=	rm -rf
@@ -27,8 +27,9 @@ RM			=	rm -rf
 LIBFT		=	./libft/libft.a
 
 FILE_C		=	main.c
+
 FILE_C		+=	$(addprefix parser/,\
-				pars_envp.c)
+							pars_envp.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 
@@ -39,26 +40,30 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 all			:	$(FOLDER) $(NAME)
 
 $(NAME)		:	$(OBJ) $(LIBFT)
-	$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
-$(LIBFT)	:
-	make -C ./libft
+$(LIBFT)	:	libft_obj
+				make -C ./libft
+
+libft_obj	:
+				mkdir libft_obj
 
 $(FOLDER)	:
-	mkdir -p $@
+				mkdir -p $@
 
 objects/%.o	:	./src/%.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -I $(INCLUDES) -c  $<  -o $@
+				$(CC) $(CFLAGS) -c  $<  -o $@
 
 .PHONY		:	all clean fclean re
 
 clean		:
-	$(RM) $(OBJ)
-	$(RM) $(FOLDER)
-	make clean -C ./libft
+				$(RM) $(OBJ)
+				$(RM) $(FOLDER)
+				make clean -C ./libft
+				$(RM) libft_obj
 
-fclean		: clean
-	$(RM) $(NAME)
-	make fclean -C ./libft
+fclean		:	clean
+				$(RM) $(NAME)
+				make fclean -C ./libft
 
 re			:	fclean all
