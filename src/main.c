@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/15 10:31:28 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/20 19:47:56 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	init_data(&data);
 	pars_envp(data.env, envp);
-	prompt = readline("Minishell 🍀 ");
-	printf("%s\n", prompt);
-	free(prompt);
+	while (data.exit_flag)
+	{
+		prompt = readline("Minishell 🍀 ");
+		free(prompt);
+	}
 	return (EXIT_SUCCESS);
 }
 
 static void	init_data(t_data *data)
 {
 	data->env = NULL;
+	data->exit_flag = 1;
 }	

@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/14 18:14:55 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/19 18:27:24 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ LIBFT		=	./libft/libft.a
 
 FILE_C		=	main.c
 FILE_C		+=	$(addprefix parser/,\
+				key_value_list_functions.c\
 				pars_envp.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
