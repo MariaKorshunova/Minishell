@@ -6,20 +6,22 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/19 18:27:24 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/20 20:05:01 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+.PHONY		:	all clean fclean re
+
 NAME		=	minishell
 
-INCLUDES	=	include/
 HEADER		=	$(addprefix include/,\
-				minishell.h\
-				parser.h)
+							minishell.h\
+							parser.h)
 
-CC			=	cc
 CFLAGS		=	-I include
+
 CFLAGS		+=	-Wall -Wextra -Werror
+
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
 RM			=	rm -rf
@@ -27,6 +29,7 @@ RM			=	rm -rf
 LIBFT		=	./libft/libft.a
 
 FILE_C		=	main.c
+
 FILE_C		+=	$(addprefix parser/,\
 				key_value_list_functions.c\
 				pars_envp.c)
@@ -40,26 +43,28 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 all			:	$(FOLDER) $(NAME)
 
 $(NAME)		:	$(OBJ) $(LIBFT)
-	$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
-$(LIBFT)	:
-	make -C ./libft
+$(LIBFT)	:	libft_obj ./libft/Makefile
+				make -C ./libft
+
+libft_obj	:
+				mkdir libft_obj
 
 $(FOLDER)	:
-	mkdir -p $@
+				mkdir -p $@
 
-objects/%.o	:	./src/%.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -I $(INCLUDES) -c  $<  -o $@
-
-.PHONY		:	all clean fclean re
+objects/%.o	:	./src/%.c $(HEADER) Makefile ./libft/Makefile
+				$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
-	$(RM) $(OBJ)
-	$(RM) $(FOLDER)
-	make clean -C ./libft
+				$(RM) $(OBJ)
+				$(RM) $(FOLDER)
+				make clean -C ./libft
+				$(RM) libft_obj
 
-fclean		: clean
-	$(RM) $(NAME)
-	make fclean -C ./libft
+fclean		:	clean
+				$(RM) $(NAME)
+				make fclean -C ./libft
 
 re			:	fclean all
