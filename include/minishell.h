@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/20 17:37:25 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/21 20:39:23 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,28 @@
 # include "parser.h"
 
 /* struct for list key-value */
-typedef struct s_key_value
+typedef struct s_key_val
 {
 	void				*key;
 	void				*value;
-	struct s_key_value	*next;
-}	t_key_value;
+	struct s_key_val	*next;
+}	t_key_val;
 
 /* Struct with common var in minishell */
 typedef struct s_data
 {
-	t_key_value	*env;
+	t_key_val	*env;
 	int			exit_flag;
 }	t_data;
+
+/* ./utils/key_value_list_functions */
+t_key_val	*lstnew_key_value(void *key, void *value);
+t_key_val	*lstlast_key_value(t_key_val *lst);
+void		lstadd_back_key_value(t_key_val **lst, t_key_val *new);
+void		lstprint_key_value(t_key_val *lst);
+
+/* ./utils/key_value_list_clear.c */
+void		lstdelone_key_value(t_key_val *lst);
+void		lstclear_key_value(t_key_val **lst);
 
 #endif
