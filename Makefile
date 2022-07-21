@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY		:	all clean fclean re
+.PHONY		:	all clean fclean re libft
 
 NAME		=	minishell
 
@@ -39,12 +39,12 @@ OBJ			=	$(addprefix objects/, $(FILE_C:%.c=%.o))
 
 FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 
-all			:	$(FOLDER) $(NAME)
+all			:	$(FOLDER) libft $(NAME)
 
-$(NAME)		:	$(OBJ) $(LIBFT)
+$(NAME)		:	$(OBJ)
 				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
-$(LIBFT)	:	libft_obj ./libft/Makefile
+libft		:	libft_obj
 				make -C ./libft
 
 libft_obj	:
@@ -53,7 +53,7 @@ libft_obj	:
 $(FOLDER)	:
 				mkdir -p $@
 
-objects/%.o	:	./src/%.c $(HEADER) Makefile ./libft/Makefile
+objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT)
 				$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
