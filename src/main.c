@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/21 21:06:42 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/22 18:02:00 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	init_data(&data);
-	if (pars_envp(&data.env, envp))
+	if (pars_envp(&data, envp))
 		return (EXIT_FAILURE); //  добавить perror
 	// add history
 	while (data.exit_flag)
