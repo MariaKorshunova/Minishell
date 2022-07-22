@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/12 20:33:53 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/15 11:15:27 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,21 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../libft/libft.h"
+# include "parser.h"
 
-struct s_data
+/* struct for environment */
+typedef struct s_env
 {
-	char	**env;
+	char			*name;
+	char			*content;
+	struct s_env	*next;
+}	t_env;
+
+/* Struct with common var in minishell */
+typedef struct s_data
+{
+	t_env	*env;
 }	t_data;
 
 #endif

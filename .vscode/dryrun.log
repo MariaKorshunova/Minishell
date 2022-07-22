@@ -1,0 +1,13 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/refrain/Desktop/Minishell'
+mkdir -p objects
+mkdir -p objects/parser
+ 
+cc -I include -Wall -Wextra -Werror -c src/main.c -o objects/main.o
+ 
+cc -I include -Wall -Wextra -Werror -c src/parser/pars_envp.c -o objects/parser/pars_envp.o
+mkdir libft_obj
+make -C ./libft
+cc -lreadline -L/Users/refrain/.brew/opt/readline/lib -I include -Wall -Wextra -Werror ./libft/libft.a objects/main.o objects/parser/pars_envp.o -o minishell
+make: Leaving directory `/Users/refrain/Desktop/Minishell'
+ 
