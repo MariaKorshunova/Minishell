@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   key_value_lstclear.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/22 18:12:08 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/21 20:30:57 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/25 18:19:20 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	lstdelone_key_value(t_key_val *lst)
+{
+	if (!lst)
+		return ;
+	free(lst->key);
+	free(lst->value);
+	free(lst);
+}
 
-typedef struct s_data		t_data;
-typedef struct s_key_val	t_key_val;
+void	lstclear_key_value(t_key_val **lst)
+{
+	t_key_val	*tmp;
 
-/* pars_envp.c */
-int	pars_envp(t_data *data, char **envp);
-
-#endif
+	if (!lst)
+		return ;
+	if (!(*lst))
+		return ;
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		lstdelone_key_value(tmp);
+	}
+}
