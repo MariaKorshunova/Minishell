@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/22 18:02:00 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/25 19:20:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,23 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	init_data(&data);
 	if (pars_envp(&data, envp))
-		return (EXIT_FAILURE); //  добавить perror
-	// add history
+	{
+		perror(PREFIX_ERROR);
+		return (EXIT_FAILURE);
+	}
 	while (data.exit_flag)
 	{
-		prompt = readline("Minishell 🍀 ");
+		prompt = readline(PROMPT);
 		free(prompt);
 		data.exit_flag = 0;
 	}
-	lstclear_key_value(&data.env); // destructor
+	destructor_minishell(&data);
 	return (EXIT_SUCCESS);
 }
 
 static void	init_data(t_data *data)
 {
 	data->env = NULL;
+	data->env_arr = NULL;
 	data->exit_flag = 1;
 }	

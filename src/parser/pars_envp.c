@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:24:23 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/22 20:52:37 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/25 19:06:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ static int	add_lst_env(t_key_val **lst, char *str, int j);
 static char	*pars_name_envp(char *str, int j, t_key_val	**lst);
 static char	*pars_value_envp(char *str, int j, t_key_val **lst, char *name);
 
-/* in progress */
-
 int	pars_envp(t_data *data, char **envp)
 {
 	if (pars_envp_lst(&data->env, envp))
 		return (EXIT_FAILURE);
-	lstprint_key_value(data->env);
+	if (envp_list_to_chararray(data))
+	{
+		lstclear_key_value(&data->env);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 

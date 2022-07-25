@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/21 20:38:08 by jmabel           ###   ########.fr        #
+#    Updated: 2022/07/25 19:22:05 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ HEADER		=	$(addprefix include/,\
 
 CFLAGS		=	-I include
 
-CFLAGS		+=	-Wall -Wextra -Werror
+# CFLAGS		+=	-Wall -Wextra -Werror
+CFLAGS		+=	-Wall -Wextra -Werror -fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -35,7 +36,10 @@ FILE_C		+=	$(addprefix parser/,\
 
 FILE_C		+=	$(addprefix utils/,\
 				key_value_list_functions.c\
-				key_value_lstclear.c)
+				key_value_lstclear.c\
+				envp_list_to_chararray.c\
+				array_operations.c\
+				destructor.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

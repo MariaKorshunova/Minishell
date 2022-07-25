@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_lstclear.c                               :+:      :+:    :+:   */
+/*   array_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/21 20:30:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/25 18:19:20 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/25 17:46:51 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lstdelone_key_value(t_key_val *lst)
+void	free_2dimensional_array(void **arr)
 {
-	if (!lst)
+	int	i;
+
+	if (!(arr))
 		return ;
-	free(lst->key);
-	free(lst->value);
-	free(lst);
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }
 
-void	lstclear_key_value(t_key_val **lst)
+void	print_2dimensional_chararray(char **arr)
 {
-	t_key_val	*tmp;
+	int	i;
 
-	if (!lst)
+	if (!(arr))
 		return ;
-	if (!(*lst))
-		return ;
-	while (*lst)
-	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		lstdelone_key_value(tmp);
-	}
+	i = 0;
+	while (arr[i] != '\0')
+		printf("%s\n", arr[i++]);
 }
