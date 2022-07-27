@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_list_functions.c                         :+:      :+:    :+:   */
+/*   key_value_lstcreate.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 17:24:03 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/25 16:37:35 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/27 19:22:44 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/27 19:54:27 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
 t_key_val	*lstnew_key_value(void *key, void *value)
 {
@@ -23,26 +23,6 @@ t_key_val	*lstnew_key_value(void *key, void *value)
 	lstnew->value = value;
 	lstnew->next = NULL;
 	return (lstnew);
-}
-
-t_key_val	*lstlast_key_value(t_key_val *lst)
-{
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-int	lst_size_key_value(t_key_val *lst)
-{
-	int	count;
-
-	count = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		count++;
-	}
-	return (count);
 }
 
 void	lstadd_back_key_value(t_key_val **lst, t_key_val *new)
@@ -58,13 +38,23 @@ void	lstadd_back_key_value(t_key_val **lst, t_key_val *new)
 		*lst = new;
 }
 
-void	lstprint_key_value(t_key_val *lst)
+int	lstnew_add_back_intkey_value(t_key_val **lst, int key, void *value)
 {
-	if (!lst)
-		return ;
-	while (lst)
+	t_key_val	*lstnew;
+	int			*key_pointer;
+
+	lstnew = NULL;
+	key_pointer = NULL;
+	key_pointer = (int *)malloc(sizeof(int));
+	if (!key_pointer)
+		return (EXIT_FAILURE);
+	*key_pointer = key;
+	lstnew = lstnew_key_value(key_pointer, value);
+	if (!lstnew)
 	{
-		printf("%s=%s\n", (char *)lst->key, (char *)lst->value);
-		lst = lst->next;
+		free(key_pointer);
+		return (EXIT_FAILURE);
 	}
+	lstadd_back_key_value(lst, lstnew);
+	return (EXIT_SUCCESS);
 }

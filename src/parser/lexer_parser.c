@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   lexer_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/27 13:48:10 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/27 12:08:34 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/27 17:12:50 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "parser.h"
 
-# include "minishell.h"
+int	lexer_parser(t_data *data, char *prompt)
+{
+	t_key_val	*token_list;
 
-typedef struct s_data		t_data;
-typedef struct s_key_val	t_key_val;
-
-/* pars_envp.c */
-int pars_envp(t_data *data, char **envp);
-
-/* lexer_parser.c */
-int lexer_parser(t_data *data, char *prompt);
-
-/* lexer.c */
-t_key_val	*lexer(char *prompt);
-
-#endif
+	(void) data;
+	token_list = NULL;
+	token_list = lexer(prompt);
+	lstprint_key_value(token_list, 'd');
+	lstclear_key_value(&token_list);
+	return (EXIT_SUCCESS);
+}

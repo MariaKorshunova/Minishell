@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/25 17:46:51 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/27 12:31:46 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	print_2dimensional_chararray(char **arr)
 	if (!(arr))
 		return ;
 	i = 0;
-	while (arr[i] != '\0')
+	while (arr[i])
 		printf("%s\n", arr[i++]);
 }

@@ -23,13 +23,11 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	init_data(&data);
 	if (pars_envp(&data, envp))
-	{
-		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
-	}
 	while (data.exit_flag)
 	{
 		prompt = readline(PROMPT);
+		lexer_parser(&data, prompt);
 		free(prompt);
 		data.exit_flag = 0;
 	}
