@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/28 14:22:10 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/28 17:41:25 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef enum e_token_type
 	SEP,
 	WORD,
 	GREATER,
-	LESS,
 	DOUBLE_GREATER,
+	LESS,
 	DOUBLE_LESS,
 	QUOTE,
 	DOUBLE_QUOTE,

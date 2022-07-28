@@ -6,12 +6,13 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:59:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/28 15:15:23 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/28 15:57:28 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	add_token(t_key_val **token_list, char *prompt, int *i);
 static int	add_sep_token(t_key_val **token_list, char *prompt, int *i);
 static int	add_word_token(t_key_val **token_list, char *prompt, int *i);
 
@@ -26,20 +27,30 @@ t_key_val	*lexer(char *prompt)
 	token_list = NULL;
 	while (i < len_prompt)
 	{
-		if (add_sep_token(&token_list, prompt, &i))
-		{
-			lstclear_key_value(&token_list);
+		if (add_token(&token_list, prompt, &i))
 			return (NULL);
-		}
-		if (add_word_token(&token_list, prompt, &i))
-		{
-			lstclear_key_value(&token_list);
-			return (NULL);
-		}
-		if (ft_strchr(SPEC_SYMBOL, prompt[i]) != NULL)
-			i++;
 	}
 	return (token_list);
+}
+
+static int	add_token(t_key_val **token_list, char *prompt, int *i)
+{
+	if (add_sep_token(token_list, prompt, i))
+	{
+		lstclear_key_value(token_list);
+		return (EXIT_FAILURE);
+	}
+	if (add_word_token(token_list, prompt, i))
+	{
+		lstclear_key_value(token_list);
+		return (EXIT_FAILURE);
+	}
+	if (add_spec_symbol_token(token_list, prompt, i))
+	{
+		lstclear_key_value(token_list);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 static int	add_sep_token(t_key_val **token_list, char *prompt, int *i)
