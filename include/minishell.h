@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/27 19:47:23 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/28 14:22:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 # define PROMPT "\e[1;32m minishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
-# define SPEC_SYMBOL "<>|' \t\""
+# define SPEC_SYMBOL "<>|'\""
+# define SEPARATOR " \t"
 
 typedef enum e_token_type
 {
