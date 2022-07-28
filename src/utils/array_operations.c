@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   array_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/22 18:12:08 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/25 17:46:51 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	free_2dimensional_array(void **arr)
+{
+	int	i;
 
-typedef struct s_data		t_data;
-typedef struct s_key_val	t_key_val;
+	if (!(arr))
+		return ;
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
 
-/* pars_envp.c */
-int	pars_envp(t_data *data, char **envp);
+void	print_2dimensional_chararray(char **arr)
+{
+	int	i;
 
-#endif
+	if (!(arr))
+		return ;
+	i = 0;
+	while (arr[i] != NULL)
+		printf("%s\n", arr[i++]);
+}
