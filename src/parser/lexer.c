@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:59:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/28 15:57:28 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/28 19:02:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	add_token(t_key_val **token_list, char *prompt, int *i);
 static int	add_sep_token(t_key_val **token_list, char *prompt, int *i);
 static int	add_word_token(t_key_val **token_list, char *prompt, int *i);
+static int	add_spec_symbol_token(t_key_val **token_list, char *prompt, int *i);
 
 t_key_val	*lexer(char *prompt)
 {
@@ -89,5 +90,18 @@ static int	add_word_token(t_key_val **token_list, char *prompt, int *i)
 			return (EXIT_FAILURE);
 		}
 	}
+	return (EXIT_SUCCESS);
+}
+
+static int	add_spec_symbol_token(t_key_val **token_list, char *prompt, int *i)
+{
+	if (add_less_token(token_list, prompt, i))
+		return (EXIT_FAILURE);
+	else if (add_greater_token(token_list, prompt, i))
+		return (EXIT_FAILURE);
+	else if (add_pipe_token(token_list, prompt, i))
+		return (EXIT_FAILURE);
+	else if (add_quote_token(token_list, prompt, i))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

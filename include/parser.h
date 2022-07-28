@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/28 15:44:14 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/28 18:41:18 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int			lexer_parser(t_data *data, char *prompt);
 t_key_val	*lexer(char *prompt);
 
 /* lexer_spec_symbol_token.c */
-int			add_spec_symbol_token(t_key_val **token_list, char *prompt, int *i);
+int			add_less_token(t_key_val **token_list, char *prompt, int *i);
+int			add_greater_token(t_key_val **token_list, char *prompt, int *i);
+int			add_pipe_token(t_key_val **token_list, char *prompt, int *i);
+
+/* lexer_add_quote_token.c */
+int			add_quote_token(t_key_val **token_list, char *prompt, int *i);
 
 #endif
