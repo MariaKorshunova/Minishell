@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:59:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/28 19:02:47 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/29 15:45:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	add_spec_symbol_token(t_key_val **token_list, char *prompt, int *i)
 		return (EXIT_FAILURE);
 	else if (add_pipe_token(token_list, prompt, i))
 		return (EXIT_FAILURE);
-	else if (add_quote_token(token_list, prompt, i))
+	else if (add_quotes_token(token_list, prompt, i))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

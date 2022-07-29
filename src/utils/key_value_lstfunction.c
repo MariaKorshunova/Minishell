@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 17:24:03 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/27 19:25:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/29 16:37:41 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	lstprint_key_value(t_key_val *lst, char type)
 		if (type == 's')
 			printf("%s=%s\n", (char *)lst->key, (char *)lst->value);
 		else if (type == 'd')
-			printf("%d=\"%s\"\n", *(int *)lst->key, (char *)lst->value);
+			printf("%d=%s\n", *(int *)lst->key, (char *)lst->value);
 		lst = lst->next;
 	}
 }
