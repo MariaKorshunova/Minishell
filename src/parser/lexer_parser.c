@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   lexer_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/27 12:31:46 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/27 12:08:34 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/29 15:39:42 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
-void	free_2dimensional_array(void **arr)
+int	lexer_parser(t_data *data, char *prompt)
 {
-	int	i;
+	t_key_val	*token_list;
 
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-void	print_2dimensional_chararray(char **arr)
-{
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
+	(void) data;
+	token_list = NULL;
+	token_list = lexer(prompt);
+	if (token_list == NULL)
+		return (EXIT_FAILURE);
+	lstprint_key_value(token_list, 'd');
+	lstclear_key_value(&token_list);
+	return (EXIT_SUCCESS);
 }
