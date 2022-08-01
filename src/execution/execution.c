@@ -23,7 +23,7 @@ int	execution(t_data *data, char *prompt)
 	token_list = lexer(prompt);
 	if (token_list == NULL)
 		return (EXIT_FAILURE);
-	lstprint_key_value(token_list, 'd');
+	// lstprint_key_value(token_list, 'd');
 	if (check_syntax_error(token_list) == -1)
 	{
 		printf("%s: %s\n", PREFIX_ERROR, "syntax error near unexpected token `|'");
