@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/29 15:45:20 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:16:01 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 # include "parser.h"
+# include "execution.h"
 
 # define PROMPT "\e[1;32m minishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
@@ -46,6 +47,14 @@ typedef struct s_key_val
 	void				*value;
 	struct s_key_val	*next;
 }	t_key_val;
+
+/* struct for executor */
+typedef struct s_exec
+{
+	t_key_val		**outfile;
+	char			**cmd;
+	struct s_exec	*next;
+}	t_exec;
 
 /* Struct with common var in minishell */
 typedef struct s_data

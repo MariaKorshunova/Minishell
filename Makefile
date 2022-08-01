@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/29 16:39:14 by jmabel           ###   ########.fr        #
+#    Updated: 2022/08/01 12:45:29 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME		=	minishell
 
 HEADER		=	$(addprefix include/,\
 							minishell.h\
-							parser.h)
+							parser.h\
+							execution.h)
 
 CFLAGS		=	-I include
 
@@ -32,11 +33,14 @@ LIBFT		=	./libft/libft.a
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
-				lexer_parser.c\
+				pars_envp.c\
 				lexer.c\
 				lexer_spec_symbol_token.c\
 				lexer_add_quote_token.c\
-				pars_envp.c)
+				syntax_error.c)
+
+FILE_C		+=	$(addprefix execution/,\
+				execution.c)
 
 FILE_C		+=	$(addprefix utils/,\
 				key_value_lstcreate.c\

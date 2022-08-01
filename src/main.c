@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/29 15:41:30 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/07/29 21:12:08 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ int	main(int argc, char **argv, char **envp)
 	while (data.exit_flag)
 	{
 		prompt = readline(PROMPT);
-		if (lexer_parser(&data, prompt))
+		if (!prompt)
+		{
+			destructor_minishell(&data);
+			return (EXIT_FAILURE);
+		}
+		if (execution(&data, prompt))
 		{
 			free(prompt);
 			destructor_minishell(&data);
