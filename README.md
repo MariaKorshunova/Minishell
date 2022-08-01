@@ -17,6 +17,22 @@ STDERR is redirect to STDOUT: redirected to /dev/null,
 effectually redirecting both STDERR and STDOUT to /dev/null         
 echo 'hello' > /dev/null 2>&1
 
+**Syntax error**
+* empty string only separators)
+Строка только с одним токеном SEP, вовзращает управление.
+* Строка только с одним токеном SEP между пайпами,это ошибка
+
+	bash-3.2$  | echo
+	bash: syntax error near unexpected token `|'
+
+	bash-3.2$ echo hello |   
+	> 
+
+
+
+
+**Parsing**
+Может не быть названия команды (=null)
 
 bash-3.2$ echo privet infile >
 bash: syntax error near unexpected token `newline'
@@ -32,3 +48,5 @@ bash-3.2$ ls | cat << end | wc << end2
 > end
 > end2
        0       0       0
+
+  > out | ls (зависает) 

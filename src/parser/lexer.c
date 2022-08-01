@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:59:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/29 15:45:57 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:58:41 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ static int	add_token(t_key_val **token_list, char *prompt, int *i)
 
 static int	add_sep_token(t_key_val **token_list, char *prompt, int *i)
 {
-	int			j;
+	int	j;
 
 	j = *i;
-	while (ft_strchr(SEPARATOR, prompt[*i]) != NULL)
+	while (ft_strchr(SEPARATOR, prompt[*i]) != NULL && prompt[*i] != '\0')
 		(*i)++;
 	if (j != *i)
 	{
