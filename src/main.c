@@ -32,7 +32,13 @@ int	main(int argc, char **argv, char **envp)
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
 		}
-		history(prompt);
+		if (history(prompt))
+		{
+			free(prompt);
+			destructor_minishell(&data);
+			rl_clear_history();
+			return (EXIT_FAILURE);
+		}
 		if (execution(&data, prompt))
 		{
 			free(prompt);
