@@ -88,4 +88,7 @@ void		print_2dimensional_chararray(char **arr);
 /* .src/utils/destructor.c */
 void		destructor_minishell(t_data *data);
 
+/* .src/history/history.c */
+int			history(char *str);
+
 #endif

@@ -50,6 +50,9 @@ FILE_C		+=	$(addprefix utils/,\
 				array_operations.c\
 				destructor.c)
 
+FILE_C		+=	$(addprefix history/,\
+				history.c)
+
 SRCS		=	$(addprefix src/, $(FILE_C))
 
 OBJ			=	$(addprefix objects/, $(FILE_C:%.c=%.o))
