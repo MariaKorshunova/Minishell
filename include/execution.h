@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/27 12:31:46 by jmabel           ###   ########.fr       */
+/*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
+/*   Updated: 2022/07/29 19:33:08 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-void	free_2dimensional_array(void **arr)
-{
-	int	i;
+# include "minishell.h"
 
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
+typedef struct s_data		t_data;
+typedef struct s_key_val	t_key_val;
+typedef struct s_exec		t_exec;
 
-void	print_2dimensional_chararray(char **arr)
-{
-	int	i;
+/* execution.c */
+int			execution(t_data *data, char *prompt);
 
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
-}
+#endif

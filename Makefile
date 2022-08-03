@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/25 19:22:05 by jmabel           ###   ########.fr        #
+#    Updated: 2022/08/01 12:45:29 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,13 @@ NAME		=	minishell
 
 HEADER		=	$(addprefix include/,\
 							minishell.h\
-							parser.h)
+							parser.h\
+							execution.h)
 
 CFLAGS		=	-I include
 
-# CFLAGS		+=	-Wall -Wextra -Werror
-CFLAGS		+=	-Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS		+=	-Wall -Wextra -Werror
+CFLAGS		+=	-fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -32,10 +33,18 @@ LIBFT		=	./libft/libft.a
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
-				pars_envp.c)
+				pars_envp.c\
+				lexer.c\
+				lexer_spec_symbol_token.c\
+				lexer_add_quote_token.c\
+				syntax_error.c)
+
+FILE_C		+=	$(addprefix execution/,\
+				execution.c)
 
 FILE_C		+=	$(addprefix utils/,\
-				key_value_list_functions.c\
+				key_value_lstcreate.c\
+				key_value_lstfunction.c\
 				key_value_lstclear.c\
 				envp_list_to_chararray.c\
 				array_operations.c\
