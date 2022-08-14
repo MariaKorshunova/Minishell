@@ -21,10 +21,14 @@ static char	*pars_value_envp(char *str, int j, t_key_val **lst, char *name);
 int	pars_envp(t_data *data, char **envp)
 {
 	if (pars_envp_lst(&data->env, envp))
+	{
+		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
+	}
 	if (envp_list_to_chararray(data))
 	{
 		lstclear_key_value(&data->env);
+		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

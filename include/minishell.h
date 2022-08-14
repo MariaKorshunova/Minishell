@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/25 19:21:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/01 20:16:01 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,25 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 # include "parser.h"
+# include "execution.h"
 
 # define PROMPT "\e[1;32m minishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
+# define SPEC_SYMBOL "<>|'\""
+# define SEPARATOR " \t"
+
+typedef enum e_token_type
+{
+	SEP,
+	WORD,
+	GREATER,
+	DOUBLE_GREATER,
+	LESS,
+	DOUBLE_LESS,
+	QUOTE,
+	DOUBLE_QUOTE,
+	PIPE,
+}	t_token_type;
 
 /* struct for list key-value */
 typedef struct s_key_val
@@ -32,6 +48,14 @@ typedef struct s_key_val
 	struct s_key_val	*next;
 }	t_key_val;
 
+/* struct for executor */
+typedef struct s_exec
+{
+	t_key_val		**outfile;
+	char			**cmd;
+	struct s_exec	*next;
+}	t_exec;
+
 /* Struct with common var in minishell */
 typedef struct s_data
 {
@@ -40,14 +64,17 @@ typedef struct s_data
 	int			exit_flag;
 }	t_data;
 
-/* .src//utils/key_value_list_functions */
+/* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);
+void		lstadd_back_key_value(t_key_val **lst, t_key_val *new);
+int			lstnew_add_back_intkey_value(t_key_val **lst, int key, void *value);
+
+/* .src/utils/key_value_lstfunction.c */
 t_key_val	*lstlast_key_value(t_key_val *lst);
 int			lst_size_key_value(t_key_val *lst);
-void		lstadd_back_key_value(t_key_val **lst, t_key_val *new);
-void		lstprint_key_value(t_key_val *lst);
+void		lstprint_key_value(t_key_val *lst, char type);
 
-/* .src//utils/key_value_list_clear.c */
+/* .src/utils/key_value_list_clear.c */
 void		lstdelone_key_value(t_key_val *lst);
 void		lstclear_key_value(t_key_val **lst);
 
