@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/07/25 19:22:05 by jmabel           ###   ########.fr        #
+#    Updated: 2022/08/15 00:46:40 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ RM			=	rm -rf
 
 LIBFT		=	./libft/libft.a
 
-FILE_C		=	main.c
+# FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
 				pars_envp.c)
@@ -40,6 +40,13 @@ FILE_C		+=	$(addprefix utils/,\
 				envp_list_to_chararray.c\
 				array_operations.c\
 				destructor.c)
+
+FILE_C		+=	$(addprefix builtins/,\
+				utils.c\
+				find_builtin.c\
+				ft_echo.c\
+				ft_pwd.c\
+				ft_cd.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

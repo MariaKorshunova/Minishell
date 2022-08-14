@@ -1,36 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/14 22:05:10 by refrain          ###   ########.fr       */
+/*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
+/*   Updated: 2022/08/15 01:21:27 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	free_2dimensional_array(void **arr)
-{
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-void	print_2dimensional_chararray(char **arr)
-{
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
-}
