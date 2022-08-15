@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_builtin.c                                     :+:      :+:    :+:   */
+/*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 23:01:13 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/15 05:28:05 by refrain          ###   ########.fr       */
+/*   Created: 2022/08/15 03:26:38 by refrain           #+#    #+#             */
+/*   Updated: 2022/08/15 03:52:47 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-void	find_builtin(char **cmd, t_key_val *envp_list)
-{
-	if (ft_strcmp((cmd)[0], "echo") == 0 || ft_strcmp((cmd)[0], "ECHO") == 0)
-		ft_echo(cmd);
-	else if (ft_strcmp((cmd)[0], "pwd") == 0 || ft_strcmp((cmd)[0], "PWD") == 0)
-		ft_pwd();
-	else if (ft_strcmp((cmd)[0], "cd") == 0)
-		ft_cd(cmd, envp_list);
-}
+# include "signal.h"
+# include "stdio.h"
+# include <readline/readline.h>
+
+void	ctrlc_handler(int signum);
+int		signal_handler(void);
+
+#endif

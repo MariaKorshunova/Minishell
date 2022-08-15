@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_builtin.c                                     :+:      :+:    :+:   */
+/*   array_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/07 23:01:13 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/15 05:28:05 by refrain          ###   ########.fr       */
+/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
+/*   Updated: 2022/08/15 02:21:00 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "minishell.h"
 
-void	find_builtin(char **cmd, t_key_val *envp_list)
+void	free_2dimensional_array(void **arr)
 {
-	if (ft_strcmp((cmd)[0], "echo") == 0 || ft_strcmp((cmd)[0], "ECHO") == 0)
-		ft_echo(cmd);
-	else if (ft_strcmp((cmd)[0], "pwd") == 0 || ft_strcmp((cmd)[0], "PWD") == 0)
-		ft_pwd();
-	else if (ft_strcmp((cmd)[0], "cd") == 0)
-		ft_cd(cmd, envp_list);
+	int	i;
+
+	if (!(arr))
+		return ;
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+void	print_2dimensional_chararray(char **arr)
+{
+	int	i;
+
+	if (!(arr))
+		return ;
+	i = 0;
+	while (arr[i])
+		printf("%s\n", arr[i++]);
 }

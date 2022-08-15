@@ -1,13 +1,53 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/refrain/Desktop/Minishell'
-mkdir -p objects
+make: Entering directory `/Users/regina/Desktop/Minishell3'
+mkdir -p objects/
+mkdir -p objects/builtins/
+mkdir -p objects/execution/
+mkdir -p objects/parser/
+mkdir -p objects/signals/
+mkdir -p objects/utils/
  
-mkdir -p objects/parser
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/main.c -o objects/main.o
  
-cc -I include -Wall -Wextra -Werror -c src/main.c -o objects/main.o
-cc -I include -Wall -Wextra -Werror -c src/parser/pars_envp.c -o objects/parser/pars_envp.o
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/parser/pars_envp.c -o objects/parser/pars_envp.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/parser/lexer.c -o objects/parser/lexer.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/parser/lexer_spec_symbol_token.c -o objects/parser/lexer_spec_symbol_token.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/parser/lexer_add_quote_token.c -o objects/parser/lexer_add_quote_token.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/parser/syntax_error.c -o objects/parser/syntax_error.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/execution/execution.c -o objects/execution/execution.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/utils/key_value_lstcreate.c -o objects/utils/key_value_lstcreate.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/utils/key_value_lstfunction.c -o objects/utils/key_value_lstfunction.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/utils/key_value_lstclear.c -o objects/utils/key_value_lstclear.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/utils/envp_list_to_chararray.c -o objects/utils/envp_list_to_chararray.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/utils/array_operations.c -o objects/utils/array_operations.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/utils/destructor.c -o objects/utils/destructor.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/builtins/utils.c -o objects/builtins/utils.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/builtins/find_builtin.c -o objects/builtins/find_builtin.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/builtins/ft_echo.c -o objects/builtins/ft_echo.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/builtins/ft_pwd.c -o objects/builtins/ft_pwd.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/builtins/ft_cd.c -o objects/builtins/ft_cd.o
+ 
+cc -I include -Wall -Wextra -Werror -fsanitize=address -g -I/opt/homebrew/opt/readline/include -c src/signals/signal.c -o objects/signals/signal.o
+ 
 mkdir libft_obj
 make -C ./libft
-cc -lreadline -L/Users/refrain/.brew/opt/readline/lib -I include -Wall -Wextra -Werror ./libft/libft.a objects/main.o objects/parser/pars_envp.o -o minishell
-make: Leaving directory `/Users/refrain/Desktop/Minishell'
+ 
+cc -lreadline -L/Users/regina/.brew/opt/readline/lib -I include -Wall -Wextra -Werror -fsanitize=address -g ./libft/libft.a -L/opt/homebrew/opt/readline/lib objects/main.o objects/parser/pars_envp.o objects/parser/lexer.o objects/parser/lexer_spec_symbol_token.o objects/parser/lexer_add_quote_token.o objects/parser/syntax_error.o objects/execution/execution.o objects/utils/key_value_lstcreate.o objects/utils/key_value_lstfunction.o objects/utils/key_value_lstclear.o objects/utils/envp_list_to_chararray.o objects/utils/array_operations.o objects/utils/destructor.o objects/builtins/utils.o objects/builtins/find_builtin.o objects/builtins/ft_echo.o objects/builtins/ft_pwd.o objects/builtins/ft_cd.o objects/signals/signal.o -o minishell
+make: Leaving directory `/Users/regina/Desktop/Minishell3'
  

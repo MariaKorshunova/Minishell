@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/01 20:16:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/15 04:00:16 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "../libft/libft.h"
 # include "parser.h"
 # include "execution.h"
+# include "../src/signals/signal_handler.h"
 
 # define PROMPT "\e[1;32m minishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"

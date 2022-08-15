@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/15 01:01:37 by refrain          ###   ########.fr       */
+/*   Updated: 2022/08/15 05:46:54 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,24 +172,27 @@ int	ft_cd(char **cmd, t_key_val *envp_list)
 	return (0);
 }
 
-// char	**ft_example(void)
-// {
-// 	char	**str;
+char	**ft_example(void)
+{
+	char	**str;
 
-// 	str = (char **)malloc (2 * sizeof(char *));
-// 	str[0] = ft_strdup("cd");
-// 	// str[1] = ft_strdup("-n");
-// 	// str[2] = ft_strdup("-n");
-// 	// str[3] = ft_strdup("-n");
-// 	return (str);
-// }
+	str = (char **)malloc (2 * sizeof(char *));
+	str[0] = ft_strdup("cd");
+	// str[1] = ft_strdup("-n");
+	// str[2] = ft_strdup("-n");
+	// str[3] = ft_strdup("-n");
+	return (str);
+}
 
 // int	main(void)
 // {
-// 	t_key_val *envp_list = lstlast_key_value(envp_list);
+// 	t_key_val *envp_list = NULL;
+// 	envp_list = lexer("HOME=/Users/regina\n__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0\nTMPDIR=/var/folders/2n/dcs1mf5j6f74h0rtl1fw6z3c0000gn/T/\nPWD=/Users/regina/Desktop/Minishell3\nOLDPWD=/Users/regina/Desktop/Minishell3");
+// 	// printf("%s", (char *)envp_list->value);
+// 	// envp_list = lexer("cd src");
 // 	char **str = ft_example();
 // 	find_builtin(str, envp_list);
-// 	printf("%s\n", "hello");
-// 	printf("%s\n", str[0]);
+// 	// printf("%s\n", "hello");
+// 	// printf("%s\n", str[0]);
 // 	return (0);
 // }
