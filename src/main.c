@@ -18,7 +18,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*prompt;
 	t_data	data;
-
 	(void) argc;
 	(void) argv;
 	init_data(&data);
@@ -47,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 			return (EXIT_FAILURE);
 		}
 		free(prompt);
-//		data.exit_flag = 0;
+		data.exit_flag = 0;
 	}
 	destructor_minishell(&data);
 	rl_clear_history();

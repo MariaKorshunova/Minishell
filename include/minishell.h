@@ -51,7 +51,10 @@ typedef struct s_key_val
 /* struct for executor */
 typedef struct s_exec
 {
-	t_key_val		**outfile;
+//	t_key_val		**infile;
+//	t_key_val		**outfile;
+	char			**infile;
+	char			**outfile;
 	char			**cmd;
 	struct s_exec	*next;
 }	t_exec;
@@ -90,5 +93,8 @@ void		destructor_minishell(t_data *data);
 
 /* .src/history/history.c */
 int			history(char *str);
+
+/* .src/executor/executor.c */
+int			executor(t_exec *exec, t_data *envp);
 
 #endif

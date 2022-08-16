@@ -12,12 +12,13 @@
 
 #include "parser.h"
 
-int	execution(t_data *data, char *prompt)
+int	execution(t_data *envp, char *prompt)
 {
 	t_key_val	*token_list;
 	t_list		*pipeline;
+	t_exec		exec;
 
-	(void) data;
+	(void)envp;
 	token_list = NULL;
 	pipeline = NULL;
 	token_list = lexer(prompt);
@@ -30,5 +31,9 @@ int	execution(t_data *data, char *prompt)
 		return (EXIT_FAILURE);
 	}
 	lstclear_key_value(&token_list);
+	if (executor(&exec, envp))
+	{
+		printf("Goodbye 🌚");
+	}
 	return (EXIT_SUCCESS);
 }

@@ -53,6 +53,9 @@ FILE_C		+=	$(addprefix utils/,\
 FILE_C		+=	$(addprefix history/,\
 				history.c)
 
+FILE_C		+=	$(addprefix executor/,\
+				executor.c)
+
 SRCS		=	$(addprefix src/, $(FILE_C))
 
 OBJ			=	$(addprefix objects/, $(FILE_C:%.c=%.o))
