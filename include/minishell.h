@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/01 20:16:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/29 19:18:28 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ typedef struct s_key_val
 /* struct for executor */
 typedef struct s_exec
 {
-	t_key_val		**outfile;
 	char			**cmd;
+	t_key_val		**infile;
+	t_key_val		**outfile;
 	struct s_exec	*next;
 }	t_exec;
 
