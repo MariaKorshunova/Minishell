@@ -6,29 +6,29 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/15 05:46:54 by refrain          ###   ########.fr       */
+/*   Updated: 2022/08/29 19:06:15 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	put_envp_value(t_key_val *envp_list, char *key, char *new)
+int	put_envp_value(t_data *data, char *key, char *new)
 {
 	int	i;
 	int	j;
 
-	if (!envp_list || !key)
+	if (!data || !key)
 		return (1);
-	i = pos_in_envp(envp_list, key);
+	i = pos_in_envp(data, key);
 	if (i == -1)
 		return (1);
 	j = 0;
 	while (j < i)
 	{
-		envp_list = envp_list->next;
+		data->env = data->env->next;
 		i++;
 	}
-	envp_list->value = new;
+	data->env->value = new;
 	return (0);
 }
 
@@ -110,88 +110,88 @@ int	change_directory(char **cmd, char *home, char *pwd, char *oldpwd)
 // 	}
 // }
 
-int	pos_in_envp(t_key_val *envp_list, char *str)
-{
-	int	i;
+// int	pos_in_envp(t_data *data, char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!envp_list || !str)
-		return (-1);
-	while (envp_list)
-	{
-		if (!ft_strcmp(envp_list->key, str))
-			return (i);
-		i++;
-		envp_list = envp_list->next;
-	}
-	return (-1);
-}
+// 	i = 0;
+// 	if (!data || !str)
+// 		return (-1);
+// 	while (data->env)
+// 	{
+// 		if (!ft_strcmp(data->env->key, str))
+// 			return (i);
+// 		i++;
+// 		data->env = data->env->next;
+// 	}
+// 	return (-1);
+// }
 
-char	*get_value_from_envp(t_key_val *envp_list, char *str)
+char	*get_value_from_envp(t_data *data, char *str)
 {
 	int		i;
 	int		j;
 	char	*val;
 
-	if (!envp_list || !str)
+	if (!data || !str)
 		return (NULL);
-	i = pos_in_envp(envp_list, str);
+	i = pos_in_envp(data, str);
 	if (i == -1)
 		return (NULL);
 	j = 0;
 	while (j < i)
 	{
-		envp_list = envp_list->next;
+		data->env = data->env->next;
 		j++;
 	}
-	val = ft_strdup(envp_list->value);
+	val = ft_strdup(data->env->value);
 	return (val);
 }
 
-int	ft_cd(char **cmd, t_key_val *envp_list)
+int	ft_cd(char **cmd, t_data *data)
 {
 	char	*home;
 	char	*pwd;
 	char	*oldpwd;
 	
-	if (!cmd || !envp_list)
+	if (!cmd || !data)
 		return (1);
-	home = get_value_from_envp(envp_list, "HOME");
-	printf("%s", get_value_from_envp(envp_list, "HOME"));
-	pwd = get_value_from_envp(envp_list, "PWD");
-	oldpwd = get_value_from_envp(envp_list, "OLDPWD");
+	home = get_value_from_envp(data, "HOME");
+	printf("%s", get_value_from_envp(data, "HOME"));
+	pwd = get_value_from_envp(data, "PWD");
+	oldpwd = get_value_from_envp(data, "OLDPWD");
 	if (!home || !pwd || !oldpwd)
 		return (1);
 	change_directory(cmd, home, pwd, oldpwd);
-	if (put_envp_value(envp_list, "OLDPWD", pwd))
+	if (put_envp_value(data, "OLDPWD", pwd))
 		return (1);
-	if (put_envp_value(envp_list, "PWD", getcwd(NULL, 0)))
+	if (put_envp_value(data, "PWD", getcwd(NULL, 0)))
 		return (1);
 	free (home);
 	free(oldpwd);
 	return (0);
 }
 
-char	**ft_example(void)
-{
-	char	**str;
+// char	**ft_example(void)
+// {
+// 	char	**str;
 
-	str = (char **)malloc (2 * sizeof(char *));
-	str[0] = ft_strdup("cd");
-	// str[1] = ft_strdup("-n");
-	// str[2] = ft_strdup("-n");
-	// str[3] = ft_strdup("-n");
-	return (str);
-}
+// 	str = (char **)malloc (2 * sizeof(char *));
+// 	str[0] = ft_strdup("cd");
+// 	// str[1] = ft_strdup("-n");
+// 	// str[2] = ft_strdup("-n");
+// 	// str[3] = ft_strdup("-n");
+// 	return (str);
+// }
 
 // int	main(void)
 // {
-// 	t_key_val *envp_list = NULL;
-// 	envp_list = lexer("HOME=/Users/regina\n__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0\nTMPDIR=/var/folders/2n/dcs1mf5j6f74h0rtl1fw6z3c0000gn/T/\nPWD=/Users/regina/Desktop/Minishell3\nOLDPWD=/Users/regina/Desktop/Minishell3");
-// 	// printf("%s", (char *)envp_list->value);
+// 	t_data *data;
+// 	// data->env
 // 	// envp_list = lexer("cd src");
 // 	char **str = ft_example();
-// 	find_builtin(str, envp_list);
+// 	find_builtin(str, data);
+// 	free_2dimensional_array((void **)str);
 // 	// printf("%s\n", "hello");
 // 	// printf("%s\n", str[0]);
 // 	return (0);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 00:15:07 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/15 00:15:28 by refrain          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:17:34 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,15 @@ int	ft_strcmp(const char *s1, const char *s2)
 		return (-1);
 	return (0);
 }
+
+// char	**ft_example(void)
+// {
+// 	char	**str;
+
+// 	str = (char **)malloc (2 * sizeof(char *));
+// 	str[0] = ft_strdup("echo");
+// 	str[1] = ft_strdup("-n");
+// 	str[2] = ft_strdup(" hello");
+// 	// str[3] = ft_strdup("-n");
+// 	return (str);
+// }

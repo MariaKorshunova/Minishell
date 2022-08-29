@@ -6,11 +6,12 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/15 05:47:07 by refrain          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:23:15 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins/builtins.h"
 
 static void	init_data(t_data *data);	
 

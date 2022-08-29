@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/08/15 03:57:23 by refrain          ###   ########.fr        #
+#    Updated: 2022/08/29 20:05:26 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,11 +51,12 @@ FILE_C		+=	$(addprefix utils/,\
 				destructor.c)
 
 FILE_C		+=	$(addprefix builtins/,\
-				utils.c\
 				find_builtin.c\
 				ft_echo.c\
 				ft_pwd.c\
-				ft_cd.c)
+				ft_cd.c\
+				ft_env.c\
+				builtin_utils.c)
 
 FILE_C		+=	$(addprefix signals/,\
 				signal.c)
