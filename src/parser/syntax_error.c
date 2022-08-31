@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 19:50:51 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/29 18:04:40 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/31 18:17:59 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_syntax_error(t_key_val *token_list)
 		if (pipe_error != 0)
 		{
 			print_syntax_error(pipe_error);
-			return (-1);
+			return (pipe_error);
 		}
 		pipe_error = -1;
 	}

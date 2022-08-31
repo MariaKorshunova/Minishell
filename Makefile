@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/08/29 18:59:56 by jmabel           ###   ########.fr        #
+#    Updated: 2022/08/31 18:31:08 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ FILE_C		+=	$(addprefix parser/,\
 				lexer.c\
 				lexer_spec_symbol_token.c\
 				lexer_add_quote_token.c\
+				open_quotes.c\
 				syntax_error.c)
 
 FILE_C		+=	$(addprefix execution/,\

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/29 19:52:07 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/31 18:34:12 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int			add_pipe_token(t_key_val **token_list, char *prompt, int *i);
 
 /* lexer_add_quote_token.c */
 int			add_quotes_token(t_key_val **token_list, char *prompt, int *i);
+
+/* */
+char		*open_quotes(t_key_val **token);
 
 /* syntax_error.c */
 int			check_syntax_error(t_key_val *token_list);
