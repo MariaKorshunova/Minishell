@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 11:44:04 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/01 18:28:24 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ int			add_pipe_token(t_key_val **token_list, char *prompt, int *i);
 
 /* lexer_add_quote_token.c */
 int			add_quotes_token(t_key_val **token_list, char *prompt, int *i);
+
+/* lst_expand_token.c */
+t_list		*expand_tokens(t_key_val *token, t_data *data);
+
+/* lst_token_operations.c */
+int			add_note_lst_from_token(t_list **expand_token, char *value);
+int			strdup_str_add_note_lst(t_list **expand_token, char *str);
+int			substr_add_note_lst(t_list **expand_token, char *str,
+				int start, int len);
 
 /* open_quotes.c */
 char		*open_quotes(t_key_val **token, t_data *data);

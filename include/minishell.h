@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 12:59:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/01 16:55:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,19 @@ typedef struct s_data
 {
 	t_key_val	*env;
 	char		**env_arr;
+	int			exit_status;
 	int			exit_flag;
 }	t_data;
+
+/* .src/utils/array_operations.c */
+void		free_2dimensional_array(void **arr);
+void		print_2dimensional_chararray(char **arr);
+
+/* .src/utils/envp_list_to_chararray.c */
+int			envp_list_to_chararray(t_data *data);
+
+/* ft_strchr_pos.c */
+int			ft_strchr_pos(char *s, int c);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);
@@ -78,13 +89,6 @@ void		lstprint_key_value(t_key_val *lst, char type);
 /* .src/utils/key_value_list_clear.c */
 void		lstdelone_key_value(t_key_val *lst);
 void		lstclear_key_value(t_key_val **lst);
-
-/* .src/utils/envp_list_to_chararray.c */
-int			envp_list_to_chararray(t_data *data);
-
-/* .src/utils/array_operations.c */
-void		free_2dimensional_array(void **arr);
-void		print_2dimensional_chararray(char **arr);
 
 /* .src/utils/destructor.c */
 void		destructor_minishell(t_data *data);
