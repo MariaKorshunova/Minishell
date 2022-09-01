@@ -18,20 +18,23 @@ effectually redirecting both STDERR and STDOUT to /dev/null
 echo 'hello' > /dev/null 2>&1
 
 **Syntax error**
-* empty string only separators)
+- [*] empty string only separators)
 Строка только с одним токеном SEP, вовзращает управление.
-* Строка только с одним токеном SEP между пайпами,это ошибка
-
-	bash-3.2$  | echo
-	bash: syntax error near unexpected token `|'
-
-	bash-3.2$ echo hello |   
-	> 
+- [*] Строка с отсутствующими токенами только с одним токеном SEP между пайпами
+- [*] Отсутствие токенов WORD, QUOTE, DOUBLE_QOUTE после редиректа (возможен SEP между)
 
 
+**expand $**
+- [] hello$USER
+- [] hello$USER$USER
+- [] $\0 
+- [] $?
+- [] ${USER} - фигурные скобки
+something else?
 
 
-**Parsing**
+**Notes**
+
 Может не быть названия команды (=null)
 
 bash-3.2$ echo privet infile >

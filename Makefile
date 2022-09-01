@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/08/31 18:31:08 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/01 13:02:22 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,12 @@ FILE_C		+=	$(addprefix execution/,\
 				execution.c)
 
 FILE_C		+=	$(addprefix utils/,\
+				array_operations.c\
+				envp_list_to_chararray.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\
-				envp_list_to_chararray.c\
-				array_operations.c\
+				lstprint.c\
 				destructor.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))

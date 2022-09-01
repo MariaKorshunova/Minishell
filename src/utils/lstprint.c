@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                     :+:      :+:    :+:   */
+/*   lstprint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 12:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/29 18:15:39 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/01 12:51:34 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/01 12:58:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-int	execution(t_data *data, char *prompt)
+void	lstprint(t_list *lst, char c)
 {
-	t_list	*pipeline;
-
-	(void) data;
-	pipeline = NULL;
-	pipeline = parser(data, prompt);
-	if (pipeline == NULL)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		if (c == 's')
+			printf("%s\n", (char *)lst->content);
+		lst = lst->next;
+	}
 }

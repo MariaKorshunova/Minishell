@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:54:43 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/31 18:58:18 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/01 11:44:11 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // static t_list	*parser_pipeline(t_key_val *token_list);
 
-t_list	*parser(char *prompt)
+t_list	*parser(t_data *data, char *prompt)
 {
 	t_list		*pipeline;
 	t_key_val	*token_list;
@@ -30,7 +30,7 @@ t_list	*parser(char *prompt)
 		return (NULL);
 	}
 	lstprint_key_value(token_list, 'd');
-	open_quotes(&token_list);
+	open_quotes(&token_list, data);
 	// lstprint_key_value(token_list, 'd');
 	// pipeline = parser_pipeline(token_list);
 	lstclear_key_value(&token_list);

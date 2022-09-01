@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/29 19:18:28 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/01 12:59:31 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void		print_2dimensional_chararray(char **arr);
 
 /* .src/utils/destructor.c */
 void		destructor_minishell(t_data *data);
+
+/* .src/utils/lstprint.c */
+void		lstprint(t_list *lst, char c);
 
 #endif

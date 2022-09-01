@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:38:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 13:00:41 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/01 12:30:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,58 +16,75 @@
  Pointer to token_list is moved.
  Pointer can't be NULL */
 
-static t_list	*expand_tokens(t_key_val *token, t_data *data);
-static int		add_note_expand_token(t_list **expand_token, char *value);
+static int	count_len_word(t_key_val *token, t_data *data);
+static int	count_add_envp(char *str, t_data *data);
 
 char	*open_quotes(t_key_val **token, t_data *data)
 {
-	t_list	*expand_token;
+	char	*word;
+	int		len;
 
+	(void) word;
 	if (token == NULL)
 		return (NULL);
-	expand_token = NULL;
-	expand_token = expand_tokens(*token, data);
-	if (!expand_token)
-		return (NULL);
-	lstprint(expand_token, 's');
-	ft_lstclear(&expand_token, free);
+	len = count_len_word(*token, data);
+	printf("len=%d\n", len);
 	return (NULL);
 }
 
-static t_list	*expand_tokens(t_key_val *token, t_data *data)
+static int	count_len_word(t_key_val *token, t_data *data)
 {
-	t_list	*expand_token;
+	int	len;
 
-	(void) data;
 	if (token == NULL)
-		return (NULL);
-	expand_token = NULL;
+		return (-1);
+	len = 0;
 	while (*(int *)token->key == WORD || *(int *)token->key == QUOTE
 		|| *(int *)token->key == DOUBLE_QUOTE)
 	{
 		if (*(int *)token->key == QUOTE)
-		{
-			if (add_note_expand_token(&expand_token, (char *)token->value))
-			{
-				ft_lstclear(&expand_token, free);
-				return (NULL);
-			}
-		}
+			len += ft_strlen((char *)token->value);
+		else
+			len += count_add_envp((char *)token->value, data);
 		token = token->next;
 		if (token == NULL)
 			break ;
 	}
-	return (expand_token);
+	return (len);
 }
 
-static int	add_note_expand_token(t_list **expand_token, char *value)
+static int	count_add_envp(char *str, t_data *data)
 {
-	t_list	*lstnew;
+	int		i;
+	int		j;
+	int		len;
+	char	*expand;
 
-	lstnew = NULL;
-	lstnew = ft_lstnew(value);
-	if (!lstnew)
-		return (EXIT_FAILURE);
-	ft_lstadd_back(expand_token, lstnew);
-	return (EXIT_SUCCESS);
+	i = 0;
+	len = 0;
+	(void)data;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$')
+		{
+			i++;
+			if (str[i] == '\0')
+			{
+				len++;
+				break ;
+			}		
+			j = i;
+			while (str[j] != '$' && str[j] != '\0')
+				j++;
+			expand = ft_substr(str, i, j - i);
+			free(expand);
+			if (str[j] == '\0')
+				break ;
+			else
+				i = j - 1;
+		}
+		i++;
+		len++;
+	}
+	return (len);
 }
