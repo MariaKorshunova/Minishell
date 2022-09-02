@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:26:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 18:31:10 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/02 18:43:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static int	add_note_with_expand(char *str, t_list **expand_token, t_data *data)
 			if (substr_add_note_lst(expand_token, str, 0, i))
 				return (EXIT_FAILURE);
 		}
-		i++;
 		if (add_note_with_expand_1(str, expand_token, data, i))
 			return (EXIT_FAILURE);
 	}
@@ -86,25 +85,21 @@ static int	add_note_with_expand(char *str, t_list **expand_token, t_data *data)
 }
 
 static int	add_note_with_expand_1(char *str, t_list **expand_token,
-					t_data *data, int i)
+				t_data *data, int i)
 {
-	int	start;
-
-	(void) data;
-	if (str[i] == '\0')
-	{
-		if (strdup_str_add_note_lst(expand_token, "$"))
-			return (EXIT_FAILURE);
-		return (EXIT_SUCCESS);
-	}
 	while (str[i] != '\0')
 	{
-		start = i;
-		if (ft_strchr("0?", str[i]))
+		i++;
+		if (str[i] == '\0')
 		{
-			printf("here\n");
-			// if (add_note_spec_symbol(str, expand_token, data, i))
-			// 	return (EXIT_FAILURE);
+			if (strdup_str_add_note_lst(expand_token, "$"))
+				return (EXIT_FAILURE);
+			return (EXIT_SUCCESS);
+		}
+		if (ft_strchr("0$?", str[i]))
+		{
+			if (add_note_dollar_spec_symbol(str, expand_token, data, &i))
+				return (EXIT_FAILURE);
 		}
 	}
 	return (EXIT_SUCCESS);

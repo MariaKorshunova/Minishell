@@ -1,17 +1,6 @@
 # Minishell
 Creating a simple shell
 
-**Some cases fo checking:**
-
-<<< hello cat
-hello
-
-<< < hello cat
-zsh: parse error near `<'
-
-echo 'hello' >infile1 >infile2
-Возникает infile1, записывается в infile2
-
 **Не обрабатываем**
 STDERR is redirect to STDOUT: redirected to /dev/null,
 effectually redirecting both STDERR and STDOUT to /dev/null         

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 16:55:53 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/02 18:04:09 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include "parser.h"
 # include "execution.h"
 
-# define PROMPT "\e[1;32m minishell$ \e[0m"
+# define NAME "minishell"
+# define PROMPT "\e[1;32mminishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
 # define SPEC_SYMBOL "<>|'\""
 # define SEPARATOR " \t"
