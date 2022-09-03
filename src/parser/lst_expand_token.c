@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:26:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/02 18:43:33 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/03 16:36:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	add_note_with_expand(char *str, t_list **expand_token,
 				t_data *data);
 static int	add_note_with_expand_1(char *str, t_list **expand_token,
 				t_data *data, int i);
+static int	add_note_expand_env(char *str, t_list **expand_token,
+				t_data *data, int *i);
 
 t_list	*expand_tokens(t_key_val *token, t_data *data)
 {
@@ -101,6 +103,31 @@ static int	add_note_with_expand_1(char *str, t_list **expand_token,
 			if (add_note_dollar_spec_symbol(str, expand_token, data, &i))
 				return (EXIT_FAILURE);
 		}
+		else
+		{
+			if (add_note_expand_env(str, expand_token, data, &i))
+				return (EXIT_FAILURE);
+		}
 	}
+	return (EXIT_SUCCESS);
+}
+
+static int	add_note_expand_env(char *str, t_list **expand_token,
+				t_data *data, int *i)
+{
+	int		start;
+	char	*key_env;
+	char	*value_env;
+
+	(void) expand_token;
+	key_env = NULL;
+	value_env = NULL;
+	start = *i;
+	while (str[*i] != '$' && str[*i] != '\0')
+		(*i)++;
+	key_env = ft_substr(str, start, *i - start);
+	value_env = key_value_search_with_key(data->env, key_env);
+	printf("value_env=%s\n", value_env);
+	free(key_env);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/02 18:04:09 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/03 16:43:55 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_key_val
 typedef struct s_exec
 {
 	char			**cmd;
-	t_key_val		**infile;
-	t_key_val		**outfile;
+	t_key_val		*infile;
+	t_key_val		*outfile;
 	struct s_exec	*next;
 }	t_exec;
 
@@ -90,6 +90,9 @@ void		lstprint_key_value(t_key_val *lst, char type);
 /* .src/utils/key_value_list_clear.c */
 void		lstdelone_key_value(t_key_val *lst);
 void		lstclear_key_value(t_key_val **lst);
+
+/* key_value_search_with_key.c */
+char		*key_value_search_with_key(t_key_val *env, char	*key);
 
 /* .src/utils/destructor.c */
 void		destructor_minishell(t_data *data);

@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/02 18:44:05 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/03 16:37:19 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ FILE_C		+=	$(addprefix utils/,\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\
+				key_value_search_with_key.c\
 				lstprint.c\
 				destructor.c)
 
