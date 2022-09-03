@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:26:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 16:36:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/03 20:49:18 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_list	*expand_tokens(t_key_val *token, t_data *data)
 {
 	t_list	*expand_token;
 
-	(void) data;
 	if (token == NULL)
 		return (NULL);
 	expand_token = NULL;
@@ -119,7 +118,6 @@ static int	add_note_expand_env(char *str, t_list **expand_token,
 	char	*key_env;
 	char	*value_env;
 
-	(void) expand_token;
 	key_env = NULL;
 	value_env = NULL;
 	start = *i;
@@ -127,7 +125,16 @@ static int	add_note_expand_env(char *str, t_list **expand_token,
 		(*i)++;
 	key_env = ft_substr(str, start, *i - start);
 	value_env = key_value_search_with_key(data->env, key_env);
-	printf("value_env=%s\n", value_env);
 	free(key_env);
+	if (value_env)
+	{
+		if (strdup_str_add_note_lst(expand_token, value_env))
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if (strdup_str_add_note_lst(expand_token, "\0"))
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

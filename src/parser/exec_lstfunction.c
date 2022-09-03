@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                     :+:      :+:    :+:   */
+/*   exec_lstfunction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 12:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/29 18:15:39 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/03 20:30:22 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/03 20:32:03 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-int	execution(t_data *data, char *prompt)
+t_exec	*lstlast_exec(t_exec *lst)
 {
-	t_exec	*pipeline;
-
-	(void) data;
-	pipeline = NULL;
-	pipeline = parser(data, prompt);
-	if (pipeline == NULL)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
 }

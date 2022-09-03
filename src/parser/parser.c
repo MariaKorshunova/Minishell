@@ -6,21 +6,23 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:54:43 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 11:44:11 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/03 20:54:05 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// static t_list	*parser_pipeline(t_key_val *token_list);
+static t_exec	*pipeline(t_data *data, t_key_val *token);
+// static int		add_note_exec(t_exec **exec, t_data *data, t_key_val **token);
 
-t_list	*parser(t_data *data, char *prompt)
+t_exec	*parser(t_data *data, char *prompt)
 {
-	t_list		*pipeline;
 	t_key_val	*token_list;
+	t_exec		*exec;
+	char		*check;
 
-	pipeline = NULL;
 	token_list = NULL;
+	exec = NULL;
 	token_list = lexer(prompt);
 	if (token_list == NULL)
 		return (NULL);
@@ -30,29 +32,53 @@ t_list	*parser(t_data *data, char *prompt)
 		return (NULL);
 	}
 	lstprint_key_value(token_list, 'd');
-	open_quotes(&token_list, data);
-	// lstprint_key_value(token_list, 'd');
-	// pipeline = parser_pipeline(token_list);
+	check = open_quotes(&token_list, data);
+	printf("check%s\n", check);
+	free(check);
+	lstprint_key_value(token_list, 'd');
+	exec = pipeline(data, token_list);
 	lstclear_key_value(&token_list);
-	return (pipeline);
+	return (exec);
 }
 
-// static t_list	*parser_pipeline(t_key_val *token_list)
-// {
-// 	t_list	*pipeline;
+static t_exec	*pipeline(t_data *data, t_key_val *token)
+{
+	t_exec		*exec;
 
-// 	pipeline = NULL;
-// 	while (token_list)
-// 	{
-// 		if (add_lst_pipeline(token_list))
-// 			return (EXIT_FAILURE);
-// 		token_list = token_list->next;
-// 	}
-// 	return (pipeline);
+	(void) data;
+	if (!token)
+		return (NULL);
+	exec = NULL;
+	while (token)
+	{
+		if (*(int *)token->key == PIPE)
+			token = token->next;
+		while (*(int *)token->key != PIPE)
+		{
+			// if (add_note_exec(&exec, data, &token))
+			// {
+			// 	lstclear_exec(&exec);
+			// 	return (NULL);
+			// }
+			token = token->next;
+			if (token == NULL)
+				break ;
+		}
+	}
+	return (exec);
+}
+
+// static int	add_note_exec(t_exec **exec, t_data *data, t_key_val **token)
+// {
+// 	return (EXIT_SUCCESS);
 // }
 
-/*
-		if (*(int *)token_list->key == WORD
-			|| *(int *)token_list->key == QUOTE
-			|| *(int *)token_list->key == DOUBLE_QUOTE)
-*/
+/* 	t_list		*cmd;
+	t_key_val	*infile;
+	t_key_val	*outfile; */
+
+/* 	cmd = NULL;
+	infile = NULL;
+	outfile = NULL; */
+
+/* open_quotes(&token_list, data); */

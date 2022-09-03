@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 16:33:02 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 17:05:34 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/03 17:58:35 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*key_value_search_with_key(t_key_val *env, char	*key)
 	{
 		if (!ft_strncmp(key, (char *)env->key, len_key))
 		{
-			printf("%s\n", (char *)env->value);
+			return ((char *)env->value);
 			break ;
 		}
 		env = env->next;

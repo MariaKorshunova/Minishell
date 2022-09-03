@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/03 16:37:19 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/03 20:35:54 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ LIBFT		=	./libft/libft.a
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
+				exec_lstclear.c\
+				exec_lstcreate.c\
+				exec_lstfunction.c\
 				pars_envp.c\
 				parser.c\
 				lexer.c\

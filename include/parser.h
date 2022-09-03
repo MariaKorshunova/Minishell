@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/02 18:44:37 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/03 20:42:45 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@ typedef struct s_exec		t_exec;
 int			pars_envp(t_data *data, char **envp);
 
 /* parser.c */
-t_list		*parser(t_data *data, char *prompt);
+t_exec		*parser(t_data *data, char *prompt);
+
+/* exec_lstclear.c */
+void		lstdelone_exec(t_exec *lst);
+void		lstclear_exec(t_exec **lst);
+
+/* exec_lstcreate.c  */
+t_exec		*lstnew_exec(char **cmd, t_key_val *infile, t_key_val *outfile);
+void		lstadd_back_exec(t_exec **lst, t_exec *new);
+
+/* exec_lstfunction.c */
+t_exec		*lstlast_exec(t_exec *lst);
 
 /* lexer.c */
 t_key_val	*lexer(char *prompt);
@@ -48,6 +59,7 @@ int			add_note_lst_from_token(t_list **expand_token, char *value);
 int			strdup_str_add_note_lst(t_list **expand_token, char *str);
 int			substr_add_note_lst(t_list **expand_token, char *str,
 				int start, int len);
+int			lst_sum_len_content(t_list *lst);
 
 /* open_quotes.c */
 char		*open_quotes(t_key_val **token, t_data *data);
