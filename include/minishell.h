@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 18:43:47 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:05:38 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/errno.h>
 # include "../libft/libft.h"
 # include "parser.h"
 # include "execution.h"
@@ -27,6 +28,7 @@
 # define PREFIX_ERROR	"minishell"
 # define SPEC_SYMBOL "<>|'\""
 # define SEPARATOR " \t"
+# define ERR_EXECUTE_CMD 127
 
 typedef enum e_token_type
 {
@@ -66,6 +68,7 @@ typedef struct s_data
 	char		**bin_path;
 	int			pipe1[2];
 	int			pipe2[2];
+	pid_t		child;
 	int			change_env;
 	int			exit_status;
 	int			exit_flag;
@@ -81,8 +84,11 @@ int			envp_list_to_chararray(t_data *data);
 /* ft_strchr_pos.c */
 int			ft_strchr_pos(char *s, int c);
 
-/* ft_strncmp_exact.c */
-int			ft_strncmp_exact(const char *s1, const char *s2);
+/* ft_strjoin_with_endchar.c */
+char		*ft_strjoin_with_endchar(char const *s1, char const *s2, char c);
+
+/* ft_strcmp.c */
+int			ft_strcmp(const char *s1, const char *s2);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);

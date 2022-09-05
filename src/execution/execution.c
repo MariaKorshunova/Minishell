@@ -12,8 +12,7 @@
 
 #include "parser.h"
 
-static int	execution_pipe(t_data *data, t_exec *pipeline);
-static int	ft_child(t_data *data, t_exec *pipeline);
+static int	execution_pipe(t_data *data, t_exec **pipeline);
 
 int	execution(t_data *data, char *prompt)
 {
@@ -27,7 +26,7 @@ int	execution(t_data *data, char *prompt)
 		return (EXIT_FAILURE);
 	}
 	print_exec(pipeline);
-	if (execution_pipe(data, pipeline))
+	if (execution_pipe(data, &pipeline))
 	{
 		lstclear_exec(&pipeline);
 		return (EXIT_FAILURE);
@@ -36,10 +35,8 @@ int	execution(t_data *data, char *prompt)
 	return (EXIT_SUCCESS);
 }
 
-static int	execution_pipe(t_data *data, t_exec *pipeline)
+static int	execution_pipe(t_data *data, t_exec **pipeline)
 {
-	int	i;
-
 	(void) data;
 	(void) pipeline;
 	if (pipe(data->pipe1) == -1)
@@ -47,20 +44,7 @@ static int	execution_pipe(t_data *data, t_exec *pipeline)
 		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
-	i = ft_child(data, pipeline);
+	if (ft_child(data, pipeline))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
-}
-
-static int	ft_child(t_data *data, t_exec *pipeline)
-{
-	int	i;
-
-	i = 0;
-	ft_child_first(pipex, argv, envp);
-	ft_manage_middle_child(pipex, argv, &i);
-	if (i % 2 == 0)
-		ft_child_last(pipex, argv, pipex->pipe1);
-	else
-		ft_child_last(pipex, argv, pipex->pipe2);
-	return (i);
 }

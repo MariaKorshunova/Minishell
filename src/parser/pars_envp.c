@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:24:23 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 18:57:04 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 21:08:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	pars_envp(t_data *data, char **envp)
 		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
-	print_2dimensional_chararray(data->bin_path);
 	return (EXIT_SUCCESS);
 }
 

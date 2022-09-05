@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp_exact.c                                 :+:      :+:    :+:   */
+/*   ft_strjoin_with_endchar.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 18:42:40 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/05 21:42:16 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 21:42:38 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strncmp_exact(const char *s1, const char *s2)
+char	*ft_strjoin_with_endchar(char const *s1, char const *s2, char c)
 {
-	int	i;
+	char	*dest;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] != '\0' && s2[i] != '\0' )
+	dest = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	while (i < ft_strlen(s1))
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		dest[i] = s1[i];
 		i++;
 	}
-	if (s1[i] != '\0' || s2[i] != '\0')
-		return (-1);
-	return (0);
+	dest[i] = c;
+	j = i + 1;
+	i = 0;
+	while (i < ft_strlen(s2))
+		dest[j++] = s2[i++];
+	dest[j] = '\0';
+	return (dest);
 }
