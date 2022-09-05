@@ -6,51 +6,49 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/29 19:06:15 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 18:30:13 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	put_envp_value(t_data *data, char *key, char *new)
+int	put_value(t_data *data, char *key, char *new_val)
 {
+	int	pos;
 	int	i;
-	int	j;
 
-	if (!data || !key)
+	pos = pos_in_envp(data, key);
+	if (pos == -1)
 		return (1);
-	i = pos_in_envp(data, key);
-	if (i == -1)
-		return (1);
-	j = 0;
-	while (j < i)
+	i = 0;
+	while (i < pos)
 	{
 		data->env = data->env->next;
 		i++;
 	}
-	data->env->value = new;
+	data->env->value = new_val;
 	return (0);
 }
 
-char	*get_str(char *str)
+char	*ft_cut_string(char *str)
 {
 	int		i;
-	char	*new;
+	char	*new_str;
 
-	// if (!str)
-	// 	return (NULL);
+	if (!str)
+		return (NULL);
 	i = ft_strlen(str);
-	while (str[i])
+	while (str[i] != '/')
 		i--;
-	new = ft_substr(str, 0, i + 1);
-	return (new);
+	new_str = ft_substr(str, 0, i + 1);
+	return (new_str);
 }
 
-int	ft_home(char **cmd, char *home)
+int	home_directory(char **cmd, char *home)
 {
 	char	*tmp;
 
-	if (cmd[1] == NULL || !ft_strcmp(cmd[1], "~"))
+	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
 		chdir(home);
 	else
 	{
@@ -62,21 +60,21 @@ int	ft_home(char **cmd, char *home)
 		}
 		else
 		{
-			tmp = get_str(home);
+			tmp = ft_cut_string(home);
 			cmd[1] = ft_strjoin(tmp, cmd[1] + 1);
-			free (tmp);
+			free(tmp);
 		}
-		chdir (cmd[1]);
+		chdir(cmd[1]);
 	}
 	return (0);
 }
 
-int	change_directory(char **cmd, char *home, char *pwd, char *oldpwd)
+int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 {
 	char	*tmp;
-	
-	if (cmd[1] == NULL || !ft_strncmp(cmd[1], "~", 1))
-		ft_home(cmd, home);
+
+	if (!cmd[1] || !ft_strncmp(cmd[1], "~", 1))
+		home_directory(cmd, home);
 	else if (!ft_strcmp(cmd[1], "."))
 		chdir(pwd);
 	else if (!ft_strcmp(cmd[1], "-"))
@@ -86,66 +84,33 @@ int	change_directory(char **cmd, char *home, char *pwd, char *oldpwd)
 	}
 	else if (!ft_strcmp(cmd[1], ".."))
 	{
-		tmp = get_str(pwd);
+		tmp = ft_cut_string(pwd);
 		chdir(tmp);
-		free (tmp);
+		free(tmp);
 	}
 	else
 		chdir(cmd[1]);
 	return (0);
 }
 
-// int	ft_cd(char **cmd)
-// {
-// 	if (*(cmd + 1) == NULL || ft_strcmp(cmd[1], "~"))
-// 	{
-// 		*(cmd + 1) = ft_home();
-// 		if (*(cmd + 1) == NULL)
-// 		{
-// 			printf("HOME not set\n");
-// 			return (0);
-// 		}
-// 		if (cmd[1][0] == '\0')
-// 			return (0);
-// 	}
-// }
-
-// int	pos_in_envp(t_data *data, char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!data || !str)
-// 		return (-1);
-// 	while (data->env)
-// 	{
-// 		if (!ft_strcmp(data->env->key, str))
-// 			return (i);
-// 		i++;
-// 		data->env = data->env->next;
-// 	}
-// 	return (-1);
-// }
-
-char	*get_value_from_envp(t_data *data, char *str)
+char	*get_value(t_data *data, char *str)
 {
+	int		pos;
 	int		i;
-	int		j;
-	char	*val;
+	char	*res;
 
-	if (!data || !str)
+	pos = pos_in_envp(data, str);
+	printf("%d", pos);
+	if (pos == -1)
 		return (NULL);
-	i = pos_in_envp(data, str);
-	if (i == -1)
-		return (NULL);
-	j = 0;
-	while (j < i)
+	i = 0;
+	while (i < pos)
 	{
 		data->env = data->env->next;
-		j++;
+		i++;
 	}
-	val = ft_strdup(data->env->value);
-	return (val);
+	res = ft_strdup(data->env->value);
+	return (res);
 }
 
 int	ft_cd(char **cmd, t_data *data)
@@ -154,35 +119,61 @@ int	ft_cd(char **cmd, t_data *data)
 	char	*pwd;
 	char	*oldpwd;
 	
-	if (!cmd || !data)
-		return (1);
-	home = get_value_from_envp(data, "HOME");
-	printf("%s", get_value_from_envp(data, "HOME"));
-	pwd = get_value_from_envp(data, "PWD");
-	oldpwd = get_value_from_envp(data, "OLDPWD");
+	int	pos = pos_in_envp(data, "HOME");
+	printf("the number is %d\n", pos);
+	home =  get_value(data, "HOME");
+	pwd =  get_value(data, "PWD");
+	oldpwd =  get_value(data, "OLDPWD");
+	printf("your home is: %s\n", home);
+	printf("your pwd is: %s\n", pwd);
+	printf("your oldpwd is: %s\n", oldpwd);
 	if (!home || !pwd || !oldpwd)
 		return (1);
-	change_directory(cmd, home, pwd, oldpwd);
-	if (put_envp_value(data, "OLDPWD", pwd))
+	change_dir(cmd, home, pwd, oldpwd);
+	if (put_value(data, "OLDPWD", pwd))
 		return (1);
-	if (put_envp_value(data, "PWD", getcwd(NULL, 0)))
+	if (put_value(data, "PWD", getcwd(NULL, 0)))
 		return (1);
-	free (home);
+	free(home);
 	free(oldpwd);
 	return (0);
 }
 
-// char	**ft_example(void)
-// {
-// 	char	**str;
+char	**ft_example1(void)
+{
+	char	**str;
 
-// 	str = (char **)malloc (2 * sizeof(char *));
-// 	str[0] = ft_strdup("cd");
-// 	// str[1] = ft_strdup("-n");
-// 	// str[2] = ft_strdup("-n");
-// 	// str[3] = ft_strdup("-n");
-// 	return (str);
-// }
+	str = (char **)malloc (2 * sizeof(char *));
+	str[0] = ft_strdup("pwd");
+	// str[1] = ft_strdup(" ");
+	str[1] = NULL;
+	// str[3] = ft_strdup("-n");
+	return (str);
+}
+
+char	**ft_example2(void)
+{
+	char	**str;
+
+	str = (char **)malloc (2 * sizeof(char *));
+	str[0] = ft_strdup("pwd");
+	// str[1] = ft_strdup(" ");
+	str[1] = NULL;
+	// str[3] = ft_strdup("-n");
+	return (str);
+}
+
+char	**ft_example(void)
+{
+	char	**str;
+
+	str = (char **)malloc (2 * sizeof(char *));
+	str[0] = ft_strdup("cd");
+	// str[1] = ft_strdup(" ");
+	str[1] = NULL;
+	// str[3] = ft_strdup("-n");
+	return (str);
+}
 
 // int	main(void)
 // {

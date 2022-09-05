@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/29 20:23:35 by refrain          ###   ########.fr       */
+/*   Updated: 2022/08/29 20:33:44 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,25 @@
 // 	return (0);
 // }
 
-char	**ft_example(void)
-{
-	char	**str;
+// char	**ft_example(void)
+// {
+// 	char	**str;
 
-	str = (char **)malloc (12 * sizeof(char *));
-	str[0] = ft_strdup("echo");
-	str[1] = ft_strdup("-n");
-	str[2] = ft_strdup("-n");
-	str[3] = ft_strdup("-n");
-	str[4] = ft_strdup("hello");
-	str[5] = ft_strdup(" world");
-	str[6] = ft_strdup(" world ");
-	str[7] = ft_strdup(" -n");
-	str[8] = ft_strdup(" -n");
-	str[9] = ft_strdup(" yesy");
-	str[10] = ft_strdup(" -n");
-	str[11] = NULL;
-	return (str);
-}
+// 	str = (char **)malloc (12 * sizeof(char *));
+// 	str[0] = ft_strdup("echo");
+// 	str[1] = ft_strdup("-n");
+// 	str[2] = ft_strdup("-n");
+// 	str[3] = ft_strdup("-n");
+// 	str[4] = ft_strdup("hello");
+// 	str[5] = ft_strdup(" world");
+// 	str[6] = ft_strdup(" world ");
+// 	str[7] = ft_strdup(" -n");
+// 	str[8] = ft_strdup(" -n");
+// 	str[9] = ft_strdup(" yesy");
+// 	str[10] = ft_strdup(" -n");
+// 	str[11] = NULL;
+// 	return (str);
+// }
 
 // int	ft_strcmp(const char *s1, const char *s2)
 // {

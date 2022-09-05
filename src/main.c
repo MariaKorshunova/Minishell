@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/29 20:23:15 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 18:12:23 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ int	main(int argc, char **argv, char **envp)
 	while (data.exit_flag)
 	{
 		prompt = readline(PROMPT);
+		char **str1 = ft_example1();
+		printf("pwd before cd\n");
+		find_builtin(str1, &data);
+		char **str = ft_example();
+		find_builtin(str, &data);
+		char **str2 = ft_example();
+		printf("pwd after cd\n");
+		find_builtin(str2, &data);
+		free_2dimensional_array((void **)str);
 		if (!prompt)
 		{
 			destructor_minishell(&data);

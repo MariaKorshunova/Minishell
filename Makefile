@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/08/29 20:05:26 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/05 18:49:56 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
 				pars_envp.c\
+				parser.c\
 				lexer.c\
 				lexer_spec_symbol_token.c\
 				lexer_add_quote_token.c\
@@ -54,8 +55,9 @@ FILE_C		+=	$(addprefix builtins/,\
 				find_builtin.c\
 				ft_echo.c\
 				ft_pwd.c\
-				ft_cd.c\
+				ft_cd_new.c\
 				ft_env.c\
+				ft_exit.c\
 				builtin_utils.c)
 
 FILE_C		+=	$(addprefix signals/,\

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:20 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/29 20:12:29 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 17:51:30 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int pos_in_envp(t_data *data, char *str)
 	i = 0;
 	while (data->env)
 	{
-		if (!strcmp(data->env->key, str))
+		if (!ft_strcmp(data->env->key, str))
 			return (i);
 		i++;
 		data->env = data->env->next;

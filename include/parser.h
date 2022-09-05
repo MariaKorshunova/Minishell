@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/01 17:33:14 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/08/29 19:52:07 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef struct s_exec		t_exec;
 
 /* pars_envp.c */
 int			pars_envp(t_data *data, char **envp);
+
+/* parser.c */
+t_list		*parser(char *prompt);
 
 /* lexer.c */
 t_key_val	*lexer(char *prompt);
