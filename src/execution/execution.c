@@ -14,21 +14,13 @@
 
 int	execution(t_data *data, char *prompt)
 {
-	t_key_val	*token_list;
-	t_list		*pipeline;
+	t_exec	*pipeline;
 
-	(void) data;
-	token_list = NULL;
 	pipeline = NULL;
-	token_list = lexer(prompt);
-	if (token_list == NULL)
+	pipeline = parser(data, prompt);
+	if (pipeline == NULL)
 		return (EXIT_FAILURE);
-	// lstprint_key_value(token_list, 'd');
-	if (check_syntax_error(token_list) == -1)
-	{
-		printf("%s: %s\n", PREFIX_ERROR, "syntax error near unexpected token `|'");
-		return (EXIT_FAILURE);
-	}
-	lstclear_key_value(&token_list);
+	print_exec(pipeline);
+	lstclear_exec(&pipeline);
 	return (EXIT_SUCCESS);
 }

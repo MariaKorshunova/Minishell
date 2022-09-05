@@ -1,47 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_lstfunction.c                            :+:      :+:    :+:   */
+/*   lstfunction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 17:24:03 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 18:11:23 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/01 12:51:34 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 16:35:09 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-t_key_val	*lstlast_key_value(t_key_val *lst)
-{
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-int	lst_size_key_value(t_key_val *lst)
-{
-	int	count;
-
-	count = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		count++;
-	}
-	return (count);
-}
-
-void	lstprint_key_value(t_key_val *lst, char type)
+void	lstprint(t_list *lst, char c)
 {
 	if (!lst)
 		return ;
 	while (lst)
 	{
-		if (type == 's')
-			printf("%s=%s\n", (char *)lst->key, (char *)lst->value);
-		else if (type == 'd')
-			printf("%d=%s\n", *(int *)lst->key, (char *)lst->value);
+		if (c == 's')
+			printf("%s\n", (char *)lst->content);
 		lst = lst->next;
 	}
+}
+
+char	**lst_to_chararray(t_list *lst)
+{
+	char	**arr;
+	int		size_arr;
+	int		i;
+
+	i = 0;
+	size_arr = ft_lstsize(lst);
+	arr = (char **)malloc((size_arr + 1) * sizeof(char *));
+	if (!arr)
+		return (NULL);
+	while (i < size_arr)
+	{
+		arr[i] = strdup((char *)lst->content);
+		i++;
+		lst = lst->next;
+	}
+	arr[i] = NULL;
+	return (arr);
 }

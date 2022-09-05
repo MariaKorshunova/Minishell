@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_lstfunction.c                            :+:      :+:    :+:   */
+/*   exec_lstfunction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 17:24:03 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 18:11:23 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/03 20:30:22 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 17:08:44 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-t_key_val	*lstlast_key_value(t_key_val *lst)
+t_exec	*lstlast_exec(t_exec *lst)
 {
 	while (lst && lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-int	lst_size_key_value(t_key_val *lst)
+void	print_exec(t_exec *exec)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	while (lst)
+	i = 1;
+	while (exec)
 	{
-		lst = lst->next;
-		count++;
-	}
-	return (count);
-}
-
-void	lstprint_key_value(t_key_val *lst, char type)
-{
-	if (!lst)
-		return ;
-	while (lst)
-	{
-		if (type == 's')
-			printf("%s=%s\n", (char *)lst->key, (char *)lst->value);
-		else if (type == 'd')
-			printf("%d=%s\n", *(int *)lst->key, (char *)lst->value);
-		lst = lst->next;
+		printf("\e[0;33mpipeline %d\e[0m\n", i);
+		printf("\e[0;34mCOMMAND\e[0m\n");
+		print_2dimensional_chararray(exec->cmd);
+		printf("\e[0;34mINFILE\e[0m\n");
+		lstprint_key_value(exec->infile, 'd');
+		printf("\e[0;34mOUTFILE\e[0m\n");
+		lstprint_key_value(exec->outfile, 'd');
+		exec = exec->next;
+		i++;
 	}
 }
