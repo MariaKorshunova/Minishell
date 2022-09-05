@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 22:27:32 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/05 22:37:29 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME		=	minishell
 HEADER		=	$(addprefix include/,\
 							minishell.h\
 							parser.h\
-							execution.h)
+							execution.h\
+							builtins.h)
 
 CFLAGS		=	-I include
 

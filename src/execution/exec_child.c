@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:49:46 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 22:10:08 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:39:18 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	error_execve(t_data *data, t_exec **pipeline);
 
 void	ft_exec(t_data *data, t_exec **pipeline)
 {
+	find_builtin((*pipeline)->cmd, data);
 	ft_exec_without_path(data, pipeline);
 	ft_exec_with_path(data, pipeline);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/05 22:21:37 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 22:29:23 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 	{
 		ret = chdir(oldpwd);
 		printf("%s\n", oldpwd);
-		if (&oldpwd == NULL)
-			printf("bash: cd: OLDPWD not set");
+		// if (&oldpwd == NULL)
+		// 	printf("bash: cd: OLDPWD not set");
 	}
 	else if (!ft_strcmp(cmd[1], ".."))
 	{

@@ -6,12 +6,11 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:37:42 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "builtins/builtins.h"
 
 static void	init_data(t_data *data);	
 
