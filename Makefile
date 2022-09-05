@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 17:28:54 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/05 22:06:28 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,12 +56,25 @@ FILE_C		+=	$(addprefix utils/,\
 				array_operations.c\
 				envp_list_to_chararray.c\
 				ft_strchr_pos.c\
+				ft_strcmp.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\
 				key_value_search_with_key.c\
 				lstfunction.c\
 				destructor.c)
+
+FILE_C		+=	$(addprefix builtins/,\
+				find_builtin.c\
+				ft_echo.c\
+				ft_pwd.c\
+				ft_cd.c\
+				ft_env.c\
+				ft_exit.c\
+				builtin_utils.c)
+
+FILE_C		+=	$(addprefix signals/,\
+				signal.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 
@@ -72,7 +85,7 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 all			:	$(FOLDER) $(NAME)
 
 $(NAME)		:	$(OBJ) $(LIBFT)
-				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) -L$(shell brew --prefix readline)/lib $(OBJ) -o $(NAME)
 
 $(LIBFT)	:	libft_obj ./libft/Makefile
 				make -C ./libft
@@ -84,7 +97,7 @@ $(FOLDER)	:
 				mkdir -p $@
 
 objects/%.o	:	./src/%.c $(HEADER) Makefile ./libft/Makefile
-				$(CC) $(CFLAGS) -c $< -o $@
+				$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@
 
 clean		:
 				$(RM) $(OBJ)

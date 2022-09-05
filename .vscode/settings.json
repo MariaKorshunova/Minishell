@@ -1,0 +1,10 @@
+{
+	"makefile.extensionOutputFolder": "./.vscode",
+	"files.associations": {
+		"builins.h": "c",
+		"unistd.h": "c",
+		"libft.h": "c",
+		"minishell.h": "c"
+	},
+	"C_Cpp.dimInactiveRegions": false
+}

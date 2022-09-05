@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   ft_strncmp_exact.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/15 02:21:00 by refrain          ###   ########.fr       */
+/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 22:04:31 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_2dimensional_array(void **arr)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
 
-	if (!(arr))
-		return ;
 	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-void	print_2dimensional_chararray(char **arr)
-{
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
+	if (!s1 && !s2)
+		return (0);
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] != '\0' && s2[i] != '\0' )
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	if (s1[i] != '\0' || s2[i] != '\0')
+		return (-1);
+	return (0);
 }
