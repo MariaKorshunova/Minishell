@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 17:15:45 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 18:48:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,15 @@ int			substr_add_note_lst(t_list **expand_token, char *str,
 				int start, int len);
 int			lst_sum_len_content(t_list *lst);
 
-/* pars_pipeline.c */
-t_exec		*pipeline(t_data *data, t_key_val *token);
+/* pars_envp_lst.c  */
+int			pars_envp_lst(t_key_val **lst, char **envp);
 
 /* pars_envp.c */
 int			pars_envp(t_data *data, char **envp);
+int			ft_get_path(t_data *data);
+
+/* pars_pipeline.c */
+t_exec		*pipeline(t_data *data, t_key_val *token);
 
 /* parser.c */
 t_exec		*parser(t_data *data, char *prompt);

@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_search_with_key.c                        :+:      :+:    :+:   */
+/*   ft_strncmp_exact.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/03 16:33:02 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 18:49:32 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 18:42:40 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*key_value_search_with_key(t_key_val *env, char	*key)
+int	ft_strncmp_exact(const char *s1, const char *s2)
 {
-	while (env)
+	int	i;
+
+	i = 0;
+	if (!s1 && !s2)
+		return (0);
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] != '\0' && s2[i] != '\0' )
 	{
-		if (!ft_strncmp_exact(key, (char *)env->key))
-		{
-			return ((char *)env->value);
-			break ;
-		}
-		env = env->next;
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
-	return (NULL);
+	if (s1[i] != '\0' || s2[i] != '\0')
+		return (-1);
+	return (0);
 }

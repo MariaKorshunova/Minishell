@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 17:28:54 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/05 18:53:03 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ FILE_C		+=	$(addprefix parser/,\
 				exec_lstcreate.c\
 				exec_lstfunction.c\
 				expand_dollar.c\
+				pars_envp_lst.c\
 				pars_envp.c\
 				pars_pipeline.c\
 				parser.c\
@@ -56,6 +57,7 @@ FILE_C		+=	$(addprefix utils/,\
 				array_operations.c\
 				envp_list_to_chararray.c\
 				ft_strchr_pos.c\
+				ft_strncmp_exact.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\

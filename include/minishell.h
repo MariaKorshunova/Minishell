@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 16:39:22 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 18:43:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ typedef struct s_data
 {
 	t_key_val	*env;
 	char		**env_arr;
+	char		**bin_path;
+	int			pipe1[2];
+	int			pipe2[2];
+	int			change_env;
 	int			exit_status;
 	int			exit_flag;
 }	t_data;
@@ -76,6 +80,9 @@ int			envp_list_to_chararray(t_data *data);
 
 /* ft_strchr_pos.c */
 int			ft_strchr_pos(char *s, int c);
+
+/* ft_strncmp_exact.c */
+int			ft_strncmp_exact(const char *s1, const char *s2);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);
