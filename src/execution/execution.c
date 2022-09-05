@@ -21,10 +21,7 @@ int	execution(t_data *data, char *prompt)
 	pipeline = NULL;
 	pipeline = parser(data, prompt);
 	if (pipeline == NULL)
-	{
-		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
-	}
 	print_exec(pipeline);
 	if (execution_pipe(data, &pipeline))
 	{
