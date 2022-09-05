@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/15 02:21:00 by refrain          ###   ########.fr       */
+/*   Created: 2022/08/15 03:26:38 by refrain           #+#    #+#             */
+/*   Updated: 2022/08/15 03:52:47 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-void	free_2dimensional_array(void **arr)
-{
-	int	i;
+# include "signal.h"
+# include "stdio.h"
+# include <readline/readline.h>
 
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
+void	ctrlc_handler(int signum);
+int		signal_handler(void);
 
-void	print_2dimensional_chararray(char **arr)
-{
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
-}
+#endif

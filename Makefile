@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 22:06:02 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/05 22:27:32 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,18 @@ FILE_C		+=	$(addprefix utils/,\
 				lstfunction.c\
 				destructor.c)
 
+FILE_C		+=	$(addprefix builtins/,\
+				find_builtin.c\
+				ft_echo.c\
+				ft_pwd.c\
+				ft_cd.c\
+				ft_env.c\
+				ft_exit.c\
+				builtin_utils.c)
+
+FILE_C		+=	$(addprefix signals/,\
+				signal.c)
+
 SRCS		=	$(addprefix src/, $(FILE_C))
 
 OBJ			=	$(addprefix objects/, $(FILE_C:%.c=%.o))
@@ -79,7 +91,7 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 all			:	$(FOLDER) $(NAME)
 
 $(NAME)		:	$(OBJ) $(LIBFT)
-				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
+				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) -L$(shell brew --prefix readline)/lib $(OBJ) -o $(NAME)
 
 $(LIBFT)	:	libft_obj ./libft/Makefile
 				make -C ./libft
@@ -91,7 +103,7 @@ $(FOLDER)	:
 				mkdir -p $@
 
 objects/%.o	:	./src/%.c $(HEADER) Makefile ./libft/Makefile
-				$(CC) $(CFLAGS) -c $< -o $@
+				$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@
 
 clean		:
 				$(RM) $(OBJ)
