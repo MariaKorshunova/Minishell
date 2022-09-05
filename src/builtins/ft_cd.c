@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/05 22:21:37 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 22:41:14 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 	{
 		ret = chdir(oldpwd);
 		printf("%s\n", oldpwd);
-		if (&oldpwd == NULL)
+		if (oldpwd == NULL)
 			printf("bash: cd: OLDPWD not set");
 	}
 	else if (!ft_strcmp(cmd[1], ".."))
@@ -118,8 +118,7 @@ int	ft_cd(char **cmd, t_data *data)
 	home =  key_value_search_with_key(data->env, "HOME");
 	pwd =  key_value_search_with_key(data->env, "PWD");
 	oldpwd =  key_value_search_with_key(data->env, "OLDPWD");
-	// if (!oldpwd)
-		
+	// if (!ft_strcmp(oldpwd, NULL)	
 	// printf("your home is: %s\n", home);
 	// printf("your pwd is: %s\n", pwd);
 	// printf("your oldpwd is: %s\n", oldpwd);
