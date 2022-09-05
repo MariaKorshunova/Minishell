@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:02:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/05 22:05:24 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 22:36:52 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include <unistd.h>
-# include <stdlib.h> 
-# include <stdio.h>
-# include "../../libft/libft.h"
-# include "../../include/minishell.h"
+# include "minishell.h"
 
 void	find_builtin(char **cmd, t_data *data);
 int		ft_echo(char **cmd);

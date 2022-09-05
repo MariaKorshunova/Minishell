@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_search_with_key.c                        :+:      :+:    :+:   */
+/*   ft_strjoin_with_endchar.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/03 16:33:02 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:00 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/05 21:42:16 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 21:42:38 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*key_value_search_with_key(t_key_val *env, char	*key)
+char	*ft_strjoin_with_endchar(char const *s1, char const *s2, char c)
 {
-	while (env)
+	char	*dest;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	dest = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	while (i < ft_strlen(s1))
 	{
-		if (!ft_strcmp(key, (char *)env->key))
-		{
-			return ((char *)env->value);
-			break ;
-		}
-		env = env->next;
+		dest[i] = s1[i];
+		i++;
 	}
-	return (NULL);
+	dest[i] = c;
+	j = i + 1;
+	i = 0;
+	while (i < ft_strlen(s2))
+		dest[j++] = s2[i++];
+	dest[j] = '\0';
+	return (dest);
 }

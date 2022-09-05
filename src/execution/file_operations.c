@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_value_search_with_key.c                        :+:      :+:    :+:   */
+/*   file_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/03 16:33:02 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:00 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/05 20:30:38 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 21:04:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
-char	*key_value_search_with_key(t_key_val *env, char	*key)
+void	ft_close_file(int fd, char *name)
 {
-	while (env)
-	{
-		if (!ft_strcmp(key, (char *)env->key))
-		{
-			return ((char *)env->value);
-			break ;
-		}
-		env = env->next;
-	}
-	return (NULL);
+	if (close(fd) == -1)
+		ft_error(name, strerror(errno));
 }

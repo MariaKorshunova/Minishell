@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 22:06:28 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/05 22:37:29 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME		=	minishell
 HEADER		=	$(addprefix include/,\
 							minishell.h\
 							parser.h\
-							execution.h)
+							execution.h\
+							builtins.h)
 
 CFLAGS		=	-I include
 
@@ -38,6 +39,7 @@ FILE_C		+=	$(addprefix parser/,\
 				exec_lstcreate.c\
 				exec_lstfunction.c\
 				expand_dollar.c\
+				pars_envp_lst.c\
 				pars_envp.c\
 				pars_pipeline.c\
 				parser.c\
@@ -50,12 +52,17 @@ FILE_C		+=	$(addprefix parser/,\
 				syntax_error.c)
 
 FILE_C		+=	$(addprefix execution/,\
-				execution.c)
+				child.c\
+				error_execution.c\
+				exec_child.c\
+				execution.c\
+				file_operations.c)
 
 FILE_C		+=	$(addprefix utils/,\
 				array_operations.c\
 				envp_list_to_chararray.c\
 				ft_strchr_pos.c\
+				ft_strjoin_with_endchar.c\
 				ft_strcmp.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\

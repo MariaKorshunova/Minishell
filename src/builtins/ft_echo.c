@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/29 20:33:44 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 22:46:43 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	ft_echo(char **cmd)
 	}
 	if (flag == 0)
 		printf("\n");
-	return (0);
+	exit (0);
 }
 
 // int	main(void)

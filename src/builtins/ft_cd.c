@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/05 22:41:14 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 23:00:07 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 	{
 		ret = chdir(oldpwd);
 		printf("%s\n", oldpwd);
-		if (oldpwd == NULL)
+		if (!ft_strcmp(oldpwd, "(null)"))
 			printf("bash: cd: OLDPWD not set");
 	}
 	else if (!ft_strcmp(cmd[1], ".."))
@@ -118,18 +118,25 @@ int	ft_cd(char **cmd, t_data *data)
 	home =  key_value_search_with_key(data->env, "HOME");
 	pwd =  key_value_search_with_key(data->env, "PWD");
 	oldpwd =  key_value_search_with_key(data->env, "OLDPWD");
-	// if (!ft_strcmp(oldpwd, NULL)	
+	printf("%s", oldpwd);
+	// if (!ft_strcmp(oldpwd, "(null)"))
+	// 	return (NULL);
 	// printf("your home is: %s\n", home);
 	// printf("your pwd is: %s\n", pwd);
 	// printf("your oldpwd is: %s\n", oldpwd);
 	if (!home || !pwd || !oldpwd)
 		return (1);
 	if (change_dir(cmd, home, pwd, oldpwd))
-		printf("bash: cd: No such file or directory\n");
+	{
+		ft_error(cmd[1], "No such file or directory\n");
+		// printf("bash: cd: No such file or directory\n");
+		printf("hello");
+	}
 	// if (put_value(data, "OLDPWD", pwd))
 	// 	return (1);
 	// if (put_value(data, "PWD", getcwd(NULL, 0)))
 	// 	return (1);
+	// printf("%s\n", pwd);
 	free(home);
 	free(oldpwd);
 	return (0);
