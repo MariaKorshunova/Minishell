@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_quotes.c                                      :+:      :+:    :+:   */
+/*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:38:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 19:43:52 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 13:18:12 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static char	*expand_token_to_char(t_list *expand_token);
 
-char	*open_quotes(t_key_val **token, t_data *data)
+char	*expand_dollar(t_key_val **token, t_data *data)
 {
 	t_list	*expand_token;
 	char	*expand;
@@ -27,7 +27,7 @@ char	*open_quotes(t_key_val **token, t_data *data)
 		return (NULL);
 	expand_token = NULL;
 	expand = NULL;
-	expand_token = expand_tokens(*token, data);
+	expand_token = expand_tokens(token, data);
 	if (!expand_token)
 		return (NULL);
 	expand = expand_token_to_char(expand_token);

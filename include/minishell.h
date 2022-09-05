@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 16:43:55 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 16:39:22 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ char		*key_value_search_with_key(t_key_val *env, char	*key);
 /* .src/utils/destructor.c */
 void		destructor_minishell(t_data *data);
 
-/* .src/utils/lstprint.c */
+/* .src/utils/lstfunction.c */
 void		lstprint(t_list *lst, char c);
+char		**lst_to_chararray(t_list *lst);
 
 #endif

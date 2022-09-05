@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 20:42:45 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 17:15:45 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ typedef struct s_data		t_data;
 typedef struct s_key_val	t_key_val;
 typedef struct s_exec		t_exec;
 
-/* pars_envp.c */
-int			pars_envp(t_data *data, char **envp);
-
-/* parser.c */
-t_exec		*parser(t_data *data, char *prompt);
+/* exec_fill.c */
+int			fill_exec_by_condition(t_data *data, t_key_val **token,
+				t_exec *note, t_list **cmd);
 
 /* exec_lstclear.c */
 void		lstdelone_exec(t_exec *lst);
@@ -35,6 +33,10 @@ void		lstadd_back_exec(t_exec **lst, t_exec *new);
 
 /* exec_lstfunction.c */
 t_exec		*lstlast_exec(t_exec *lst);
+void		print_exec(t_exec *exec);
+
+/* expand_dollar.c */
+char		*expand_dollar(t_key_val **token, t_data *data);
 
 /* lexer.c */
 t_key_val	*lexer(char *prompt);
@@ -52,7 +54,7 @@ int			add_note_dollar_spec_symbol(char *str, t_list **expand_token,
 				t_data *data, int *i);
 
 /* lst_expand_token.c */
-t_list		*expand_tokens(t_key_val *token, t_data *data);
+t_list		*expand_tokens(t_key_val **token, t_data *data);
 
 /* lst_token_operations.c */
 int			add_note_lst_from_token(t_list **expand_token, char *value);
@@ -61,8 +63,14 @@ int			substr_add_note_lst(t_list **expand_token, char *str,
 				int start, int len);
 int			lst_sum_len_content(t_list *lst);
 
-/* open_quotes.c */
-char		*open_quotes(t_key_val **token, t_data *data);
+/* pars_pipeline.c */
+t_exec		*pipeline(t_data *data, t_key_val *token);
+
+/* pars_envp.c */
+int			pars_envp(t_data *data, char **envp);
+
+/* parser.c */
+t_exec		*parser(t_data *data, char *prompt);
 
 /* syntax_error.c */
 int			check_syntax_error(t_key_val *token_list);

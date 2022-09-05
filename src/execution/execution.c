@@ -16,10 +16,11 @@ int	execution(t_data *data, char *prompt)
 {
 	t_exec	*pipeline;
 
-	(void) data;
 	pipeline = NULL;
 	pipeline = parser(data, prompt);
 	if (pipeline == NULL)
 		return (EXIT_FAILURE);
+	print_exec(pipeline);
+	lstclear_exec(&pipeline);
 	return (EXIT_SUCCESS);
 }

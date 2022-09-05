@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 18:26:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/03 20:49:18 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/05 12:13:17 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,23 @@ static int	add_note_with_expand_1(char *str, t_list **expand_token,
 static int	add_note_expand_env(char *str, t_list **expand_token,
 				t_data *data, int *i);
 
-t_list	*expand_tokens(t_key_val *token, t_data *data)
+t_list	*expand_tokens(t_key_val **token, t_data *data)
 {
 	t_list	*expand_token;
 
 	if (token == NULL)
 		return (NULL);
 	expand_token = NULL;
-	while (*(int *)token->key == WORD || *(int *)token->key == QUOTE
-		|| *(int *)token->key == DOUBLE_QUOTE)
+	while (*(int *)(*token)->key == WORD || *(int *)(*token)->key == QUOTE
+		|| *(int *)(*token)->key == DOUBLE_QUOTE)
 	{
-		if (add_note_expand_tokens(token, &expand_token, data))
+		if (add_note_expand_tokens(*token, &expand_token, data))
 		{
 			ft_lstclear(&expand_token, free);
 			return (NULL);
 		}
-		token = token->next;
-		if (token == NULL)
+		*token = (*token)->next;
+		if (*token == NULL)
 			break ;
 	}
 	return (expand_token);
