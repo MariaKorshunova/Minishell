@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/29 20:30:03 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/05 22:05:43 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include "execution.h"
 # include "../src/signals/signal_handler.h"
 
-# define PROMPT "\e[1;32m minishell$ \e[0m"
+# define NAME "minishell"
+# define PROMPT "\e[1;32mminishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
 # define SPEC_SYMBOL "<>|'\""
 # define SEPARATOR " \t"
@@ -53,8 +54,8 @@ typedef struct s_key_val
 typedef struct s_exec
 {
 	char			**cmd;
-	t_key_val		**infile;
-	t_key_val		**outfile;
+	t_key_val		*infile;
+	t_key_val		*outfile;
 	struct s_exec	*next;
 }	t_exec;
 
@@ -63,8 +64,23 @@ typedef struct s_data
 {
 	t_key_val	*env;
 	char		**env_arr;
+	int			change_env;
+	int			exit_status;
 	int			exit_flag;
 }	t_data;
+
+/* .src/utils/array_operations.c */
+void		free_2dimensional_array(void **arr);
+void		print_2dimensional_chararray(char **arr);
+
+/* .src/utils/envp_list_to_chararray.c */
+int			envp_list_to_chararray(t_data *data);
+
+/* ft_strchr_pos.c */
+int			ft_strchr_pos(char *s, int c);
+
+/* ft_strncmp_exact.c */
+int			ft_strcmp(const char *s1, const char *s2);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);
@@ -80,14 +96,14 @@ void		lstprint_key_value(t_key_val *lst, char type);
 void		lstdelone_key_value(t_key_val *lst);
 void		lstclear_key_value(t_key_val **lst);
 
-/* .src/utils/envp_list_to_chararray.c */
-int			envp_list_to_chararray(t_data *data);
-
-/* .src/utils/array_operations.c */
-void		free_2dimensional_array(void **arr);
-void		print_2dimensional_chararray(char **arr);
+/* key_value_search_with_key.c */
+char		*key_value_search_with_key(t_key_val *env, char	*key);
 
 /* .src/utils/destructor.c */
 void		destructor_minishell(t_data *data);
+
+/* .src/utils/lstfunction.c */
+void		lstprint(t_list *lst, char c);
+char		**lst_to_chararray(t_list *lst);
 
 #endif

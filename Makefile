@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 18:49:56 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/05 22:06:28 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,29 +33,42 @@ LIBFT		=	./libft/libft.a
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
+				exec_fill.c\
+				exec_lstclear.c\
+				exec_lstcreate.c\
+				exec_lstfunction.c\
+				expand_dollar.c\
 				pars_envp.c\
+				pars_pipeline.c\
 				parser.c\
 				lexer.c\
 				lexer_spec_symbol_token.c\
 				lexer_add_quote_token.c\
+				lst_expand_dollar_spec_symbol.c\
+				lst_expand_token.c\
+				lst_token_operations.c\
 				syntax_error.c)
 
 FILE_C		+=	$(addprefix execution/,\
 				execution.c)
 
 FILE_C		+=	$(addprefix utils/,\
+				array_operations.c\
+				envp_list_to_chararray.c\
+				ft_strchr_pos.c\
+				ft_strcmp.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\
-				envp_list_to_chararray.c\
-				array_operations.c\
+				key_value_search_with_key.c\
+				lstfunction.c\
 				destructor.c)
 
 FILE_C		+=	$(addprefix builtins/,\
 				find_builtin.c\
 				ft_echo.c\
 				ft_pwd.c\
-				ft_cd_new.c\
+				ft_cd.c\
 				ft_env.c\
 				ft_exit.c\
 				builtin_utils.c)
