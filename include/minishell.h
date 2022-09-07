@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 18:17:24 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 21:40:08 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/errno.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "parser.h"
 # include "execution.h"
@@ -70,6 +74,7 @@ typedef struct s_data
 	char		**bin_path;
 	int			pipe1[2];
 	int			pipe2[2];
+	int			infile_fd;
 	pid_t		child;
 	int			change_env;
 	int			exit_status;

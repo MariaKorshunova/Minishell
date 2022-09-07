@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:43 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 21:18:44 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 21:48:36 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_isnumeric(char **cmd, t_data *data)
 	{
 		if (cmd[1][i] < '0' || cmd[1][i] > '9')
 		{
-			ft_error(cmd[1], ":numeric argument required");
+			ft_print_error(cmd[1], ":numeric argument required");
 			data->exit_status = 255;
 			return (255);
 		}
@@ -56,7 +56,7 @@ int	ft_negative_number(char **cmd, t_data *data)
 
 	i = ft_isnumeric(cmd, data);
 	if (cmd[2])
-		ft_error(cmd[0], "too many arguments");
+		ft_print_error(cmd[0], "too many arguments");
 	else
 	{
 		i = ft_atoi(cmd[1]);
@@ -80,7 +80,7 @@ int	ft_exit_util(char **cmd, t_data *data)
 		return (ft_negative_number(cmd, data));
 	i = ft_isnumeric(cmd, data);
 	if (cmd[2])
-		ft_error(cmd[0], "too many arguments");
+		ft_print_error(cmd[0], "too many arguments");
 	else
 	{
 		i = ft_atoi(cmd[1]);
@@ -103,7 +103,5 @@ int	ft_exit(char **cmd, t_data *data)
 		return (0);
 	}
 	else
-	{
 		return (ft_exit_util(cmd, data));
-	}
 }
