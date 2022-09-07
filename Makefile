@@ -31,6 +31,8 @@ RM			=	rm -rf
 
 LIBFT		=	./libft/libft.a
 
+LIBFT_H		=	./libft/libft.h
+
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
@@ -74,9 +76,6 @@ FILE_C		+=	$(addprefix utils/,\
 FILE_C		+=	$(addprefix history/,\
 				history.c)
 
-FILE_C		+=	$(addprefix executor/,\
-				executor.c)
-
 FILE_C		+=	$(addprefix builtins/,\
 				find_builtin.c\
 				ft_echo.c\
@@ -97,7 +96,7 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 
 all			:	$(FOLDER) libft $(NAME)
 
-$(NAME)		:	$(OBJ)
+$(NAME)		:	$(OBJ) $(LIBFT)
 				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) $(OBJ) -o $(NAME)
 
 libft		:	libft_obj
@@ -109,7 +108,7 @@ libft_obj	:
 $(FOLDER)	:
 				mkdir -p $@
 
-objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT)
+objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT_H)
 				$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:

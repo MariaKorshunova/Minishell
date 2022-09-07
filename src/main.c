@@ -20,12 +20,16 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	(void) argc;
 	(void) argv;
+	int		count_cmds;
+
+	count_cmds = 0;
 	init_data(&data);
 	if (pars_envp(&data, envp))
 		return (EXIT_FAILURE);
 	signal_handler();
 	while (data.exit_flag)
 	{
+		count_cmds++;
 		prompt = readline(PROMPT);
 		if (!prompt)
 		{
@@ -33,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
 		}
-		if (history(prompt))
+		if (history(prompt, &count_cmds))
 		{
 			free(prompt);
 			destructor_minishell(&data);

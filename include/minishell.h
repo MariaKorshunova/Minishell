@@ -116,4 +116,7 @@ void		destructor_minishell(t_data *data);
 void		lstprint(t_list *lst, char c);
 char		**lst_to_chararray(t_list *lst);
 
+/* .src/history/history.c */
+int			history(char *str, int *count_cmds);
+
 #endif
