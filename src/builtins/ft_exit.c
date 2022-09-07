@@ -6,13 +6,13 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:43 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 03:06:07 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 21:18:44 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	ft_negative_number(char **cmd)
+int	ft_isnumeric(char **cmd, t_data *data)
 {
 	int	i;
 
@@ -22,24 +22,54 @@ void	ft_negative_number(char **cmd)
 		if (cmd[1][i] < '0' || cmd[1][i] > '9')
 		{
 			ft_error(cmd[1], ":numeric argument required");
-			free_2dimensional_array((void **)cmd);
-			exit (255);
+			data->exit_status = 255;
+			return (255);
 		}
 	}
+	return (0);
+}
+
+int	ft_check_number(int i)
+{
+	if (i >= 256)
+		i = i % 256;
+	else if (i < -256)
+	{
+		while (i < -256)
+		{
+			i = i % 256;
+			if (i == 0)
+				return (i);
+		}
+		i = 256 + i;
+	}
+	else if (i < 0 && i >= -256)
+	{
+		i = 256 + i;
+	}
+	return (i);
+}
+
+int	ft_negative_number(char **cmd, t_data *data)
+{
+	int	i;
+
+	i = ft_isnumeric(cmd, data);
 	if (cmd[2])
 		ft_error(cmd[0], "too many arguments");
 	else
 	{
 		i = ft_atoi(cmd[1]);
-		i = 256 + i;
+		i = ft_check_number(i);
 		printf("exit\n");
-		printf("your number is %d\n", i);
-		free_2dimensional_array((void **)cmd);
-		exit (i);
+		data->exit_flag = 0;
+		data->exit_status = i;
+		return (i);
 	}
+	return (i);
 }
 
-void	ft_exit_util(char **cmd)
+int	ft_exit_util(char **cmd, t_data *data)
 {
 	int	i;
 
@@ -47,35 +77,33 @@ void	ft_exit_util(char **cmd)
 	if (cmd[1][i] == '+')
 		i++;
 	if (cmd[1][i] == '-')
-		ft_negative_number(cmd);
-	while (cmd[1][++i])
-	{
-		if (cmd[1][i] < '0' || cmd[1][i] > '9')
-		{
-			ft_error(cmd[1], ":numeric argument required");
-			free_2dimensional_array((void **)cmd);
-			exit (255);
-		}
-	}
+		return (ft_negative_number(cmd, data));
+	i = ft_isnumeric(cmd, data);
 	if (cmd[2])
 		ft_error(cmd[0], "too many arguments");
 	else
 	{
 		i = ft_atoi(cmd[1]);
+		i = ft_check_number(i);
 		printf("exit\n");
-		free_2dimensional_array((void **)cmd);
-		exit (i);
+		data->exit_flag = 0;
+		data->exit_status = i;
+		return (i);
 	}
+	return (0);
 }
 
-void	ft_exit(char **cmd)
+int	ft_exit(char **cmd, t_data *data)
 {
 	if (!cmd[1])
 	{
 		printf("exit\n");
-		free_2dimensional_array((void **)cmd);
-		exit (0);
+		data->exit_flag = 0;
+		data->exit_status = 0;
+		return (0);
 	}
 	else
-		ft_exit_util(cmd);
+	{
+		return (ft_exit_util(cmd, data));
+	}
 }
