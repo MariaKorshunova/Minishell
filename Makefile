@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/07 20:52:47 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/07 21:27:46 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 RM			=	rm -rf
 
 LIBFT		=	./libft/libft.a
+
+LIBFT_H		= ./libft/libft.h
 
 FILE_C		=	main.c
 
@@ -91,7 +93,7 @@ FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 
 all			:	$(FOLDER) libft $(NAME)
 
-$(NAME)		:	$(OBJ)
+$(NAME)		:	$(OBJ) $(LIBFT)
 				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) -L$(shell brew --prefix readline)/lib $(OBJ) -o $(NAME)
 
 libft		:	libft_obj
@@ -103,7 +105,7 @@ libft_obj	:
 $(FOLDER)	:
 				mkdir -p $@
 
-objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT)
+objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT_H)
 				$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@
 
 clean		:
