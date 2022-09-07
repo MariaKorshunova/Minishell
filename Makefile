@@ -6,11 +6,11 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/06 17:04:32 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/07 20:52:47 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY		:	all clean fclean re
+.PHONY		:	all clean fclean re libft
 
 NAME		=	minishell
 
@@ -23,7 +23,7 @@ HEADER		=	$(addprefix include/,\
 CFLAGS		=	-I include
 
 CFLAGS		+=	-Wall -Wextra -Werror
-CFLAGS		+=	-fsanitize=address -g
+# CFLAGS		+=	-fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -89,12 +89,12 @@ OBJ			=	$(addprefix objects/, $(FILE_C:%.c=%.o))
 
 FOLDER		=	$(sort $(dir objects/ $(OBJ)))
 
-all			:	$(FOLDER) $(NAME)
+all			:	$(FOLDER) libft $(NAME)
 
-$(NAME)		:	$(OBJ) $(LIBFT)
+$(NAME)		:	$(OBJ)
 				$(CC) $(LDFLAGS) $(CFLAGS) $(LIBFT) -L$(shell brew --prefix readline)/lib $(OBJ) -o $(NAME)
 
-$(LIBFT)	:	libft_obj ./libft/Makefile
+libft		:	libft_obj
 				make -C ./libft
 
 libft_obj	:
@@ -103,7 +103,7 @@ libft_obj	:
 $(FOLDER)	:
 				mkdir -p $@
 
-objects/%.o	:	./src/%.c $(HEADER) Makefile ./libft/Makefile
+objects/%.o	:	./src/%.c $(HEADER) Makefile $(LIBFT)
 				$(CC) $(CFLAGS) -I$(shell brew --prefix readline)/include -c $< -o $@
 
 clean		:

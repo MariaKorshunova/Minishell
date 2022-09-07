@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:02:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 04:14:54 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 20:29:23 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 
-void	find_builtin(char **cmd, t_data *data);
-void	ft_exit(char **cmd);
+int		find_builtin(char **cmd, t_data *data);
+int		ft_exit(char **cmd, t_data *data);
 
 int		ft_echo(char **cmd);
 int		ft_pwd(void);

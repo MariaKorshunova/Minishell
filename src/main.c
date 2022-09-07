@@ -6,13 +6,13 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 04:17:17 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 18:20:19 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_data(t_data *data);	
+static void	init_data(t_data *data);
 
 int	main(int argc, char **argv, char **envp)
 {
