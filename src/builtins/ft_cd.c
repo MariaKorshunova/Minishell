@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 21:42:05 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 23:11:01 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ int	home_directory(char **cmd, char *home)
 			free(tmp);
 		}
 		chdir(cmd[1]);
+		free(cmd[1]);
 	}
 	return (0);
 }
 
-void	ft_oldpwd(char *oldpwd)
+int	ft_oldpwd(char *oldpwd)
 {
 	if (oldpwd == NULL)
 	{
 		ft_print_error("cd", "OLDPWD not set");
-		exit (1);
+		return (1);
 	}
 	else
 	{
 		chdir(oldpwd);
 		printf("%s\n", oldpwd);
 	}
+	return (0);
 }
 
 int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
@@ -68,7 +70,7 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 	else if (!ft_strcmp(cmd[1], ".."))
 	{
 		tmp = ft_cut_string(pwd);
-		ret = chdir(tmp);
+		chdir(tmp);
 		free(tmp);
 	}
 	else
@@ -108,5 +110,6 @@ int	ft_cd(char **cmd, t_data *data)
 		return (1);
 	if (put_new_value(data->env, "PWD", getcwd(NULL, 0)))
 		return (1);
+	free(oldpwd);
 	return (0);
 }

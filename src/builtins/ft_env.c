@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:20 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 19:38:24 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 23:27:02 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int	ft_env(t_data *data)
 			(char *)data->env->value);
 		data->env = data->env->next;
 	}
+	// free_2dimensional_array((void **)data->env_arr);
+	// free_2dimensional_array((void **)data->bin_path);
 	return (0);
 }
