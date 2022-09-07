@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 18:08:43 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:01:24 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,11 @@ void	ft_close_pipefd(t_data *data, int *pipefd, int both)
 		ft_close_file(data->pipe2[1], NULL);
 	}
 	perror (PREFIX_ERROR);
+}
+
+void	ft_error_child_process(t_data *data, t_exec **pipeline)
+{
+	destructor_minishell(data);
+	lstclear_exec(pipeline);
+	exit(errno);
 }

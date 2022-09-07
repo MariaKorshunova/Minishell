@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 18:50:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:17:20 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int			ft_child(t_data *data, t_exec **pipeline);
 /* error_execution.c */
 void		ft_print_error(char *name, char *str_error);
 void		ft_close_pipefd(t_data *data, int *pipefd, int both);
+void		ft_error_child_process(t_data *data, t_exec **pipeline);
 
 /* exec_child.c */
-void		ft_exec(t_data *data, t_exec **pipeline);
+void		ft_exec(t_data *data, t_exec **pipeline, t_exec *exec);
 
 /* execution.c */
 int			execution(t_data *data, char *prompt);
