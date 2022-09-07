@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 20:18:51 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 21:42:05 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_oldpwd(char *oldpwd)
 {
 	if (oldpwd == NULL)
 	{
-		ft_error("cd", "OLDPWD not set");
+		ft_print_error("cd", "OLDPWD not set");
 		exit (1);
 	}
 	else
@@ -101,7 +101,7 @@ int	ft_cd(char **cmd, t_data *data)
 	oldpwd = key_value_search_with_key(data->env, "OLDPWD");
 	if (change_dir(cmd, home, pwd, oldpwd))
 	{
-		ft_error(cmd[1], "No such file or directory");
+		ft_print_error(cmd[1], "No such file or directory");
 		return (1);
 	}
 	if (put_new_value(data->env, "OLDPWD", pwd))

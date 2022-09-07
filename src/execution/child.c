@@ -6,59 +6,55 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:26:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 21:35:27 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:29:58 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static int	ft_child_first(t_data *data, t_exec **pipeline);
+static int	ft_child_first(t_data *data, t_exec **pipeline, t_exec *exec);
+static int	ft_child_first_childprocess(t_data *data, t_exec **pipeline,
+				t_exec *exec);
 
 int	ft_child(t_data *data, t_exec **pipeline)
 {
 	int	status;
 
-	if (ft_child_first(data, pipeline))
+	if (ft_child_first(data, pipeline, *pipeline))
 		return (EXIT_FAILURE);
 	wait(&status);
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_child_first(t_data *data, t_exec **pipeline)
+static int	ft_child_first(t_data *data, t_exec **pipeline, t_exec *exec)
+{	
+	if (find_builtin(exec->cmd, data))
+		return (EXIT_SUCCESS);
+	if (ft_child_first_childprocess(data, pipeline, exec))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	ft_child_first_childprocess(t_data *data, t_exec **pipeline,
+				t_exec *exec)
 {
 	data->child = fork();
 	if (data->child < 0)
 	{
-		ft_error_fork(data, data->pipe1, 0);
+		ft_close_pipefd(data, data->pipe1, 0);
 		return (EXIT_FAILURE);
 	}
 	else if (data->child == 0)
 	{
 		ft_close_file(data->pipe1[0], NULL);
+		if (redicrect_infile(data, exec->infile))
+		{
+			ft_close_file(data->pipe1[1], NULL);
+			ft_error_child_process(data, pipeline);
+		}
+		ft_close_file(data->infile_fd, NULL);
 		ft_close_file(data->pipe1[1], NULL);
-		ft_exec(data, pipeline);
+		ft_exec(data, pipeline, exec);
 	}
 	return (EXIT_SUCCESS);
 }
-
-/*
-		ft_close_file(pipex->pipe1[0], NULL);
-		ft_open_infile(pipex, argv);
-		if (pipex->infile_fd == -1)
-			ft_error_open_file(pipex, pipex->pipe1[1]);
-		if (dup2(pipex->infile_fd, STDIN_FILENO) == -1)
-		{
-			ft_close_file(pipex->infile_fd, argv[1]);
-			ft_close_file(pipex->pipe1[1], NULL);
-			ft_error_dup(pipex);
-		}
-		if (dup2(pipex->pipe1[1], STDOUT_FILENO) == -1)
-		{
-			ft_close_file(pipex->infile_fd, argv[1]);
-			ft_close_file(pipex->pipe1[1], NULL);
-			ft_error_dup(pipex);
-		}
-		ft_close_file(pipex->infile_fd, argv[1]);
-		ft_close_file(pipex->pipe1[1], NULL);
-		ft_exec(pipex, argv[2], envp);
-*/

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 18:20:19 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 21:45:54 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int argc, char **argv, char **envp)
 			return (EXIT_FAILURE);
 		}
 		free(prompt);
-		data.exit_flag = 0;
 	}
 	destructor_minishell(&data);
 	return (EXIT_SUCCESS);

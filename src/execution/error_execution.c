@@ -6,13 +6,13 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 21:01:12 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:01:24 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	ft_error(char *name, char *str_error)
+void	ft_print_error(char *name, char *str_error)
 {
 	ft_putstr_fd(PREFIX_ERROR, 2);
 	if (name)
@@ -25,7 +25,7 @@ void	ft_error(char *name, char *str_error)
 	ft_putstr_fd("\n", 2);
 }
 
-void	ft_error_fork(t_data *data, int *pipefd, int both)
+void	ft_close_pipefd(t_data *data, int *pipefd, int both)
 {
 	if (both == 0)
 	{
@@ -40,4 +40,11 @@ void	ft_error_fork(t_data *data, int *pipefd, int both)
 		ft_close_file(data->pipe2[1], NULL);
 	}
 	perror (PREFIX_ERROR);
+}
+
+void	ft_error_child_process(t_data *data, t_exec **pipeline)
+{
+	destructor_minishell(data);
+	lstclear_exec(pipeline);
+	exit(errno);
 }
