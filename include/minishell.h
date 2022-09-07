@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 22:36:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 04:16:41 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "parser.h"
 # include "execution.h"
 # include "builtins.h"
-# include "../src/signals/signal_handler.h"
+# include "signal_handler.h"
 
 # define NAME "minishell"
 # define PROMPT "\e[1;32mminishell$ \e[0m"

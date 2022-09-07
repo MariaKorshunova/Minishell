@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:23 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/29 20:48:05 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 03:06:45 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,5 @@ int	ft_pwd(void)
 	else
 		return (-1);
 	free (pwd);
-	return (0);
+	exit (0);
 }
-
-// char	**ft_example(void)
-// {
-// 	char	**str;
-
-// 	str = (char **)malloc (4 * sizeof(char *));
-// 	str[0] = ft_strdup("pwd");
-// 	str[1] = ft_strdup(" test");
-// 	str[2] = ft_strdup(" new");
-// 	str[3] = NULL;
-// 	return (str);
-// }
-
-// int	main(void)
-// {
-// 	char **str = ft_example();
-// 	t_data *data = NULL;
-// 	find_builtin(str, data);
-// 	free_2dimensional_array((void **)str);
-// 	return (0);
-// }
-
