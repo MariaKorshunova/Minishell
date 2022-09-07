@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 17:13:07 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/07 18:54:13 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "execution.h"
 
-int	ft_echo(char **cmd)
+int	redicrect_infile(t_data *data, t_key_val *infile)
 {
-	int		i;
-	int		flag;
-
-	i = 1;
-	flag = 0;
-	if (cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
+	while (infile)
 	{
-		flag = 1;
-		i = 2;
-	}
-	while (cmd && cmd[i])
-	{
-		if (ft_strcmp(cmd[i], "-n") == 0)
-			i++;
-		else
+		if (*(int *)infile->key == LESS)
 		{
-			printf("%s%c", cmd[i++], 32);
-			while (cmd && cmd[i])
-				printf("%s%c", cmd[i++], 32);
+			if (open_infile(data, (char *)infile->value))
+				return (EXIT_FAILURE);
 		}
+		infile = infile->next;
 	}
-	if (flag == 0)
-		printf("\n");
-	exit (0);
+	return (EXIT_SUCCESS);
 }

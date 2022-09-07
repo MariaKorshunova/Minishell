@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/05 22:37:29 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/07 17:19:44 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ FILE_C		+=	$(addprefix execution/,\
 				error_execution.c\
 				exec_child.c\
 				execution.c\
-				file_operations.c)
+				file_operations.c\
+				redirect.c)
 
 FILE_C		+=	$(addprefix utils/,\
 				array_operations.c\

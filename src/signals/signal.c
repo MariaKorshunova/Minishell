@@ -6,11 +6,11 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
-/*   Updated: 2022/08/15 18:08:11 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/07 04:17:45 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal_handler.h"
+#include "minishell.h"
 
 //SIGINT - symbol name for Ctrl+C (displays a new prompt on a new line)
 //SIGQUIT - symbol name for Ctrl+\ (does nothing)

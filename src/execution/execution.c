@@ -34,8 +34,6 @@ int	execution(t_data *data, char *prompt)
 
 static int	execution_pipe(t_data *data, t_exec **pipeline)
 {
-	(void) data;
-	(void) pipeline;
 	if (pipe(data->pipe1) == -1)
 	{
 		perror(PREFIX_ERROR);

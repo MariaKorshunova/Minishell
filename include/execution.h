@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 21:22:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 18:50:44 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_exec		t_exec;
 int			ft_child(t_data *data, t_exec **pipeline);
 
 /* error_execution.c */
-void		ft_error(char *name, char *str_error);
-void		ft_error_fork(t_data *data, int *pipefd, int both);
+void		ft_print_error(char *name, char *str_error);
+void		ft_close_pipefd(t_data *data, int *pipefd, int both);
 
 /* exec_child.c */
 void		ft_exec(t_data *data, t_exec **pipeline);
@@ -34,5 +34,9 @@ int			execution(t_data *data, char *prompt);
 
 /* file_operations.c */
 void		ft_close_file(int fd, char *name);
+int			open_infile(t_data *data, char *infile);
+
+/* redirect.c */
+int			redicrect_infile(t_data *data, t_key_val *infile);
 
 #endif
