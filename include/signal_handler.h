@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 18:56:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 15:15:19 by jmabel           ###   ########.fr       */
+/*   Created: 2022/08/15 03:26:38 by refrain           #+#    #+#             */
+/*   Updated: 2022/09/07 04:15:57 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SIGNAL_HANDLER_H
+# define SIGNAL_HANDLER_H
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
-{
-	if (!lst || !del)
-		return ;
-	(*del)(lst->content);
-	free(lst);
-}
+# include "minishell.h"
+
+void	ctrlc_handler(int signum);
+int		signal_handler(void);
+
+#endif

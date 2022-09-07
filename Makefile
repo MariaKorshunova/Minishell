@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/08/01 12:45:29 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/06 17:04:32 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME		=	minishell
 HEADER		=	$(addprefix include/,\
 							minishell.h\
 							parser.h\
-							execution.h)
+							execution.h\
+							builtins.h)
 
 CFLAGS		=	-I include
 
@@ -33,21 +34,41 @@ LIBFT		=	./libft/libft.a
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
+				exec_fill.c\
+				exec_lstclear.c\
+				exec_lstcreate.c\
+				exec_lstfunction.c\
+				expand_dollar.c\
+				pars_envp_lst.c\
 				pars_envp.c\
+				pars_pipeline.c\
+				parser.c\
 				lexer.c\
 				lexer_spec_symbol_token.c\
 				lexer_add_quote_token.c\
+				lst_expand_dollar_spec_symbol.c\
+				lst_expand_token.c\
+				lst_token_operations.c\
 				syntax_error.c)
 
 FILE_C		+=	$(addprefix execution/,\
-				execution.c)
+				child.c\
+				error_execution.c\
+				exec_child.c\
+				execution.c\
+				file_operations.c)
 
 FILE_C		+=	$(addprefix utils/,\
+				array_operations.c\
+				envp_list_to_chararray.c\
+				ft_strchr_pos.c\
+				ft_strjoin_with_endchar.c\
+				ft_strcmp.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\
-				envp_list_to_chararray.c\
-				array_operations.c\
+				key_value_search_with_key.c\
+				lstfunction.c\
 				destructor.c)
 
 FILE_C		+=	$(addprefix history/,\
@@ -55,6 +76,18 @@ FILE_C		+=	$(addprefix history/,\
 
 FILE_C		+=	$(addprefix executor/,\
 				executor.c)
+
+FILE_C		+=	$(addprefix builtins/,\
+				find_builtin.c\
+				ft_echo.c\
+				ft_pwd.c\
+				ft_cd.c\
+				ft_env.c\
+				ft_exit.c\
+				builtin_utils.c)
+
+FILE_C		+=	$(addprefix signals/,\
+				signal.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

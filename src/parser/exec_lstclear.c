@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   exec_lstclear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 18:56:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 15:15:19 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/03 20:35:10 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/03 20:43:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	lstdelone_exec(t_exec *lst)
 {
-	if (!lst || !del)
+	if (!lst)
 		return ;
-	(*del)(lst->content);
+	free_2dimensional_array((void **)(lst->cmd));
+	lstclear_key_value(&(lst->infile));
+	lstclear_key_value(&(lst->outfile));
 	free(lst);
+}
+
+void	lstclear_exec(t_exec **lst)
+{
+	t_exec	*tmp;
+
+	if (!lst)
+		return ;
+	if (!(*lst))
+		return ;
+	while (*lst)
+	{
+		tmp = *lst;
+		*lst = (*lst)->next;
+		lstdelone_exec(tmp);
+	}
 }

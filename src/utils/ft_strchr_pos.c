@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_strchr_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 18:56:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 15:15:19 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/01 15:35:57 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/01 15:43:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	ft_strchr_pos(char *s, int c)
 {
-	if (!lst || !del)
-		return ;
-	(*del)(lst->content);
-	free(lst);
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!s)
+		return (-1);
+	str = (char *)s;
+	while (str[i] != '\0' && str[i] != (char)c)
+		i++;
+	if (str[i] != (char)c)
+		return (-1);
+	else
+		return (i);
 }

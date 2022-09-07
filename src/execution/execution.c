@@ -12,28 +12,39 @@
 
 #include "parser.h"
 
-int	execution(t_data *envp, char *prompt)
-{
-	t_key_val	*token_list;
-	t_list		*pipeline;
-	t_exec		exec;
+static int	execution_pipe(t_data *data, t_exec **pipeline);
 
-	(void)envp;
-	token_list = NULL;
+int	execution(t_data *data, char *prompt)
+{
+	t_exec	*pipeline;
+
 	pipeline = NULL;
-	token_list = lexer(prompt);
-	if (token_list == NULL)
-		return (EXIT_FAILURE);
-	// lstprint_key_value(token_list, 'd');
-	if (check_syntax_error(token_list) == -1)
+	pipeline = parser(data, prompt);
+	if (pipeline == NULL)
 	{
-		printf("%s: %s\n", PREFIX_ERROR, "syntax error near unexpected token `|'");
+		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
-	lstclear_key_value(&token_list);
-	if (executor(&exec, envp))
+	print_exec(pipeline);
+	if (execution_pipe(data, &pipeline))
 	{
-		printf("Goodbye 🌚");
+		lstclear_exec(&pipeline);
+		return (EXIT_FAILURE);
 	}
+	lstclear_exec(&pipeline);
+	return (EXIT_SUCCESS);
+}
+
+static int	execution_pipe(t_data *data, t_exec **pipeline)
+{
+	(void) data;
+	(void) pipeline;
+	if (pipe(data->pipe1) == -1)
+	{
+		perror(PREFIX_ERROR);
+		return (EXIT_FAILURE);
+	}
+	if (ft_child(data, pipeline))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

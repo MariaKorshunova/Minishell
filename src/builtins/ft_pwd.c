@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 18:56:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 15:15:19 by jmabel           ###   ########.fr       */
+/*   Created: 2022/08/06 23:22:23 by refrain           #+#    #+#             */
+/*   Updated: 2022/09/07 03:06:45 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "builtins.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	ft_pwd(void)
 {
-	if (!lst || !del)
-		return ;
-	(*del)(lst->content);
-	free(lst);
+	char	*buf;
+	char	*pwd;
+
+	buf = NULL;
+	pwd = getcwd(buf, 0);
+	if (pwd)
+		printf("%s\n", pwd);
+	else
+		return (-1);
+	free (pwd);
+	exit (0);
 }

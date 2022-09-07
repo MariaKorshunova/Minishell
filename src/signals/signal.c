@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/15 02:21:00 by refrain          ###   ########.fr       */
+/*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
+/*   Updated: 2022/09/07 04:17:45 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_2dimensional_array(void **arr)
-{
-	int	i;
+//SIGINT - symbol name for Ctrl+C (displays a new prompt on a new line)
+//SIGQUIT - symbol name for Ctrl+\ (does nothing)
+//SIG_IGN — igrores the signal, specified as signo
 
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+void	ctrlc_handler(int signum)
+{
+	if (signum == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
-void	print_2dimensional_chararray(char **arr)
+int	signal_handler(void)
 {
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
+	signal(SIGINT, ctrlc_handler);
+	signal(SIGQUIT, SIG_IGN);
+	return (0);
 }

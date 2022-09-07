@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array_operations.c                                 :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 16:18:29 by jmabel            #+#    #+#             */
-/*   Updated: 2022/08/15 02:21:00 by refrain          ###   ########.fr       */
+/*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
+/*   Updated: 2022/09/07 02:00:28 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-void	free_2dimensional_array(void **arr)
+int	ft_echo(char **cmd)
 {
-	int	i;
+	int		i;
+	int		flag;
 
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-void	print_2dimensional_chararray(char **arr)
-{
-	int	i;
-
-	if (!(arr))
-		return ;
-	i = 0;
-	while (arr[i])
-		printf("%s\n", arr[i++]);
+	i = 1;
+	flag = 0;
+	if (cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
+	{
+		flag = 1;
+		i = 2;
+	}
+	while (cmd && cmd[i])
+	{
+		if (ft_strcmp(cmd[i], "-n") == 0)
+			i++;
+		else
+		{
+			printf("%s%c", cmd[i++], 32);
+			while (cmd && cmd[i])
+				printf("%s%c", cmd[i++], 32);
+		}
+	}
+	if (flag == 0)
+		printf("\n");
+	exit (0);
 }

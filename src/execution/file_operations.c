@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   file_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 18:56:15 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 15:15:19 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/05 20:30:38 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 21:04:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "execution.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_close_file(int fd, char *name)
 {
-	if (!lst || !del)
-		return ;
-	(*del)(lst->content);
-	free(lst);
+	if (close(fd) == -1)
+		ft_error(name, strerror(errno));
 }

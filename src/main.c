@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/29 21:12:08 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/07 04:17:17 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ int	main(int argc, char **argv, char **envp)
 	init_data(&data);
 	if (pars_envp(&data, envp))
 		return (EXIT_FAILURE);
+	signal_handler();
 	while (data.exit_flag)
 	{
 		prompt = readline(PROMPT);
 		if (!prompt)
 		{
+			printf("exit\n");
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
 		}
@@ -57,5 +59,8 @@ static void	init_data(t_data *data)
 {
 	data->env = NULL;
 	data->env_arr = NULL;
+	data->bin_path = NULL;
+	data->change_env = 0;
+	data->exit_status = 0;
 	data->exit_flag = 1;
 }	

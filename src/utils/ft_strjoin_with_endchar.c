@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destructor.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin_with_endchar.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/25 19:07:41 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 21:19:52 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/05 21:42:16 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 21:42:38 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	destructor_minishell(t_data *data)
+char	*ft_strjoin_with_endchar(char const *s1, char const *s2, char c)
 {
-	lstclear_key_value(&data->env);
-	free_2dimensional_array((void **)data->env_arr);
-	free_2dimensional_array((void **)data->bin_path);
+	char	*dest;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	dest = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	while (i < ft_strlen(s1))
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = c;
+	j = i + 1;
+	i = 0;
+	while (i < ft_strlen(s2))
+		dest[j++] = s2[i++];
+	dest[j] = '\0';
+	return (dest);
 }
