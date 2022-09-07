@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   file_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/06 23:22:23 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 03:06:45 by refrain          ###   ########.fr       */
+/*   Created: 2022/09/05 20:30:38 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/05 21:04:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "execution.h"
 
-int	ft_pwd(void)
+void	ft_close_file(int fd, char *name)
 {
-	char	*buf;
-	char	*pwd;
-
-	buf = NULL;
-	pwd = getcwd(buf, 0);
-	if (pwd)
-		printf("%s\n", pwd);
-	else
-		return (-1);
-	free (pwd);
-	exit (0);
+	if (close(fd) == -1)
+		ft_error(name, strerror(errno));
 }
