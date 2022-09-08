@@ -20,16 +20,16 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	(void) argc;
 	(void) argv;
-	int		count_cmds;
+//	int		count_cmds;
 
-	count_cmds = 0;
+//	count_cmds = 0;
 	init_data(&data);
 	if (pars_envp(&data, envp))
 		return (EXIT_FAILURE);
 	signal_handler();
 	while (data.exit_flag)
 	{
-		count_cmds++;
+//		count_cmds++;
 		prompt = readline(PROMPT);
 		if (!prompt)
 		{
@@ -37,13 +37,13 @@ int	main(int argc, char **argv, char **envp)
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
 		}
-		if (history(prompt, &count_cmds))
-		{
-			free(prompt);
-			destructor_minishell(&data);
-			rl_clear_history();
-			return (EXIT_FAILURE);
-		}
+//		if (history(prompt, &count_cmds))
+//		{
+//			free(prompt);
+//			destructor_minishell(&data);
+//			rl_clear_history();
+//			return (EXIT_FAILURE);
+//		}
 		if (execution(&data, prompt))
 		{
 			free(prompt);
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			return (EXIT_FAILURE);
 		}
 		free(prompt);
-		data.exit_flag = 0;
+//		data.exit_flag = 0;
 	}
 	destructor_minishell(&data);
 	rl_clear_history();
