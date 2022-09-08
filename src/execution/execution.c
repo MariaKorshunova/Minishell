@@ -60,8 +60,6 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 static int	execution_without_pipe(t_data *data, t_exec **pipeline,
 				t_exec *exec)
 {
-	int	status;
-
 	if (find_builtin(exec->cmd, data))
 		return (EXIT_SUCCESS);
 	data->child = fork();
@@ -75,6 +73,6 @@ static int	execution_without_pipe(t_data *data, t_exec **pipeline,
 		ft_exec(data, pipeline, exec);
 	}
 	else
-		wait(&status);
+		wait(&(data->exit_status));
 	return (EXIT_SUCCESS);
 }

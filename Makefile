@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
+#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/07 21:40:36 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/08 18:22:49 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ FILE_C		+=	$(addprefix execution/,\
 				exec_child.c\
 				execution.c\
 				file_operations.c\
+				heredoc.c\
 				redirect.c)
 
 FILE_C		+=	$(addprefix utils/,\
