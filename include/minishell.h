@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 21:40:08 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 00:53:54 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_data
 	int			change_env;
 	int			exit_status;
 	int			exit_flag;
+	int			signal_flag;
 }	t_data;
 
 /* .src/utils/array_operations.c */

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 21:45:54 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 00:58:01 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	main(int argc, char **argv, char **envp)
 	signal_handler();
 	while (data.exit_flag)
 	{
-		prompt = readline(PROMPT);
+		if (data.signal_flag)
+			prompt = readline(PROMPT);
+		else
+			prompt = readline("");
 		if (!prompt)
 		{
 			printf("exit\n");
@@ -41,6 +44,7 @@ int	main(int argc, char **argv, char **envp)
 			return (EXIT_FAILURE);
 		}
 		free(prompt);
+		// data.signal_flag = 1;
 	}
 	destructor_minishell(&data);
 	return (EXIT_SUCCESS);
@@ -54,4 +58,5 @@ static void	init_data(t_data *data)
 	data->change_env = 0;
 	data->exit_status = 0;
 	data->exit_flag = 1;
+	data->signal_flag = 1;
 }	
