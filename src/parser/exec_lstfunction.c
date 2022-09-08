@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 20:30:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 17:08:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/08 13:33:03 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ t_exec	*lstlast_exec(t_exec *lst)
 	while (lst && lst->next)
 		lst = lst->next;
 	return (lst);
+}
+
+int	lst_size_exec(t_exec *lst)
+{
+	int	count;
+
+	count = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		count++;
+	}
+	return (count);
 }
 
 void	print_exec(t_exec *exec)

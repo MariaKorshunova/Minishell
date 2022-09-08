@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 18:48:33 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/08 13:32:54 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		lstadd_back_exec(t_exec **lst, t_exec *new);
 
 /* exec_lstfunction.c */
 t_exec		*lstlast_exec(t_exec *lst);
+int			lst_size_exec(t_exec *lst);
 void		print_exec(t_exec *exec);
 
 /* expand_dollar.c */
