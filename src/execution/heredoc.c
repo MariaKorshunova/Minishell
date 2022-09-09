@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 17:42:04 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/08 17:46:19 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_heredoc(t_data *data, t_key_val *infile)
 {
-	int	i;
+	char	*line;
+	int		eof;
 
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] != '\0' && s2[i] != '\0' )
+	(void) data;
+	eof = 1;
+	while (eof)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		line = readline(">");
+		if (!line)
+			return (EXIT_FAILURE);
+		if (ft_strcmp(line, (char *)infile->value) == 0)
+		{
+			free(line);
+			eof = 0;
+		}
+		else
+		{
+			ft_putstr_fd(line, STDIN_FILENO);
+			free(line);
+		}
 	}
-	if (s1[i] != '\0' || s2[i] != '\0')
-		return (-1);
-	return (0);
+	return (EXIT_SUCCESS);
 }

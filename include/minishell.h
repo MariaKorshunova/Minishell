@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/09 00:53:54 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 03:09:15 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ typedef struct s_data
 	int			pipe1[2];
 	int			pipe2[2];
 	int			infile_fd;
+	int			infile_flag;
 	pid_t		child;
 	int			change_env;
 	int			exit_status;
 	int			exit_flag;
 	int			signal_flag;
+	int			signal_flag2;
 }	t_data;
 
 /* .src/utils/array_operations.c */

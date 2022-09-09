@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:26:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 23:26:47 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 01:05:30 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_child_first_childprocess(t_data *data, t_exec **pipeline,
 		ft_close_file(data->pipe1[0], NULL);
 		if (redicrect_infile(data, exec->infile))
 		{
-			ft_close_file(data->pipe1[1], NULL);
+			// ft_close_file(data->pipe1[1], NULL);
 			ft_error_child_process(data, pipeline);
 		}
 		ft_close_file(data->infile_fd, NULL);

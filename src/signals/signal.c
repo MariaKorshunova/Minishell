@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 04:17:45 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 04:45:04 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,35 @@
 //SIGQUIT - symbol name for Ctrl+\ (does nothing)
 //SIG_IGN — igrores the signal, specified as signo
 
-void	ctrlc_handler(int signum)
+// void	ctrlc_handler(int signum)
+// {
+// 	if (signum == SIGINT)
+// 	{
+// 		write (1, "\n", 1);
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// }
+
+void	ctrlc_handler(void)
 {
-	if (signum == SIGINT)
+	int	pid;
+
+	pid = waitpid(-1, NULL, WNOHANG);
+	if (pid)
 	{
-		printf("\n");
-		rl_on_new_line();
+		write(1, "\n", 1);
 		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
 
-int	signal_handler(void)
+int	signal_handler(t_data *data)
 {
-	signal(SIGINT, ctrlc_handler);
+	(void)data;
+	signal(SIGINT, (void *)ctrlc_handler);
 	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }

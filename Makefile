@@ -6,9 +6,10 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/07 22:48:46 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/09 01:03:27 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 .PHONY		:	all clean fclean re libft
 
@@ -59,6 +60,7 @@ FILE_C		+=	$(addprefix execution/,\
 				exec_child.c\
 				execution.c\
 				file_operations.c\
+				heredoc.c\
 				redirect.c)
 
 FILE_C		+=	$(addprefix utils/,\
