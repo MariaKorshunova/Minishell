@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/09 04:45:04 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 05:06:57 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ctrlc_handler(void)
 	int	pid;
 
 	pid = waitpid(-1, NULL, WNOHANG);
+	if (!pid)
+		write(1, "\n", 1);
 	if (pid)
 	{
 		write(1, "\n", 1);
