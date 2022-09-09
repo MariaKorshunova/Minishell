@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/09 04:33:38 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/09 06:50:16 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,5 @@ static void	init_data(t_data *data)
 	data->change_env = 0;
 	data->exit_status = 0;
 	data->exit_flag = 1;
-	data->signal_flag = 0;
-	data->signal_flag2 = 0;
 	signal_handler(data);
 }	
