@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 17:45:52 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 13:22:16 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 # include "../libft/libft.h"
 # include "parser.h"
 # include "execution.h"
+# include "get_next_line.h"
 # include "builtins.h"
 # include "signal_handler.h"
 
 # define NAME "minishell"
 # define PROMPT "\e[1;32mminishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
+# define HEREDOC_PROMPT ">"
 # define SPEC_SYMBOL "<>|'\""
 # define SEPARATOR " \t"
 # define ERR_EXECUTE_CMD 127

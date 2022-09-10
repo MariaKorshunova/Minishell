@@ -69,7 +69,6 @@ static int	execution_without_pipe(t_data *data, t_exec **pipeline,
 	{
 		if (redicrect_infile(data, exec->infile))
 			ft_error_child_process(data, pipeline);
-		ft_close_file(data->infile_fd, NULL);
 		ft_exec(data, pipeline, exec);
 	}
 	else

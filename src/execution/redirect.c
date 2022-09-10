@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 17:48:13 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 13:15:58 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int	redicrect_infile(t_data *data, t_key_val *infile)
 		ft_close_file(data->infile_fd, (char *)infile->value);
 		return (EXIT_FAILURE);
 	}
+	// ft_close_file(data->infile_fd, NULL);
 	return (EXIT_SUCCESS);
 }
