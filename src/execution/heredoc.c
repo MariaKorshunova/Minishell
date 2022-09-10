@@ -6,26 +6,41 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 13:39:15 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:13:19 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+static int	get_next_line_heredoc(char *stop, int fd);
+
 int	ft_heredoc(t_data *data, t_key_val *infile)
 {
-	char	*line;
-	int		len_limiter;
 	int		pipe_heredoc[2];
 
-	(void)data;
 	if (pipe(pipe_heredoc) == -1)
 	{
 		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
-	// if (dup2)
-	len_limiter = ft_strlen((char *)infile->value);
+	data->infile_fd = pipe_heredoc[0];
+	if (get_next_line_heredoc((char *)infile->value, pipe_heredoc[1]))
+	{
+		perror (PREFIX_ERROR);
+		ft_close_file(pipe_heredoc[0]);
+		ft_close_file(pipe_heredoc[1]);
+		return (EXIT_FAILURE);
+	}
+	ft_close_file(pipe_heredoc[1], NULL);
+	return (EXIT_SUCCESS);
+}
+
+static int	get_next_line_heredoc(char *stop, int fd)
+{
+	char	*line;
+	int		len_limiter;
+
+	len_limiter = ft_strlen(stop);
 	while (1)
 	{
 		ft_putstr_fd(HEREDOC_PROMPT, 1);
@@ -35,7 +50,7 @@ int	ft_heredoc(t_data *data, t_key_val *infile)
 			perror(PREFIX_ERROR);
 			return (EXIT_FAILURE);
 		}
-		if (ft_strncmp(line, (char *)infile->value, len_limiter) == 0)
+		if (ft_strncmp(line, stop, len_limiter) == 0)
 		{
 			if (line[len_limiter] == '\n')
 			{
@@ -43,7 +58,7 @@ int	ft_heredoc(t_data *data, t_key_val *infile)
 				break ;
 			}
 		}
-		ft_putstr_fd(line, 1);
+		ft_putstr_fd(line, fd);
 		free(line);
 	}
 	return (EXIT_SUCCESS);

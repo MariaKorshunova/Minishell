@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 13:15:58 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:15:39 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	redicrect_infile(t_data *data, t_key_val *infile)
 {
+	int	status;
+
+	status = 0;
 	if (!infile)
 		return (EXIT_SUCCESS);
 	while (infile)
@@ -32,6 +35,8 @@ int	redicrect_infile(t_data *data, t_key_val *infile)
 		{
 			if (ft_heredoc(data, infile))
 				return (EXIT_FAILURE);
+			if (infile->next)
+				ft_close_file(data->infile_fd, NULL);
 		}
 		infile = infile->next;
 	}
@@ -41,6 +46,6 @@ int	redicrect_infile(t_data *data, t_key_val *infile)
 		ft_close_file(data->infile_fd, (char *)infile->value);
 		return (EXIT_FAILURE);
 	}
-	// ft_close_file(data->infile_fd, NULL);
+	ft_close_file(data->infile_fd, NULL);
 	return (EXIT_SUCCESS);
 }
