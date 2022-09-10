@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 16:13:19 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:56:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	ft_heredoc(t_data *data, t_key_val *infile)
 	if (get_next_line_heredoc((char *)infile->value, pipe_heredoc[1]))
 	{
 		perror (PREFIX_ERROR);
-		ft_close_file(pipe_heredoc[0]);
-		ft_close_file(pipe_heredoc[1]);
+		ft_close_file(pipe_heredoc[0], NULL);
+		ft_close_file(pipe_heredoc[1], NULL);
 		return (EXIT_FAILURE);
 	}
 	ft_close_file(pipe_heredoc[1], NULL);

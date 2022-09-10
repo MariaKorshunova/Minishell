@@ -6,19 +6,19 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 16:15:39 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:20:20 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-int	redicrect_infile(t_data *data, t_key_val *infile)
-{
-	int	status;
+static int	redirect_outfile_bypass(t_data *data, t_key_val *outfile);
 
-	status = 0;
+int	redirect_infile(t_data *data, t_key_val *infile)
+{
 	if (!infile)
 		return (EXIT_SUCCESS);
+	data->infile_flag = 1;
 	while (infile)
 	{
 		if (*(int *)infile->key == LESS)
@@ -40,12 +40,42 @@ int	redicrect_infile(t_data *data, t_key_val *infile)
 		}
 		infile = infile->next;
 	}
-	if (dup2(data->infile_fd, STDIN_FILENO) == -1)
-	{
-		perror(PREFIX_ERROR);
-		ft_close_file(data->infile_fd, (char *)infile->value);
+	return (EXIT_SUCCESS);
+}
+
+int	redirect_outfile(t_data *data, t_key_val *outfile)
+{
+	if (!outfile)
+		return (EXIT_SUCCESS);
+	data->outfile_flag = 1;
+	if (redirect_outfile_bypass(data, outfile))
 		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	redirect_outfile_bypass(t_data *data, t_key_val *outfile)
+{
+	while (outfile)
+	{
+		if (*(int *)outfile->key == GREATER)
+		{
+			if (open_outfile_greater(data, (char *)outfile->value))
+			{
+				ft_print_error(outfile->value, strerror(errno));
+				return (EXIT_FAILURE);
+			}
+		}
+		else if (*(int *)outfile->key == DOUBLE_GREATER)
+		{
+			if (open_outfile_doublegreater(data, (char *)outfile->value))
+			{
+				ft_print_error(outfile->value, strerror(errno));
+				return (EXIT_FAILURE);
+			}			
+		}
+		if (outfile->next)
+			ft_close_file(data->outfile_fd, (char *)outfile->value);
+		outfile = outfile->next;
 	}
-	ft_close_file(data->infile_fd, NULL);
 	return (EXIT_SUCCESS);
 }

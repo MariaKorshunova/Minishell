@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:30:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 18:50:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 20:20:55 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ int	open_infile(t_data *data, char *infile)
 {
 	data->infile_fd = open(infile, O_RDONLY);
 	if (data->infile_fd == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	open_outfile_greater(t_data *data, char *name)
+{
+	data->outfile_fd = open(name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (data->outfile_fd == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	open_outfile_doublegreater(t_data *data, char *name)
+{
+	data->outfile_fd = open(name, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (data->outfile_fd == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

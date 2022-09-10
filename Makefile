@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/10 16:06:55 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/10 21:58:32 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ FILE_C		+=	$(addprefix parser/,\
 FILE_C		+=	$(addprefix execution/,\
 				child.c\
 				error_execution.c\
-				exec_child.c\
+				exec_without_pipe.c\
+				exec.c\
 				execution.c\
 				file_operations.c\
 				heredoc.c\

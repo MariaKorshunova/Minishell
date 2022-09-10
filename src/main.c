@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 18:21:45 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 21:45:57 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ static void	init_data(t_data *data)
 	data->env = NULL;
 	data->env_arr = NULL;
 	data->bin_path = NULL;
-	data->infile_flag = 0;
 	data->change_env = 0;
+	data->infile_flag = 0;
+	data->outfile_flag = 0;
 	data->exit_status = 0;
 	data->exit_flag = 1;
 }	
