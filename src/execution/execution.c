@@ -43,15 +43,15 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 		if (execution_without_pipe(data, pipeline, *pipeline))
 			return (EXIT_FAILURE);
 	}
-	// else
-	// {
-	// 	if (pipe(data->pipe1) == -1)
-	// 	{
-	// 		perror(PREFIX_ERROR);
-	// 		return (EXIT_FAILURE);
-	// 	}
-	// 	if (ft_child(data, pipeline))
-	// 		return (EXIT_FAILURE);
-	// }
+	else
+	{
+		if (pipe(data->pipe1) == -1)
+		{
+			perror(PREFIX_ERROR);
+			return (EXIT_FAILURE);
+		}
+		if (ft_child(data, pipeline))
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:57:31 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 15:38:42 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/12 19:53:36 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	execution_without_pipe(t_data *data, t_exec **pipeline,
 	if (tmp_stdin_stdout(&tmp_stdin, &tmp_stdout))
 		return (EXIT_FAILURE);
 	if (redirect_without_pipe(data, exec))
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	status_builtin = find_builtin(exec->cmd, data);
 	if (status_builtin == -1)
 	{
@@ -63,7 +63,7 @@ static int	redirect_without_pipe(t_data *data, t_exec *exec)
 		return (EXIT_FAILURE);
 	if (data->infile_flag == 1)
 	{
-		if (dup2_infile_stdin(data))
+		if (dup2_infile_stdin(data) == -1)
 		{
 			perror (PREFIX_ERROR);
 			return (EXIT_FAILURE);
@@ -71,7 +71,7 @@ static int	redirect_without_pipe(t_data *data, t_exec *exec)
 	}
 	if (data->outfile_flag == 1)
 	{
-		if (dup2_outfile_stdout(data))
+		if (dup2_outfile_stdout(data) == -1)
 		{
 			perror (PREFIX_ERROR);
 			return (EXIT_FAILURE);
@@ -89,6 +89,7 @@ static int	child_without_pipe(t_data *data, t_exec **pipeline,
 	else if (data->child == 0)
 		ft_exec(data, pipeline, exec);
 	wait(&(data->exit_status));
+	data->exit_status = data->exit_status % 255;
 	return (EXIT_SUCCESS);
 }
 

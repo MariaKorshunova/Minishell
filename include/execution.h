@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 14:26:43 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/12 20:58:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 typedef struct s_data		t_data;
 typedef struct s_key_val	t_key_val;
 typedef struct s_exec		t_exec;
+
+/* child_first.c  */
+int			ft_child_first(t_data *data, t_exec **pipeline, t_exec *exec);
+
+/* child_last.c */
+int			ft_child_last(t_data *data, t_exec **pipeline, t_exec *exec,
+				int *pipefd);
 
 /* child.c */
 int			ft_child(t_data *data, t_exec **pipeline);

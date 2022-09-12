@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 14:15:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/12 19:10:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,13 @@ static int	open_outfile_bypass(t_data *data, t_key_val *outfile)
 int	open_infile_outfile(t_data *data, t_exec *exec)
 {
 	if (open_infile(data, exec->infile))
+	{
+		data->exit_status = 1;
 		return (EXIT_FAILURE);
+	}
 	if (open_outfile(data, exec->outfile))
 	{
+		data->exit_status = 1;
 		if (data->infile_flag == 1)
 			ft_close_file(data->infile_fd, NULL);
 		return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/12 14:26:16 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/12 20:54:50 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,8 @@ FILE_C		+=	$(addprefix parser/,\
 				syntax_error.c)
 
 FILE_C		+=	$(addprefix execution/,\
+				child_first.c\
+				child_last.c\
 				child.c\
 				error_execution.c\
 				exec_without_pipe.c\
