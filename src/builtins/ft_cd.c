@@ -6,16 +6,43 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 23:11:01 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/12 18:03:57 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+// t_list	ft_add_oldpwd(char **cmd, t_data *data)
+// {
+// 	t_key_val	*temp;
+
+// 	temp = data->env;
+// 	while (temp->next)
+// 		temp = temp->next;
+// 	(char *)temp->key = strdup()
+		
+// }
+
+char	*home_util(char **cmd, char *home)
+{
+	char	*tmp;
+
+	if (!cmd || !home)
+		return (0);
+	tmp = ft_cut_string(home);
+	cmd[1] = ft_strjoin(tmp, cmd[1] + 1);
+	if (!cmd[1])
+		return (NULL);
+	free(tmp);
+	return (cmd[1]);
+}
+
 int	home_directory(char **cmd, char *home)
 {
 	char	*tmp;
 
+	if (!cmd || !home)
+		return (0);
 	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
 		chdir(home);
 	else
@@ -24,14 +51,14 @@ int	home_directory(char **cmd, char *home)
 		{
 			tmp = cmd[1] + 1;
 			cmd[1] = ft_strjoin(home, "/");
+			if (!cmd[1])
+				return (-1);
 			cmd[1] = ft_strjoin(cmd[1], tmp);
+			if (!cmd[1])
+				return (-1);
 		}
 		else
-		{
-			tmp = ft_cut_string(home);
-			cmd[1] = ft_strjoin(tmp, cmd[1] + 1);
-			free(tmp);
-		}
+			cmd[1] = home_util(cmd, home);
 		chdir(cmd[1]);
 		free(cmd[1]);
 	}
@@ -64,9 +91,7 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 	else if (!ft_strcmp(cmd[1], "."))
 		chdir(pwd);
 	else if (!ft_strcmp(cmd[1], "-"))
-	{
 		ft_oldpwd(oldpwd);
-	}
 	else if (!ft_strcmp(cmd[1], ".."))
 	{
 		tmp = ft_cut_string(pwd);
@@ -80,14 +105,21 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 
 int	put_new_value(t_key_val *env, char	*key, char *newval)
 {
-	while (env)
+	t_key_val	*temp;
+
+	temp = env;
+	while (temp)
 	{
-		if (!ft_strcmp(key, (char *)env->key))
+		if (!ft_strcmp(key, (char *)temp->key))
 		{
-			env->value = newval;
+			free((char *)temp->value);
+			temp->value = strdup(newval);
+			if (!(temp->value))
+				return (0);
+			free((char *)temp->value);
 			break ;
 		}
-		env = env->next;
+		temp = temp->next;
 	}
 	return (0);
 }
@@ -106,10 +138,14 @@ int	ft_cd(char **cmd, t_data *data)
 		ft_print_error(cmd[1], "No such file or directory");
 		return (1);
 	}
+	// else
+	// {
+	// 	if (!oldpwd)
+				
+	// }
 	if (put_new_value(data->env, "OLDPWD", pwd))
 		return (1);
 	if (put_new_value(data->env, "PWD", getcwd(NULL, 0)))
 		return (1);
-	free(oldpwd);
 	return (0);
 }

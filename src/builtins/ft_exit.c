@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:43 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 21:48:36 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/12 14:02:16 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_isnumeric(char **cmd, t_data *data)
 		{
 			ft_print_error(cmd[1], ":numeric argument required");
 			data->exit_status = 255;
-			return (255);
+			return (data->exit_status);
 		}
 	}
 	return (0);
@@ -56,7 +56,11 @@ int	ft_negative_number(char **cmd, t_data *data)
 
 	i = ft_isnumeric(cmd, data);
 	if (cmd[2])
+	{
 		ft_print_error(cmd[0], "too many arguments");
+		data->exit_status = 1;
+		return (data->exit_status);
+	}
 	else
 	{
 		i = ft_atoi(cmd[1]);
@@ -64,9 +68,9 @@ int	ft_negative_number(char **cmd, t_data *data)
 		printf("exit\n");
 		data->exit_flag = 0;
 		data->exit_status = i;
-		return (i);
+		return (data->exit_status);
 	}
-	return (i);
+	return (data->exit_status);
 }
 
 int	ft_exit_util(char **cmd, t_data *data)
@@ -80,7 +84,11 @@ int	ft_exit_util(char **cmd, t_data *data)
 		return (ft_negative_number(cmd, data));
 	i = ft_isnumeric(cmd, data);
 	if (cmd[2])
+	{
 		ft_print_error(cmd[0], "too many arguments");
+		data->exit_status = 1;
+		return (data->exit_status);
+	}
 	else
 	{
 		i = ft_atoi(cmd[1]);
@@ -88,7 +96,7 @@ int	ft_exit_util(char **cmd, t_data *data)
 		printf("exit\n");
 		data->exit_flag = 0;
 		data->exit_status = i;
-		return (i);
+		return (data->exit_status);
 	}
 	return (0);
 }
@@ -100,7 +108,7 @@ int	ft_exit(char **cmd, t_data *data)
 		printf("exit\n");
 		data->exit_flag = 0;
 		data->exit_status = 0;
-		return (0);
+		return (data->exit_status);
 	}
 	else
 		return (ft_exit_util(cmd, data));

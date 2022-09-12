@@ -6,13 +6,13 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/09 05:10:39 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/12 13:33:49 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ctrlc_handler(void)
+static void	ctrlc_handler(void)
 {
 	int	pid;
 
