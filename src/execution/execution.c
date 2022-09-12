@@ -35,21 +35,23 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 {
 	int	len_exec;
 
+	data->infile_flag = 0;
+	data->outfile_flag = 0;
 	len_exec = lst_size_exec(*pipeline);
 	if (len_exec == 1)
 	{
 		if (execution_without_pipe(data, pipeline, *pipeline))
 			return (EXIT_FAILURE);
 	}
-	else
-	{
-		if (pipe(data->pipe1) == -1)
-		{
-			perror(PREFIX_ERROR);
-			return (EXIT_FAILURE);
-		}
-		if (ft_child(data, pipeline))
-			return (EXIT_FAILURE);
-	}
+	// else
+	// {
+	// 	if (pipe(data->pipe1) == -1)
+	// 	{
+	// 		perror(PREFIX_ERROR);
+	// 		return (EXIT_FAILURE);
+	// 	}
+	// 	if (ft_child(data, pipeline))
+	// 		return (EXIT_FAILURE);
+	// }
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/10 21:58:32 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/12 14:26:16 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ FILE_C		+=	$(addprefix execution/,\
 				execution.c\
 				file_operations.c\
 				heredoc.c\
+				open_files.c\
 				redirect.c)
 
 FILE_C		+=	$(addprefix utils/,\

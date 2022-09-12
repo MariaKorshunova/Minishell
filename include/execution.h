@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 21:59:22 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/12 14:26:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,20 @@ int			execution(t_data *data, char *prompt);
 
 /* file_operations.c */
 void		ft_close_file(int fd, char *name);
-int			open_infile(t_data *data, char *infile);
+int			open_infile_less(t_data *data, char *infile);
 int			open_outfile_greater(t_data *data, char *name);
 int			open_outfile_doublegreater(t_data *data, char *name);
 
 /* heredoc.c */
 int			ft_heredoc(t_data *data, t_key_val *infile);
 
+/* open_files.c */
+int			open_infile(t_data *data, t_key_val *infile);
+int			open_outfile(t_data *data, t_key_val *outfile);
+int			open_infile_outfile(t_data *data, t_exec *exec);
+
 /* redirect.c */
-int			redirect_infile(t_data *data, t_key_val *infile);
-int			redirect_outfile(t_data *data, t_key_val *outfile);
+int			dup2_infile_stdin(t_data *data);
+int			dup2_outfile_stdout(t_data *data);
 
 #endif

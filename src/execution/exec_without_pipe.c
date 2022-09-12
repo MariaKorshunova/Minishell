@@ -6,76 +6,103 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:57:31 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 22:23:40 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/12 15:38:42 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+static int	tmp_stdin_stdout(int *tmp_stdin, int *tmp_stdout);
 static int	redirect_without_pipe(t_data *data, t_exec *exec);
-static int	dup2_infile_stdin(t_data *data);
-static int	dup2_outfile_stdout(t_data *data);
+static int	child_without_pipe(t_data *data, t_exec **pipeline,
+				t_exec *exec);
+static int	return_origin_stdin_stdout(int tmp_stdin, int tmp_stdout);
 
 int	execution_without_pipe(t_data *data, t_exec **pipeline,
 				t_exec *exec)
 {
-	if (find_builtin(exec->cmd, data))
-		return (EXIT_SUCCESS);
-	data->child = fork();
-	if (data->child < 0)
+	int	tmp_stdin;
+	int	tmp_stdout;
+	int	status_builtin;
+
+	if (tmp_stdin_stdout(&tmp_stdin, &tmp_stdout))
 		return (EXIT_FAILURE);
-	else if (data->child == 0)
+	if (redirect_without_pipe(data, exec))
+		return (EXIT_FAILURE);
+	status_builtin = find_builtin(exec->cmd, data);
+	if (status_builtin == -1)
 	{
-		if (redirect_without_pipe(data, exec))
-			ft_error_child_process(data, pipeline);
-		if (data->infile_flag == 1)
-			dup2_infile_stdin(data);
-		if (data->outfile_flag == 1)
-			dup2_outfile_stdout(data);
-		ft_exec(data, pipeline, exec);
+		perror(PREFIX_ERROR);
+		return (EXIT_FAILURE);
 	}
-	else
-		wait(&(data->exit_status));
+	else if (status_builtin == 1)
+	{
+		if (return_origin_stdin_stdout(tmp_stdin, tmp_stdout))
+			return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
+	}
+	if (child_without_pipe(data, pipeline, exec))
+		return (EXIT_FAILURE);
+	if (return_origin_stdin_stdout(tmp_stdin, tmp_stdout))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	tmp_stdin_stdout(int *tmp_stdin, int *tmp_stdout)
+{
+	*tmp_stdin = dup(0);
+	*tmp_stdout = dup(1);
+	if (*tmp_stdin == -1 || *tmp_stdout == -1)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
 static int	redirect_without_pipe(t_data *data, t_exec *exec)
 {
-	if (redirect_infile(data, exec->infile))
+	if (open_infile_outfile(data, exec))
 		return (EXIT_FAILURE);
-	if (redirect_outfile(data, exec->outfile))
+	if (data->infile_flag == 1)
 	{
-		if (data->infile_flag == 1)
-			ft_close_file(data->infile_fd, NULL);
-		return (EXIT_FAILURE);
+		if (dup2_infile_stdin(data))
+		{
+			perror (PREFIX_ERROR);
+			return (EXIT_FAILURE);
+		}
+	}
+	if (data->outfile_flag == 1)
+	{
+		if (dup2_outfile_stdout(data))
+		{
+			perror (PREFIX_ERROR);
+			return (EXIT_FAILURE);
+		}
 	}
 	return (EXIT_SUCCESS);
 }
 
-static int	dup2_infile_stdin(t_data *data)
+static int	child_without_pipe(t_data *data, t_exec **pipeline,
+				t_exec *exec)
 {
-	if (dup2(data->infile_fd, STDIN_FILENO) == -1)
-	{
-		perror(PREFIX_ERROR);
-		ft_close_file(data->infile_fd, NULL);
-		if (data->outfile_flag == 1)
-			ft_close_file(data->outfile_fd, NULL);
+	data->child = fork();
+	if (data->child < 0)
 		return (EXIT_FAILURE);
-	}
-	ft_close_file(data->infile_fd, NULL);
+	else if (data->child == 0)
+		ft_exec(data, pipeline, exec);
+	wait(&(data->exit_status));
 	return (EXIT_SUCCESS);
 }
 
-static int	dup2_outfile_stdout(t_data *data)
+static int	return_origin_stdin_stdout(int tmp_stdin, int tmp_stdout)
 {
-	if (dup2(data->outfile_fd, STDOUT_FILENO) == -1)
+	if (dup2(tmp_stdin, STDIN_FILENO) == -1)
 	{
-		perror(PREFIX_ERROR);
-		if (data->infile_flag == 1)
-			ft_close_file(data->infile_fd, NULL);
-		ft_close_file(data->outfile_fd, NULL);
+		perror (PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
-	ft_close_file(data->outfile_fd, NULL);
+	if (dup2(tmp_stdout, STDOUT_FILENO) == -1)
+	{
+		perror (PREFIX_ERROR);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

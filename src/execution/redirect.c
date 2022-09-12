@@ -5,77 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 22:20:20 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/12 14:25:25 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/12 14:25:59 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static int	redirect_outfile_bypass(t_data *data, t_key_val *outfile);
-
-int	redirect_infile(t_data *data, t_key_val *infile)
+int	dup2_infile_stdin(t_data *data)
 {
-	if (!infile)
-		return (EXIT_SUCCESS);
-	data->infile_flag = 1;
-	while (infile)
+	if (dup2(data->infile_fd, STDIN_FILENO) == -1)
 	{
-		if (*(int *)infile->key == LESS)
-		{
-			if (open_infile(data, (char *)infile->value))
-			{
-				ft_print_error(infile->value, strerror(errno));
-				return (EXIT_FAILURE);
-			}
-			if (infile->next)
-				ft_close_file(data->infile_fd, (char *)infile->value);
-		}
-		else if (*(int *)infile->key == DOUBLE_LESS)
-		{
-			if (ft_heredoc(data, infile))
-				return (EXIT_FAILURE);
-			if (infile->next)
-				ft_close_file(data->infile_fd, NULL);
-		}
-		infile = infile->next;
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	redirect_outfile(t_data *data, t_key_val *outfile)
-{
-	if (!outfile)
-		return (EXIT_SUCCESS);
-	data->outfile_flag = 1;
-	if (redirect_outfile_bypass(data, outfile))
+		perror(PREFIX_ERROR);
+		ft_close_file(data->infile_fd, NULL);
+		if (data->outfile_flag == 1)
+			ft_close_file(data->outfile_fd, NULL);
 		return (EXIT_FAILURE);
+	}
+	ft_close_file(data->infile_fd, NULL);
 	return (EXIT_SUCCESS);
 }
 
-static int	redirect_outfile_bypass(t_data *data, t_key_val *outfile)
+int	dup2_outfile_stdout(t_data *data)
 {
-	while (outfile)
+	if (dup2(data->outfile_fd, STDOUT_FILENO) == -1)
 	{
-		if (*(int *)outfile->key == GREATER)
-		{
-			if (open_outfile_greater(data, (char *)outfile->value))
-			{
-				ft_print_error(outfile->value, strerror(errno));
-				return (EXIT_FAILURE);
-			}
-		}
-		else if (*(int *)outfile->key == DOUBLE_GREATER)
-		{
-			if (open_outfile_doublegreater(data, (char *)outfile->value))
-			{
-				ft_print_error(outfile->value, strerror(errno));
-				return (EXIT_FAILURE);
-			}			
-		}
-		if (outfile->next)
-			ft_close_file(data->outfile_fd, (char *)outfile->value);
-		outfile = outfile->next;
+		perror(PREFIX_ERROR);
+		if (data->infile_flag == 1)
+			ft_close_file(data->infile_fd, NULL);
+		ft_close_file(data->outfile_fd, NULL);
+		return (EXIT_FAILURE);
 	}
+	ft_close_file(data->outfile_fd, NULL);
 	return (EXIT_SUCCESS);
 }
