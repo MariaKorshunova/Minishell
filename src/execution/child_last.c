@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:53:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 21:33:41 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/13 21:34:18 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@ static void	ft_child_last_childprocess(t_data *data, t_exec **pipeline,
 				t_exec *exec, int *pipefd);
 static void	redirect_child_last(t_data *data, t_exec **pipeline, int *pipefd);
 
-int	ft_child_last(t_data *data, t_exec **pipeline, t_exec *exec, int *pipefd)
+int	ft_child_last(t_data *data, t_exec **pipeline, t_exec *exec, int len_exec)
 {
-	data->infile_fd = 0;
-	data->outfile_fd = 0;
+	int	*pipefd;
+
+	init_file_flag(data);
+	if (len_exec % 2 == 0)
+		pipefd = data->pipe1;
+	else
+		pipefd = data->pipe2;
 	data->child = fork();
 	if (data->child < 0)
 	{

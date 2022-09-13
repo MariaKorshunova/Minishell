@@ -6,29 +6,91 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:26:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 20:59:00 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/13 22:06:46 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-int	ft_child(t_data *data, t_exec **pipeline)
+static int	ft_manage_middle_child(t_data *data, t_exec **pipeline,
+				t_exec **pipeline_current, int len_exec);
+static int	wait_childs(t_data *data, int len_exec);
+
+int	ft_child(t_data *data, t_exec **pipeline, int len_exec)
 {
-	int		status[2];
-	int		i;
 	t_exec	*pipeline_current;
 
-	i = 0;
 	pipeline_current = *pipeline;
 	if (ft_child_first(data, pipeline, pipeline_current))
 		return (EXIT_FAILURE);
 	pipeline_current = pipeline_current->next;
-	if (ft_child_last(data, pipeline, pipeline_current, data->pipe1))
+	if (ft_manage_middle_child(data, pipeline, &pipeline_current, len_exec))
 		return (EXIT_FAILURE);
-	ft_close_file(data->pipe1[0], NULL);
-	ft_close_file(data->pipe1[1], NULL);
-	wait(&(status[1]));
-	wait(&(status[0]));
-	data->exit_status = status[0] % 255;
+	if (ft_child_last(data, pipeline, pipeline_current, len_exec))
+		return (EXIT_FAILURE);
+	if (len_exec % 2 == 0)
+		close_pipe(data->pipe1);
+	else
+		close_pipe(data->pipe2);
+	if (wait_childs(data, len_exec))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	ft_manage_middle_child(t_data *data, t_exec **pipeline,
+				t_exec **pipeline_current, int len_exec)
+{
+	int	i;
+
+	i = 1;
+	while (i < len_exec - 1)
+	{
+		init_file_flag(data);
+		if (i % 2 == 1)
+		{
+			if (open_pipe(data->pipe2, data->pipe1))
+				return (EXIT_FAILURE);
+			ft_child_middle_odd(data, pipeline, *pipeline_current);
+			close_pipe(data->pipe1);
+		}
+		else
+		{
+			if (open_pipe(data->pipe1, data->pipe2))
+				return (EXIT_FAILURE);
+			ft_child_middle_even(data, pipeline, *pipeline_current);
+			close_pipe(data->pipe2);
+		}
+		*pipeline_current = (*pipeline_current)->next;
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	wait_childs(t_data *data, int len_exec)
+{
+	int	i;
+	int	*status;
+
+	i = 0;
+	status = (int *)malloc((len_exec + 1) * sizeof(int));
+	if (!status)
+		return (EXIT_FAILURE);
+	while (i < len_exec)
+	{
+		if (wait(&(status[i])) == -1)
+		{
+			free(status);
+			return (EXIT_FAILURE);
+		}
+		i++;
+	}
+	data->exit_status = 0;
+	while (i > 0)
+	{
+		if (status[i] != 0)
+			data->exit_status = status[i] % 255;
+		i--;
+	}
+	free(status);
 	return (EXIT_SUCCESS);
 }

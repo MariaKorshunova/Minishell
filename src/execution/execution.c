@@ -35,8 +35,7 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 {
 	int	len_exec;
 
-	data->infile_flag = 0;
-	data->outfile_flag = 0;
+	init_file_flag(data);
 	len_exec = lst_size_exec(*pipeline);
 	if (len_exec == 1)
 	{
@@ -50,7 +49,7 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 			perror(PREFIX_ERROR);
 			return (EXIT_FAILURE);
 		}
-		if (ft_child(data, pipeline))
+		if (ft_child(data, pipeline, len_exec))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

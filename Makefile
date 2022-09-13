@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/12 20:54:50 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/13 22:00:12 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ FILE_C		+=	$(addprefix parser/,\
 FILE_C		+=	$(addprefix execution/,\
 				child_first.c\
 				child_last.c\
+				child_middle_even.c\
+				child_middle_odd.c\
 				child.c\
 				error_execution.c\
 				exec_without_pipe.c\
@@ -65,6 +67,7 @@ FILE_C		+=	$(addprefix execution/,\
 				file_operations.c\
 				heredoc.c\
 				open_files.c\
+				pipefd_operations.c\
 				redirect.c)
 
 FILE_C		+=	$(addprefix utils/,\

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:30:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 18:46:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/13 21:23:06 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,10 @@ int	open_outfile_doublegreater(t_data *data, char *name)
 	if (data->outfile_fd == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
+}
+
+void	init_file_flag(t_data *data)
+{
+	data->infile_flag = 0;
+	data->outfile_flag = 0;
 }
