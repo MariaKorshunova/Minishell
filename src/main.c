@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 14:19:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/14 13:21:14 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,8 @@ static void	init_data(t_data *data)
 	data->change_env = 0;
 	data->exit_status = 0;
 	data->exit_flag = 1;
+	data->key_tmp[0] = "TMP";
+	data->key_tmp[1] = "TEMP";
+	data->key_tmp[2] = "TMPDIR";
+	data->key_tmp[3] = NULL;
 }	

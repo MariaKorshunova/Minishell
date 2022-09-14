@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 21:45:19 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/14 14:06:17 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_data
 	t_key_val	*env;
 	char		**env_arr;
 	char		**bin_path;
+	char		*key_tmp[4];
 	int			pipe1[2];
 	int			pipe2[2];
 	int			infile_flag;
@@ -93,14 +94,18 @@ void		print_2dimensional_chararray(char **arr);
 /* .src/utils/envp_list_to_chararray.c */
 int			envp_list_to_chararray(t_data *data);
 
-/* ft_strchr_pos.c */
+/* .src/utils/ft_strchr_pos.c */
 int			ft_strchr_pos(char *s, int c);
+int			ft_strrchr_pos(char *s, int c);
 
-/* ft_strjoin_with_endchar.c */
+/* .src/utils/ft_strjoin_with_endchar.c */
 char		*ft_strjoin_with_endchar(char const *s1, char const *s2, char c);
 
-/* ft_strcmp.c */
+/* .src/utils/ft_strcmp.c */
 int			ft_strcmp(const char *s1, const char *s2);
+
+/* .src/utils/get_path_tmp.c */
+char		*get_path_tmp(t_data *data);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);

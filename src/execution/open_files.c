@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 19:10:43 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/14 13:22:59 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	open_infile(t_data *data, t_key_val *infile)
 			if (infile->next)
 				ft_close_file(data->infile_fd, (char *)infile->value);
 		}
-		else if (*(int *)infile->key == DOUBLE_LESS)
+		/* else if (*(int *)infile->key == DOUBLE_LESS)
 		{
 			if (ft_heredoc(data, infile))
 				return (EXIT_FAILURE);
 			if (infile->next)
 				ft_close_file(data->infile_fd, NULL);
-		}
+		} */
 		infile = infile->next;
 	}
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:35:57 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/01 15:43:10 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/14 14:07:51 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,20 @@ int	ft_strchr_pos(char *s, int c)
 		return (-1);
 	else
 		return (i);
+}
+
+int	ft_strrchr_pos(char *s, int c)
+{
+	int	i;
+
+	i = ft_strlen(s);
+	if (c == '\0')
+		return (i);
+	while (i > 0)
+	{
+		i--;
+		if (s[i] == (char)c)
+			return (i);
+	}
+	return (i);
 }
