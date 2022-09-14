@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 23:01:13 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/12 15:10:20 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 03:17:41 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ int	find_builtin(char **cmd, t_data *data)
 		ft_exit(cmd, data);
 		return (1);
 	}
+	else
+		return (0);
 	return (0);
 }
