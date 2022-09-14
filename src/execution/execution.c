@@ -13,8 +13,6 @@
 #include "parser.h"
 
 static int	execution_pipe(t_data *data, t_exec **pipeline);
-static int	execution_without_pipe(t_data *data, t_exec **pipeline,
-				t_exec *exec);
 
 int	execution(t_data *data, char *prompt)
 {
@@ -24,7 +22,6 @@ int	execution(t_data *data, char *prompt)
 	pipeline = parser(data, prompt);
 	if (pipeline == NULL)
 		return (EXIT_FAILURE);
-	print_exec(pipeline);
 	if (execution_pipe(data, &pipeline))
 	{
 		lstclear_exec(&pipeline);
@@ -38,6 +35,7 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 {
 	int	len_exec;
 
+	init_file_flag(data);
 	len_exec = lst_size_exec(*pipeline);
 	if (len_exec == 1)
 	{
@@ -51,28 +49,8 @@ static int	execution_pipe(t_data *data, t_exec **pipeline)
 			perror(PREFIX_ERROR);
 			return (EXIT_FAILURE);
 		}
-		if (ft_child(data, pipeline))
+		if (ft_child(data, pipeline, len_exec))
 			return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
-}
-
-static int	execution_without_pipe(t_data *data, t_exec **pipeline,
-				t_exec *exec)
-{
-	if (find_builtin(exec->cmd, data))
-		return (EXIT_SUCCESS);
-	data->child = fork();
-	if (data->child < 0)
-		return (EXIT_FAILURE);
-	else if (data->child == 0)
-	{
-		if (redicrect_infile(data, exec->infile))
-			ft_error_child_process(data, pipeline);
-		// ft_close_file(data->infile_fd, NULL);
-		ft_exec(data, pipeline, exec);
-	}
-	else
-		wait(&(data->exit_status));
 	return (EXIT_SUCCESS);
 }

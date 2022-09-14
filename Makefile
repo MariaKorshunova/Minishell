@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/09 01:03:27 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/14 17:21:19 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ HEADER		=	$(addprefix include/,\
 							minishell.h\
 							parser.h\
 							execution.h\
+							get_next_line.h\
 							builtins.h)
 
 CFLAGS		=	-I include
@@ -55,12 +56,19 @@ FILE_C		+=	$(addprefix parser/,\
 				syntax_error.c)
 
 FILE_C		+=	$(addprefix execution/,\
+				child_first.c\
+				child_last.c\
+				child_middle_even.c\
+				child_middle_odd.c\
 				child.c\
 				error_execution.c\
-				exec_child.c\
+				exec_without_pipe.c\
+				exec.c\
 				execution.c\
 				file_operations.c\
 				heredoc.c\
+				open_files.c\
+				pipefd_operations.c\
 				redirect.c)
 
 FILE_C		+=	$(addprefix utils/,\
@@ -68,6 +76,7 @@ FILE_C		+=	$(addprefix utils/,\
 				envp_list_to_chararray.c\
 				ft_strchr_pos.c\
 				ft_strjoin_with_endchar.c\
+				get_next_line.c\
 				ft_strcmp.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\

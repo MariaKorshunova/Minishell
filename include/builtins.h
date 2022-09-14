@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:02:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 21:40:28 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 16:51:43 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int		put_envp_value(t_data *data, char *key, char *new);
 
 char	*get_value_from_envp(t_data *data, char *str);
 char	*ft_cut_string(char *str);
+
+void	ft_builtin_print_error(char *builtin, char *name, char *str_error);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/09 06:50:09 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 15:52:19 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@
 # include "../libft/libft.h"
 # include "parser.h"
 # include "execution.h"
+# include "get_next_line.h"
 # include "builtins.h"
 # include "signal_handler.h"
 
 # define NAME "minishell"
 # define PROMPT "\e[1;32mminishell$ \e[0m"
 # define PREFIX_ERROR	"minishell"
+# define HEREDOC_PROMPT ">"
 # define SPEC_SYMBOL "<>|'\""
 # define SEPARATOR " \t"
 # define ERR_EXECUTE_CMD 127
@@ -66,7 +68,7 @@ typedef struct s_exec
 	struct s_exec	*next;
 }	t_exec;
 
-/* Struct with common var in minishell */
+/* Struct with common variable in minishell */
 typedef struct s_data
 {
 	t_key_val	*env;
@@ -74,8 +76,10 @@ typedef struct s_data
 	char		**bin_path;
 	int			pipe1[2];
 	int			pipe2[2];
-	int			infile_fd;
 	int			infile_flag;
+	int			outfile_flag;
+	int			infile_fd;
+	int			outfile_fd;
 	pid_t		child;
 	int			change_env;
 	int			exit_status;

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 23:01:13 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/14 03:17:41 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 17:33:42 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	find_builtin(char **cmd, t_data *data)
 	}
 	else if (ft_strcmp((cmd)[0], "cd") == 0)
 	{
-		ft_cd(cmd, data);
+		if (ft_cd(cmd, data) == -1)
+			return (-1);
 		return (1);
 	}
 	else if (ft_strcmp((cmd)[0], "env") == 0 || ft_strcmp((cmd)[0], "ENV") == 0)
@@ -39,7 +40,5 @@ int	find_builtin(char **cmd, t_data *data)
 		ft_exit(cmd, data);
 		return (1);
 	}
-	else
-		return (0);
 	return (0);
 }

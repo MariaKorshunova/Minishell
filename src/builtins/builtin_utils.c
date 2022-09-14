@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 00:15:07 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/14 03:00:23 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 17:42:31 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 char	*ft_cut_string(char *str)
 {
 	int		i;
+	char	*newvalue;
 
-	if (!str)
-		return (NULL);
 	i = ft_strlen(str);
 	while (str[i] != '/')
 		i--;
-	return (ft_substr(str, 0, i + 1));
+	newvalue = ft_substr(str, 0, i + 1);
+	if (!newvalue)
+		return (NULL);
+	return (newvalue);
 }
 
 // void	ft_print_builtin_error(char *name, char *str_error)
