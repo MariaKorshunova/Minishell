@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 17:42:04 by jmabel           ###   ########.fr       */
+/*   Created: 2021/11/08 14:03:28 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/10 13:11:06 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] != '\0' && s2[i] != '\0' )
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	if (s1[i] != '\0' || s2[i] != '\0')
-		return (-1);
-	return (0);
-}
+# include <stdlib.h>
+# include <unistd.h>
+
+# include "minishell.h"
+
+char	*get_next_line(int fd);
+
+#endif

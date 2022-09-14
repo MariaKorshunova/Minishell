@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   pipefd_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 17:42:04 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/13 21:41:40 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/13 21:42:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "execution.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	open_pipe(int *pipe_for_open, int *pipe_opened)
 {
-	int	i;
-
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] != '\0' && s2[i] != '\0' )
+	if (pipe(pipe_for_open) == -1)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		ft_close_file(pipe_opened[0], NULL);
+		ft_close_file(pipe_opened[1], NULL);
+		return (EXIT_FAILURE);
 	}
-	if (s1[i] != '\0' || s2[i] != '\0')
-		return (-1);
-	return (0);
+	return (EXIT_SUCCESS);
+}
+
+void	close_pipe(int *pipefd)
+{
+	ft_close_file(pipefd[0], NULL);
+	ft_close_file(pipefd[1], NULL);
 }

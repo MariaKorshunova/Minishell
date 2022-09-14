@@ -22,7 +22,6 @@ int	execution(t_data *data, char *prompt)
 	pipeline = parser(data, prompt);
 	if (pipeline == NULL)
 		return (EXIT_FAILURE);
-	print_exec(pipeline);
 	if (execution_pipe(data, &pipeline))
 	{
 		lstclear_exec(&pipeline);
@@ -34,12 +33,24 @@ int	execution(t_data *data, char *prompt)
 
 static int	execution_pipe(t_data *data, t_exec **pipeline)
 {
-	if (pipe(data->pipe1) == -1)
+	int	len_exec;
+
+	init_file_flag(data);
+	len_exec = lst_size_exec(*pipeline);
+	if (len_exec == 1)
 	{
-		perror(PREFIX_ERROR);
-		return (EXIT_FAILURE);
+		if (execution_without_pipe(data, pipeline, *pipeline))
+			return (EXIT_FAILURE);
 	}
-	if (ft_child(data, pipeline))
-		return (EXIT_FAILURE);
+	else
+	{
+		if (pipe(data->pipe1) == -1)
+		{
+			perror(PREFIX_ERROR);
+			return (EXIT_FAILURE);
+		}
+		if (ft_child(data, pipeline, len_exec))
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

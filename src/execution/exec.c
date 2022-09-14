@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_child.c                                       :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:49:46 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/07 19:19:24 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:06:08 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	error_execve(t_data *data, t_exec **pipeline);
 
 void	ft_exec(t_data *data, t_exec **pipeline, t_exec *exec)
 {
+	if (exec->cmd[0] == NULL)
+		exit (EXIT_SUCCESS);
 	ft_exec_without_path(data, pipeline, exec);
 	ft_exec_with_path(data, pipeline, exec);
 	ft_print_error(exec->cmd[0], "command not found");
