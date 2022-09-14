@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/12 16:56:10 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 14:53:16 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_echo(char **cmd)
 {
 	int		i;
 	int		flag;
+	t_data	data;
 
 	i = 1;
 	flag = 0;
@@ -63,5 +64,6 @@ int	ft_echo(char **cmd)
 	print_cmd(cmd, i);
 	if (flag == 0)
 		printf("\n");
-	return (0);
+	data.exit_status = 0;
+	return (data.exit_flag);
 }

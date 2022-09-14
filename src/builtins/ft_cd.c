@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/14 03:26:16 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 15:37:49 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ int	home_directory(char **cmd, char *home)
 		}
 		else
 			cmd[1] = home_util(cmd, home);
-		chdir(cmd[1]);
-		free(cmd[1]);
+		if (chdir(cmd[1]))
+			ft_print_error(cmd[1], "No such file or directory");
+		// free(cmd[1]);
 	}
 	return (0);
 }
@@ -68,7 +69,7 @@ int	home_directory(char **cmd, char *home)
 int	ft_oldpwd(char *oldpwd)
 {
 	t_data	data;
-	
+
 	if (oldpwd == NULL)
 	{
 		ft_print_error("cd", "OLDPWD not set");
@@ -106,7 +107,7 @@ int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
 	return (ret);
 }
 
-char	*put_new_value(t_key_val *env, char	*key, char *newval)
+int	put_new_value(t_key_val *env, char	*key, char *newval)
 {
 	t_key_val	*temp;
 
@@ -118,12 +119,12 @@ char	*put_new_value(t_key_val *env, char	*key, char *newval)
 			free((char *)temp->value);
 			temp->value = strdup(newval);
 			if (!(temp->value))
-				return (0);
+				return (-1);
 			break ;
 		}
 		temp = temp->next;
 	}
-	return ((char *)temp->value);
+	return (0);
 }
 
 int	ft_cd(char **cmd, t_data *data)
@@ -146,8 +147,11 @@ int	ft_cd(char **cmd, t_data *data)
 	// 	if (!oldpwd)
 				
 	// }
-	oldpwd = put_new_value(data->env, "OLDPWD", pwd);
-	pwd = put_new_value(data->env, "PWD", getcwd(NULL, 0));
+	if (oldpwd)
+		if (put_new_value(data->env, "OLDPWD", pwd))
+			return (-1);
+	if (put_new_value(data->env, "PWD", getcwd(NULL, 0)))
+		return (-1);
 	data->exit_status = 0;
 	return (data->exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:43 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/12 14:02:16 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 15:02:17 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	ft_isnumeric(char **cmd, t_data *data)
 	int	i;
 
 	i = 0;
-	while (cmd[1][++i])
+	if (cmd[1][i] == '+' || (cmd[1][i] == '-'))
+		i++;
+	while (cmd[1][i])
 	{
 		if (cmd[1][i] < '0' || cmd[1][i] > '9')
 		{
@@ -25,6 +27,7 @@ int	ft_isnumeric(char **cmd, t_data *data)
 			data->exit_status = 255;
 			return (data->exit_status);
 		}
+		++i;
 	}
 	return (0);
 }
