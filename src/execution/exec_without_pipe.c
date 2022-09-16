@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:57:31 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 19:53:36 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 18:00:36 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	redirect_without_pipe(t_data *data, t_exec *exec)
 {
 	if (open_infile_outfile(data, exec))
 		return (EXIT_FAILURE);
-	if (data->infile_flag == 1)
+	if (data->infile_flag > 0)
 	{
 		if (dup2_infile_stdin(data) == -1)
 		{

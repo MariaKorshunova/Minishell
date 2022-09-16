@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/16 17:03:59 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:59:48 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ int	open_infile(t_data *data, t_key_val *infile)
 			ft_close_file(data->infile_fd, (char *)infile->value);
 			if (*(int *)infile->key == DOUBLE_LESS)
 				unlink((char *)infile->value);
+		}
+		else
+		{
+			if (*(int *)infile->key == DOUBLE_LESS)
+			{
+				data->infile_flag = 2;
+				data->name_heredoc = (char *)infile->value;
+			}
 		}
 		infile = infile->next;
 	}

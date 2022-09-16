@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 14:25:25 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 16:40:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 18:00:13 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	dup2_infile_stdin(t_data *data)
 		return (EXIT_FAILURE);
 	}
 	ft_close_file(data->infile_fd, NULL);
+	if (data->infile_flag == 2)
+		unlink(data->name_heredoc);
 	return (EXIT_SUCCESS);
 }
 
