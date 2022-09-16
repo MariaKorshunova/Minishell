@@ -9,3 +9,7 @@ bash-3.2$ unset A+
 bash: unset: `A+': not a valid identifier
 bash-3.2$ unset A-
 bash: unset: `A-': not a valid identifier
+bash-3.2$ unset A +=
+bash: unset: `+=': not a valid identifier
+bash-3.2$ unset A -+
+bash: unset: `-+': not a valid identifier
