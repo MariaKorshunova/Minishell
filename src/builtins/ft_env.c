@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:20 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/14 14:54:13 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/15 23:50:05 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_env(t_data *data)
 			(char *)temp->value);
 		temp = temp->next;
 	}
-	data->exit_flag = 0;
-	return (data->exit_flag);
+	data->exit_status = 0;
+	return (data->exit_status);
 }
