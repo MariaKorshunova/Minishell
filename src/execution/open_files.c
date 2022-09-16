@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/14 13:22:59 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:03:59 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,17 @@ int	open_infile(t_data *data, t_key_val *infile)
 	data->infile_flag = 1;
 	while (infile)
 	{
-		if (*(int *)infile->key == LESS)
+		if (open_infile_less(data, (char *)infile->value))
 		{
-			if (open_infile_less(data, (char *)infile->value))
-			{
-				ft_print_error(infile->value, strerror(errno));
-				return (EXIT_FAILURE);
-			}
-			if (infile->next)
-				ft_close_file(data->infile_fd, (char *)infile->value);
+			ft_print_error(infile->value, strerror(errno));
+			return (EXIT_FAILURE);
 		}
-		/* else if (*(int *)infile->key == DOUBLE_LESS)
+		if (infile->next)
 		{
-			if (ft_heredoc(data, infile))
-				return (EXIT_FAILURE);
-			if (infile->next)
-				ft_close_file(data->infile_fd, NULL);
-		} */
+			ft_close_file(data->infile_fd, (char *)infile->value);
+			if (*(int *)infile->key == DOUBLE_LESS)
+				unlink((char *)infile->value);
+		}
 		infile = infile->next;
 	}
 	return (EXIT_SUCCESS);

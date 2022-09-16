@@ -1,0 +1,12 @@
+Makefile
+README.md
+README_builtins.md
+README_refrain.md
+include
+infile
+libft
+libft_obj
+minishell
+objects
+out
+src

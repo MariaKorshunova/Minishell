@@ -6,32 +6,68 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/14 17:56:51 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:58:29 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static char	*join_path_index(char *path_tmp, int i);
+static int	ft_heredoc(char *path_tmp, t_key_val *infile);
 static char	*create_filename_heredoc(char *path_tmp);
-// static int	get_next_line_heredoc(char *stop, int fd);
+static char	*join_path_index(char *path_tmp, int i);
+static int	get_next_line_heredoc(char *stop, int fd);
 
-int	ft_heredoc(t_data *data, t_key_val *token_list)
+int	open_heredoc(t_data *data, t_exec *exec)
 {
-	char	*path_tmp;
-	char	*filename;
-	// int		fd;
+	char		*path_tmp;
+	t_key_val	*tmp;
 
-	(void)token_list;
 	path_tmp = get_path_tmp(data);
 	if (!path_tmp)
 		return (EXIT_FAILURE);
-	printf("path_tmp=%s\n", path_tmp);
-	filename = create_filename_heredoc(path_tmp);
-	printf("filename=%s\n", filename);
-	// fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	// unlink(filename);
+	while (exec)
+	{
+		tmp = exec->infile;
+		while (tmp)
+		{
+			if (*(int *)tmp->key == DOUBLE_LESS)
+			{
+				if (ft_heredoc(path_tmp, tmp))
+				{
+					free(path_tmp);
+					return (EXIT_FAILURE);
+				}
+			}
+			tmp = tmp->next;
+		}
+		exec = exec->next;
+	}
 	free(path_tmp);
+	return (EXIT_SUCCESS);
+}
+
+static int	ft_heredoc(char *path_tmp, t_key_val *infile)
+{
+	char	*filename;
+	int		fd;
+
+	filename = create_filename_heredoc(path_tmp);
+	if (!filename)
+		return (EXIT_FAILURE);
+	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (fd == -1)
+	{
+		free(filename);
+		return (EXIT_FAILURE);
+	}
+	if (get_next_line_heredoc((char *)infile->value, fd))
+	{
+		ft_close_file(fd, (char *)infile->value);
+		free(filename);
+		return (EXIT_FAILURE);
+	}
+	free(infile->value);
+	infile->value = filename;
 	return (EXIT_SUCCESS);
 }
 
@@ -73,31 +109,31 @@ static char	*join_path_index(char *path_tmp, int i)
 	return (path_name);
 }
 
-// static int	get_next_line_heredoc(char *stop, int fd)
-// {
-// 	char	*line;
-// 	int		len_limiter;
+static int	get_next_line_heredoc(char *stop, int fd)
+{
+	char	*line;
+	int		len_limiter;
 
-// 	len_limiter = ft_strlen(stop);
-// 	while (1)
-// 	{
-// 		ft_putstr_fd(HEREDOC_PROMPT, 1);
-// 		line = get_next_line(STDIN_FILENO);
-// 		if (!line)
-// 		{
-// 			perror(PREFIX_ERROR);
-// 			return (EXIT_FAILURE);
-// 		}
-// 		if (ft_strncmp(line, stop, len_limiter) == 0)
-// 		{
-// 			if (line[len_limiter] == '\n')
-// 			{
-// 				free(line);
-// 				break ;
-// 			}
-// 		}
-// 		ft_putstr_fd(line, fd);
-// 		free(line);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
+	len_limiter = ft_strlen(stop);
+	while (1)
+	{
+		ft_putstr_fd(HEREDOC_PROMPT, 1);
+		line = get_next_line(STDIN_FILENO);
+		if (!line)
+		{
+			perror(PREFIX_ERROR);
+			return (EXIT_FAILURE);
+		}
+		if (ft_strncmp(line, stop, len_limiter) == 0)
+		{
+			if (line[len_limiter] == '\n')
+			{
+				free(line);
+				break ;
+			}
+		}
+		ft_putstr_fd(line, fd);
+		free(line);
+	}
+	return (EXIT_SUCCESS);
+}

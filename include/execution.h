@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/14 13:34:46 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 15:43:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			open_outfile_doublegreater(t_data *data, char *name);
 void		init_file_flag(t_data *data);
 
 /* heredoc.c */
-int			ft_heredoc(t_data *data, t_key_val *token_list);
+int			open_heredoc(t_data *data, t_exec *exec);
 
 /* open_files.c */
 int			open_infile(t_data *data, t_key_val *infile);
