@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/16 15:43:47 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 17:22:18 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ void		ft_exec(t_data *data, t_exec **pipeline, t_exec *exec);
 /* execution.c */
 int			execution(t_data *data, char *prompt);
 
-/* file_operations.c */
+/* file_close.c */
 void		ft_close_file(int fd, char *name);
+void		ft_close_files_with_check_flag(t_data *data);
+
+/* file_open.c */
 int			open_infile_less(t_data *data, char *infile);
 int			open_outfile_greater(t_data *data, char *name);
 int			open_outfile_doublegreater(t_data *data, char *name);

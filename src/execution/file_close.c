@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_execution.c                                  :+:      :+:    :+:   */
+/*   file_close.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/17 17:22:26 by jmabel           ###   ########.fr       */
+/*   Created: 2022/09/17 17:20:54 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/17 17:23:09 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	ft_print_error(char *name, char *str_error)
+void	ft_close_file(int fd, char *name)
 {
-	ft_putstr_fd(PREFIX_ERROR, 2);
-	if (name)
-	{
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(name, 2);
-	}
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(str_error, 2);
-	ft_putstr_fd("\n", 2);
+	if (close(fd) == -1)
+		ft_print_error(name, strerror(errno));
 }
 
-void	ft_error_child_process(t_data *data, t_exec **pipeline)
+void	ft_close_files_with_check_flag(t_data *data)
 {
-	destructor_minishell(data);
-	lstclear_exec(pipeline);
-	exit(errno);
+	if (data->infile_flag > 0)
+		ft_close_file(data->infile_fd, NULL);
+	if (data->infile_flag == 2)
+		unlink(data->name_heredoc);
+	if (data->outfile_flag == 1)
+		ft_close_file(data->outfile_fd, NULL);
 }

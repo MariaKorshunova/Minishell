@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:18:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/17 16:57:35 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 17:11:00 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ static void	redirect_child_first(t_data *data, t_exec **pipeline)
 	if (dup2(data->outfile_fd, STDOUT_FILENO) == -1)
 	{
 		perror(PREFIX_ERROR);
-		if (data->infile_flag == 1)
+		if (data->infile_flag > 0)
 			ft_close_file(data->infile_fd, NULL);
+		if (data->infile_flag == 2)
+			unlink(data->name_heredoc);
 		if (data->outfile_flag == 1)
 			ft_close_file(data->outfile_fd, NULL);
 		ft_close_file(data->pipe1[1], NULL);

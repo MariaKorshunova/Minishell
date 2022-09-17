@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/16 16:57:26 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/17 17:21:19 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,8 @@ FILE_C		+=	$(addprefix execution/,\
 				exec_without_pipe.c\
 				exec.c\
 				execution.c\
-				file_operations.c\
+				file_close.c\
+				file_open.c\
 				heredoc.c\
 				open_files.c\
 				pipefd_operations.c\

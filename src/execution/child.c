@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:26:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/14 12:52:11 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 19:10:50 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ static int	wait_childs(t_data *data, int len_exec)
 	data->exit_status = 0;
 	while (i > 0)
 	{
-		if (status[i] != 0)
-			data->exit_status = status[i] % 255;
+		if (WIFEXITED(status[i]) != 0)
+			data->exit_status = WEXITSTATUS(status[i]);
 		i--;
 	}
 	free(status);
