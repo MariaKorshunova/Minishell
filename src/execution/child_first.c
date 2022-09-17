@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:18:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 21:34:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 16:57:35 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,12 @@ static void	ft_child_first_childprocess(t_data *data, t_exec **pipeline,
 
 static void	redirect_child_first(t_data *data, t_exec **pipeline)
 {
-	if (data->infile_flag == 1)
+	if (data->infile_flag > 0)
 	{
 		if (dup2_infile_stdin(data))
 		{
 			perror(PREFIX_ERROR);
 			ft_close_file(data->pipe1[1], NULL);
-			ft_close_file(data->infile_fd, NULL);
 			if (data->outfile_flag == 1)
 				ft_close_file(data->outfile_fd, NULL);
 			ft_error_child_process(data, pipeline);
