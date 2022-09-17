@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/14 13:21:14 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 20:43:13 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int	main(int argc, char **argv, char **envp)
 		if (!prompt)
 		{
 			printf("exit\n");
+			perror(PREFIX_ERROR);
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
 		}
 		if (execution(&data, prompt))
 		{
+			perror(PREFIX_ERROR);
 			free(prompt);
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);

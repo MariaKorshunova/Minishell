@@ -6,12 +6,13 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/16 17:59:48 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 20:06:52 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+static int	open_infile_bypass(t_data *data, t_key_val *infile);
 static int	open_outfile_bypass(t_data *data, t_key_val *outfile);
 
 int	open_infile(t_data *data, t_key_val *infile)
@@ -19,6 +20,13 @@ int	open_infile(t_data *data, t_key_val *infile)
 	if (!infile)
 		return (EXIT_SUCCESS);
 	data->infile_flag = 1;
+	if (open_infile_bypass(data, infile))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	open_infile_bypass(t_data *data, t_key_val *infile)
+{
 	while (infile)
 	{
 		if (open_infile_less(data, (char *)infile->value))
