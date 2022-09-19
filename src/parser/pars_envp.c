@@ -6,32 +6,30 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:24:23 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:58 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 22:00:04 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int			pars_envp(t_data *data, char **envp);
-
 int	pars_envp(t_data *data, char **envp)
 {
 	if (pars_envp_lst(&data->env, envp))
+		return (EXIT_FAILURE);
+	if (change_init_env(&data->env))
 	{
-		perror(PREFIX_ERROR);
+		lstclear_key_value(&data->env);
 		return (EXIT_FAILURE);
 	}
 	if (envp_list_to_chararray(data))
 	{
 		lstclear_key_value(&data->env);
-		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
 	if (ft_get_path(data))
 	{
 		lstclear_key_value(&data->env);
 		free_2dimensional_array((void **)data->env_arr);
-		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

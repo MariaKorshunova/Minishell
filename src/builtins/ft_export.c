@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 03:11:50 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 20:25:21 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 20:43:40 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,14 @@ int	ft_export(char **cmd, t_data *data)
 	// t_key_val	*tmp;
 
 	i = 0;
-	if (ft_check_arg(cmd))
-		return (1);
+	// if (ft_check_arg(cmd))
+	// 	return (1);
 	if (!cmd[1])
 	{
 		ft_bubble_sort(data->env_arr);
 		while (data->env_arr && (data->env_arr)[i])
 			ft_print_sorted_array((data->env_arr)[i++]);
+		return (0);
 	}
 	i = 1;
 	while (cmd && cmd[i])

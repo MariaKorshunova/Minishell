@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 20:36:31 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:52:27 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	init_data(&data);
 	if (pars_envp(&data, envp))
+	{
+		perror(PREFIX_ERROR);
 		return (EXIT_FAILURE);
+	}
 	signal_handler(&data);
 	while (data.exit_flag)
 	{

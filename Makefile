@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/19 20:33:13 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/19 22:00:29 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADER		=	$(addprefix include/,\
 CFLAGS		=	-I include
 
 CFLAGS		+=	-Wall -Wextra -Werror
-CFLAGS		+=	-fsanitize=address -g
+# CFLAGS		+=	-fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -38,6 +38,7 @@ LIBFT_H		= ./libft/libft.h
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
+				change_init_env.c\
 				exec_fill.c\
 				exec_lstclear.c\
 				exec_lstcreate.c\
@@ -80,6 +81,7 @@ FILE_C		+=	$(addprefix utils/,\
 				get_next_line.c\
 				get_path_tmp.c\
 				ft_strcmp.c\
+				key_value_lstadd.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\

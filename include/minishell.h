@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 20:28:59 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 21:02:32 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ int			ft_strcmp(const char *s1, const char *s2);
 
 /* .src/utils/get_path_tmp.c */
 char		*get_path_tmp(t_data *data);
+
+/* .src/utils/key_value_lstadd.c */
+int			lst_addback_new_key_value(t_key_val **lst, char *key, char *value);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);

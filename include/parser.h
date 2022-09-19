@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 17:50:23 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 22:05:13 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 typedef struct s_data		t_data;
 typedef struct s_key_val	t_key_val;
 typedef struct s_exec		t_exec;
+
+/* change_init_env.c */
+int			change_init_env(t_key_val **env);
 
 /* exec_fill.c */
 int			fill_exec_by_condition(t_data *data, t_key_val **token,
