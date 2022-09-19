@@ -6,11 +6,27 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 03:11:50 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 19:23:47 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 20:25:21 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+int	ft_check_arg(char **cmd)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	if (cmd[i][j] != '_' || !ft_isalpha(cmd[i][j]) || ft_strchr(cmd[i], '?'))
+	{
+		ft_export_unset_print_error(cmd[0], cmd[i], "not a valid identifier");
+		i++;
+		return (1);
+	}
+	return (0);
+}
 
 static	void	ft_swap(char **lhs, char **rhs)
 {
@@ -77,6 +93,8 @@ int	ft_export(char **cmd, t_data *data)
 	// t_key_val	*tmp;
 
 	i = 0;
+	if (ft_check_arg(cmd))
+		return (1);
 	if (!cmd[1])
 	{
 		ft_bubble_sort(data->env_arr);
@@ -103,10 +121,10 @@ int	ft_export(char **cmd, t_data *data)
 				return (-1);
 			}	
 		}
-		printf("newkey=%s newvalue=%s", newkey, newvalue);
+		// printf("newkey=%s newvalue=%s", newkey, newvalue);
 		// tmp = data->env;
 		// oldvalue = key_value_search_with_key(tmp, newkey);
-		oldvalue=NULL;
+		oldvalue = NULL;
 		if (!oldvalue)
 		{
 			lstnew = lstnew_key_value(newkey, newvalue);

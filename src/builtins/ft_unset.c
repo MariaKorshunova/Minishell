@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:01:54 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 15:57:29 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 20:08:16 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_unset(char **cmd, t_key_val *data)
 	
 		// if (!ft_is_valid(cmd[i]))
 		// {
-		// 	ft_unset_builtin_print_error(cmd[0], cmd[1], "not a valid identifier");
+			ft_export_unset_print_error(cmd[0], cmd[1], "not a valid identifier");
 		// 	data->exit_status = 1;
 		// }
 		// i++;

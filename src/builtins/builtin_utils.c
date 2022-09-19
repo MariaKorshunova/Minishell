@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 00:15:07 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 17:45:15 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 20:27:37 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,4 @@ int	lst_addback_new_key_value(t_key_val **lst, char *key, char *value)
 		return (EXIT_FAILURE);
 	lstadd_back_key_value(lst, lstnew);
 	return (EXIT_SUCCESS);
-}
-
-int	ft_put_new_value(t_key_val *env, char	*key, char *newval)
-{
-	t_key_val	*temp;
-
-	temp = env;
-	while (temp)
-	{
-		if (!ft_strcmp(key, (char *)temp->key))
-		{
-			free((char *)temp->value);
-			temp->value = ft_strdup(newval);
-			if (!(temp->value))
-				return (-1);
-			break ;
-		}
-		temp = temp->next;
-	}
-	return (0);
 }

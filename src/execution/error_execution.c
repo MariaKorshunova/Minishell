@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 17:57:30 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 20:07:54 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_builtin_print_error(char *builtin, char *name, char *str_error)
 	ft_putstr_fd("\n", 2);
 }
 
-void	ft_unset_builtin_print_error(char *builtin, char *name, char *str_error)
+void	ft_export_unset_print_error(char *builtin, char *name, char *str_error)
 {
 	ft_putstr_fd(PREFIX_ERROR, 2);
 	if (builtin)
