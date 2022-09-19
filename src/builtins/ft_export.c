@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 03:11:50 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 22:08:32 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 23:22:32 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,36 +71,41 @@ void	ft_bubble_sort(char **arr)
 	}
 }
 
-void	ft_print_sorted_array(char *str)
+int	ft_print_sorted_array(t_data *data, char *str)
 {
-	int	i;
-	int	i_pos;
+	int		i;
+	int		i_pos;
+	char	*name;
 
 	i = 0;
 	i_pos = ft_strchr_pos(str, '=');
+	name = ft_substr(str, 0, i_pos);
+	if (!name)
+		return (EXIT_FAILURE);
 	printf("declare -x ");
-	if (i_pos == -1)
-		printf("%c\n", str[i++]);
-	else
-	{
-		while (str[i] != '=')
-			printf("%c", str[i++]);
+	while (str[i] != '=')
 		printf("%c", str[i++]);
-		printf("\"");
-		while (str[i])
-			printf("%c", str[i++]);
-		printf("\"\n");
+	if (!key_value_search_with_key(data->env, name))
+	{
+		printf("\n");
+		return (EXIT_SUCCESS);
 	}
+	printf("%c", str[i++]);
+	printf("\"");
+	while (str[i])
+		printf("%c", str[i++]);
+	printf("\"\n");
+	return (EXIT_SUCCESS);
 }
 
 int	export_without_args(t_data *data)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	ft_bubble_sort(data->env_arr);
 	while (data->env_arr && (data->env_arr)[i])
-		ft_print_sorted_array((data->env_arr)[i++]);
+		ft_print_sorted_array(data, (data->env_arr)[i++]);
 	return (0);
 }
 
@@ -152,28 +157,60 @@ char	*find_new_key(char **cmd)
 	return (newkey);
 }
 
+char	*find_key(t_key_val *env, char	*key)
+{
+	while (env)
+	{
+		if (!ft_strcmp(key, (char *)env->key))
+		{
+			return ((char *)env->key);
+			break ;
+		}
+		env = env->next;
+	}
+	return (NULL);
+}
+
+int	export_add_new_key_value(char **cmd, t_data *data)
+{
+	char	*newkey;
+	char	*newvalue;
+	char	*oldkey;
+	int		i;
+
+	i = 1;
+	newkey = find_new_key(cmd);
+	newvalue = find_new_value(cmd, newkey);
+	oldkey = find_key(data->env, newkey);
+	printf("your newkey %s\n you new value %s\n your oldkey %s\n", newkey, newvalue, oldkey);
+	if (!oldkey)
+		lst_addback_new_key_value(&data->env, newkey, newvalue);
+	else if (newvalue)
+	{
+		if (ft_put_new_value(data->env, newkey, newvalue) == -1)
+		{
+			free (newkey);
+			free (newvalue);
+			return (-1);
+		}
+	}
+	return (0);
+}
+
 int	ft_export(char **cmd, t_data *data)
 {
 	int		i;
-	char	*newkey;
-	char	*newvalue;
-	char	*oldvalue;
+	int		ret;
 
 	i = 0;
 	if (!cmd[1])
 		export_without_args(data);
 	if (ft_check_arg(cmd))
 		return (1);
-	newkey = find_new_key(cmd);
-	newvalue = find_new_value(cmd, newkey);
-	oldvalue = key_value_search_with_key(data->env, newkey);
-	if (!oldvalue)
-	
-	
-	data->exit_status = 0;
+	ret = export_add_new_key_value(cmd, data);
+	data->exit_status = ret;
 	return (data->exit_status);
 }
-
 
 // int	ft_export(char **cmd, t_data *data)
 // {
@@ -221,15 +258,15 @@ int	ft_export(char **cmd, t_data *data)
 // 			}
 // 			lstadd_back_key_value(&data->env, lstnew);
 // 		}
-// 		// else
-// 		// {
-// 		// 	if (ft_put_new_value(data->env, newkey, newvalue) == -1)
-// 		// 	{
-// 		// 		free (newkey);
-// 		// 		free (newvalue);
-// 		// 		return (-1);
-// 		// 	}
-// 		// }
+// 		else
+// 		{
+// 			if (ft_put_new_value(data->env, newkey, newvalue) == -1)
+// 			{
+// 				free (newkey);
+// 				free (newvalue);
+// 				return (-1);
+// 			}
+// 		}
 // 		i++;
 // 	}
 // 	data->exit_status = 0;
