@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/18 02:52:43 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/19 17:01:51 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADER		=	$(addprefix include/,\
 CFLAGS		=	-I include
 
 CFLAGS		+=	-Wall -Wextra -Werror
-# CFLAGS		+=	-fsanitize=address -g
+CFLAGS		+=	-fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -95,7 +95,8 @@ FILE_C		+=	$(addprefix builtins/,\
 				builtin_utils.c\
 				cd_home_util.c\
 				cd_change_dir.c\
-				ft_unset.c)
+				ft_unset.c\
+				ft_export.c)
 
 FILE_C		+=	$(addprefix signals/,\
 				signal.c)

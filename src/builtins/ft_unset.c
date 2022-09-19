@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:01:54 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/18 03:24:19 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 15:57:29 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,20 @@
 
 // int	ft_is_valid()
 // {
-	
 // }
 
 int	test_find_lst_key_value(t_key_val *lst, char *value)
 {
+	t_key_val	*temp;
+
 	while (lst && lst->next)
 	{
-		t_key_val	*temp;
-		
 		temp = lst;
 		if (!ft_strcmp(value, temp->key))
 		{
 			free((char *)temp->key);
 			free((char *)temp->value);
-			return(0);
+			return (0);
 		}
 		temp = temp->next;
 	}
@@ -47,7 +46,7 @@ t_key_val	*find_lst_key_value(t_key_val *lst, char *value)
 	while (lst && lst->next)
 	{
 		if (!ft_strcmp(value, lst->key))
-			return(lst);
+			return (lst);
 		lst = lst->next;
 	}
 	return (NULL);
@@ -60,11 +59,10 @@ void	lst_delete_key_value(t_key_val **lst, t_key_val *new, char *value)
 	if (!new || !lst || !value)
 		return ;
 	tmp = new;
-	// tmp = find_lst_key_value(*lst, value);
 	if (tmp)
 	{
 		free (tmp->key);
-		free(tmp->value);
+		free (tmp->value);
 		free (tmp);
 	}
 }
@@ -85,7 +83,7 @@ int	ft_unset(char **cmd, t_key_val *data)
 		if (!ft_strcmp(cmd[1], (char *)temp->key))
 		{
 			printf("key %s\n value %s\n", (char *)temp->key, (char *)temp->value);
-			if (test_find_lst_key_value(data, cmd[1]))
+			if (find_lst_key_value(data, cmd[1]))
 				return (-1);
 			// lst_delete_key_value(&data, temp, cmd[1]);
 			// free((char *)temp->value);
