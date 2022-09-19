@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 13:32:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:50:23 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int			lst_sum_len_content(t_list *lst);
 
 /* pars_envp_lst.c  */
 int			pars_envp_lst(t_key_val **lst, char **envp);
+int			add_lst_env(t_key_val **lst, char *str, int j);
+char		*pars_name_envp(char *str, int j, t_key_val	**lst);
+char		*pars_value_envp(char *str, int j, t_key_val **lst, char *name);
 
 /* pars_envp.c */
 int			pars_envp(t_data *data, char **envp);

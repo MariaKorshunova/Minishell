@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/16 17:58:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:28:59 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char		*get_path_tmp(t_data *data);
 t_key_val	*lstnew_key_value(void *key, void *value);
 void		lstadd_back_key_value(t_key_val **lst, t_key_val *new);
 int			lstnew_add_back_intkey_value(t_key_val **lst, int key, void *value);
+int			ft_put_new_value(t_key_val *env, char	*key, char *newval);
 
 /* .src/utils/key_value_lstfunction.c */
 t_key_val	*lstlast_key_value(t_key_val *lst);

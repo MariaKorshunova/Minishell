@@ -6,9 +6,10 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/17 17:21:19 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/19 20:33:13 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 .PHONY		:	all clean fclean re libft
 
@@ -93,7 +94,12 @@ FILE_C		+=	$(addprefix builtins/,\
 				ft_cd.c\
 				ft_env.c\
 				ft_exit.c\
-				builtin_utils.c)
+				builtin_utils.c\
+				cd_home_util.c\
+				error_builtins.c\
+				cd_change_dir.c\
+				ft_unset.c\
+				ft_export.c)
 
 FILE_C		+=	$(addprefix signals/,\
 				signal.c)

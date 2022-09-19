@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:23 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 20:21:33 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/14 15:04:55 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_pwd(void)
 {
 	char	*buf;
 	char	*pwd;
+	t_data	data;
 
 	buf = NULL;
 	pwd = getcwd(buf, 0);
@@ -24,5 +25,6 @@ int	ft_pwd(void)
 	else
 		return (-1);
 	free (pwd);
-	return (0);
+	data.exit_status = 0;
+	return (data.exit_status);
 }

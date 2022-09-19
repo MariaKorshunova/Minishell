@@ -6,86 +6,42 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 23:22:42 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 21:42:05 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 18:10:47 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	home_directory(char **cmd, char *home)
+int	ft_chdir(char *path, char **cmd)
 {
-	char	*tmp;
-
-	if (!cmd[1] || !ft_strcmp(cmd[1], "~"))
-		chdir(home);
-	else
+	if (chdir(path))
 	{
-		if (!ft_strncmp(cmd[1], "~/", 2))
-		{
-			tmp = cmd[1] + 1;
-			cmd[1] = ft_strjoin(home, "/");
-			cmd[1] = ft_strjoin(cmd[1], tmp);
-		}
-		else
-		{
-			tmp = ft_cut_string(home);
-			cmd[1] = ft_strjoin(tmp, cmd[1] + 1);
-			free(tmp);
-		}
-		chdir(cmd[1]);
+		ft_builtin_print_error(cmd[0], path, strerror(errno));
+		return (1);
 	}
 	return (0);
 }
 
-void	ft_oldpwd(char *oldpwd)
+static int	ft_cd_util(t_data *data, char *oldpwd, char *pwd)
 {
-	if (oldpwd == NULL)
-	{
-		ft_print_error("cd", "OLDPWD not set");
-		exit (1);
-	}
-	else
-	{
-		chdir(oldpwd);
-		printf("%s\n", oldpwd);
-	}
-}
+	char	*new_pwd;
 
-int	change_dir(char **cmd, char *home, char *pwd, char *oldpwd)
-{
-	char	*tmp;
-	int		ret;
-
-	ret = 0;
-	if (!cmd[1] || !ft_strncmp(cmd[1], "~", 1))
-		home_directory(cmd, home);
-	else if (!ft_strcmp(cmd[1], "."))
-		chdir(pwd);
-	else if (!ft_strcmp(cmd[1], "-"))
+	if (!oldpwd)
 	{
-		ft_oldpwd(oldpwd);
+		if (lst_addback_new_key_value(&data->env, "OLDPWD", pwd))
+			return (-1);
 	}
-	else if (!ft_strcmp(cmd[1], ".."))
+	if (oldpwd)
 	{
-		tmp = ft_cut_string(pwd);
-		ret = chdir(tmp);
-		free(tmp);
+		if (ft_put_new_value(data->env, "OLDPWD", pwd) == -1)
+			return (-1);
 	}
-	else
-		ret = chdir(cmd[1]);
-	return (ret);
-}
-
-int	put_new_value(t_key_val *env, char	*key, char *newval)
-{
-	while (env)
+	if (pwd)
 	{
-		if (!ft_strcmp(key, (char *)env->key))
-		{
-			env->value = newval;
-			break ;
-		}
-		env = env->next;
+		new_pwd = getcwd(NULL, 0);
+		if (ft_put_new_value(data->env, "PWD", new_pwd) == -1)
+			return (-1);
+		free (new_pwd);
 	}
 	return (0);
 }
@@ -95,18 +51,26 @@ int	ft_cd(char **cmd, t_data *data)
 	char	*home;
 	char	*pwd;
 	char	*oldpwd;
+	int		ret_status;
 
 	home = key_value_search_with_key(data->env, "HOME");
 	pwd = key_value_search_with_key(data->env, "PWD");
 	oldpwd = key_value_search_with_key(data->env, "OLDPWD");
-	if (change_dir(cmd, home, pwd, oldpwd))
+	if (!home || !pwd)
 	{
-		ft_print_error(cmd[1], "No such file or directory");
-		return (1);
+		ft_putstr_fd("Environment error\n", 2);
+		return (-1);
 	}
-	if (put_new_value(data->env, "OLDPWD", pwd))
-		return (1);
-	if (put_new_value(data->env, "PWD", getcwd(NULL, 0)))
-		return (1);
-	return (0);
+	ret_status = change_dir(cmd, home, pwd, oldpwd);
+	if (ret_status == 1)
+	{
+		data->exit_status = 1;
+		return (data->exit_status);
+	}
+	if (ret_status == -1)
+		return (-1);
+	else
+		ret_status = ft_cd_util(data, oldpwd, pwd);
+	data->exit_status = 0;
+	return (data->exit_status);
 }

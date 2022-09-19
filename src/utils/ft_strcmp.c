@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 17:42:04 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 16:17:30 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	if (s1[i] != '\0' || s2[i] != '\0')
-		return (-1);
+		return (s1[i] - s2[i]);
 	return (0);
 }

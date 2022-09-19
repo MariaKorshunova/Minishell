@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 18:24:14 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:36:31 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	main(int argc, char **argv, char **envp)
 	init_data(&data);
 	if (pars_envp(&data, envp))
 		return (EXIT_FAILURE);
-	signal_handler();
+	signal_handler(&data);
 	while (data.exit_flag)
 	{
 		prompt = readline(PROMPT);
 		if (!prompt)
-			ft_error_read_prompt(data);
+			ft_error_read_prompt(&data);
 		if (execution(&data, prompt))
-			ft_error_execution(data);
+			ft_error_execution(&data, prompt);
 		free(prompt);
 	}
 	destructor_minishell(&data);
