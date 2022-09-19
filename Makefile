@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/16 03:40:56 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/18 02:52:43 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,8 @@ FILE_C		+=	$(addprefix builtins/,\
 				ft_exit.c\
 				builtin_utils.c\
 				cd_home_util.c\
-				cd_change_dir.c)
+				cd_change_dir.c\
+				ft_unset.c)
 
 FILE_C		+=	$(addprefix signals/,\
 				signal.c)
