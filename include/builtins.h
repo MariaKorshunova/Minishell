@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:02:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 20:34:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 22:54:20 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			ft_env(t_data *data);
 int			home_directory(char **cmd, char *home);
 int			change_dir(char **cmd, char *home, char *pwd, char *oldpwd);
 int			lst_addback_new_key_value(t_key_val **lst, char *key, char *value);
-int			ft_unset(char **cmd, t_key_val *data);
+int			ft_unset(char **cmd, t_key_val **env);
 int			ft_export(char **cmd, t_data *data);
 
 char		*ft_cut_string(char *str);
