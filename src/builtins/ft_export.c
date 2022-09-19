@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 03:11:50 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 17:55:22 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 19:23:47 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,11 @@ int	ft_export(char **cmd, t_data *data)
 {
 	int		i;
 	int		j;
-	// char	*newval;
+	char	*newkey;
+	char	*oldvalue;
+	char	*newvalue;
+	t_key_val	*lstnew;
+	// t_key_val	*tmp;
 
 	i = 0;
 	if (!cmd[1])
@@ -85,8 +89,44 @@ int	ft_export(char **cmd, t_data *data)
 		j = 0;
 		while (cmd[i][j] != '=' && cmd[i][j] != '\0')
 			j++;
-		if (add_lst_env(&(data->env), cmd[i], j))
+		newkey = ft_substr(cmd[i], 0, j);
+		if (!newkey)
 			return (-1);
+		if (cmd[i][j] == '\0')
+			newvalue = NULL;
+		else
+		{
+			newvalue = ft_substr(cmd[i], j + 1, ft_strlen(cmd[i]) - j - 1);
+			if (!newvalue)
+			{
+				free (newkey);
+				return (-1);
+			}	
+		}
+		printf("newkey=%s newvalue=%s", newkey, newvalue);
+		// tmp = data->env;
+		// oldvalue = key_value_search_with_key(tmp, newkey);
+		oldvalue=NULL;
+		if (!oldvalue)
+		{
+			lstnew = lstnew_key_value(newkey, newvalue);
+			if (!lstnew)
+			{
+				free (newkey);
+				free (newvalue);
+				return (-1);
+			}
+			lstadd_back_key_value(&data->env, lstnew);
+		}
+		// else
+		// {
+		// 	if (ft_put_new_value(data->env, newkey, newvalue) == -1)
+		// 	{
+		// 		free (newkey);
+		// 		free (newvalue);
+		// 		return (-1);
+		// 	}
+		// }
 		i++;
 	}
 	data->exit_status = 0;

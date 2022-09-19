@@ -18,6 +18,11 @@ int	execution(t_data *data, char *prompt)
 {
 	t_exec	*pipeline;
 
+	if (ft_strlen(prompt) == 0)
+		return (EXIT_SUCCESS);
+	add_history(prompt);
+	if (envp_list_to_chararray(data))
+		return (EXIT_FAILURE);
 	pipeline = NULL;
 	pipeline = parser(data, prompt);
 	if (pipeline == NULL)

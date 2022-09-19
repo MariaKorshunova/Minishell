@@ -6,33 +6,107 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 16:56:33 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/16 16:58:29 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+static int	ft_heredoc(char *path_tmp, t_key_val *infile);
+static char	*create_filename_heredoc(char *path_tmp);
+static char	*join_path_index(char *path_tmp, int i);
 static int	get_next_line_heredoc(char *stop, int fd);
 
-int	ft_heredoc(t_data *data, t_key_val *infile)
+int	open_heredoc(t_data *data, t_exec *exec)
 {
-	int		pipe_heredoc[2];
+	char		*path_tmp;
+	t_key_val	*tmp;
 
-	if (pipe(pipe_heredoc) == -1)
-	{
-		perror(PREFIX_ERROR);
+	path_tmp = get_path_tmp(data);
+	if (!path_tmp)
 		return (EXIT_FAILURE);
-	}
-	data->infile_fd = pipe_heredoc[0];
-	if (get_next_line_heredoc((char *)infile->value, pipe_heredoc[1]))
+	while (exec)
 	{
-		perror (PREFIX_ERROR);
-		ft_close_file(pipe_heredoc[0], NULL);
-		ft_close_file(pipe_heredoc[1], NULL);
-		return (EXIT_FAILURE);
+		tmp = exec->infile;
+		while (tmp)
+		{
+			if (*(int *)tmp->key == DOUBLE_LESS)
+			{
+				if (ft_heredoc(path_tmp, tmp))
+				{
+					free(path_tmp);
+					return (EXIT_FAILURE);
+				}
+			}
+			tmp = tmp->next;
+		}
+		exec = exec->next;
 	}
-	ft_close_file(pipe_heredoc[1], NULL);
+	free(path_tmp);
 	return (EXIT_SUCCESS);
+}
+
+static int	ft_heredoc(char *path_tmp, t_key_val *infile)
+{
+	char	*filename;
+	int		fd;
+
+	filename = create_filename_heredoc(path_tmp);
+	if (!filename)
+		return (EXIT_FAILURE);
+	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (fd == -1)
+	{
+		free(filename);
+		return (EXIT_FAILURE);
+	}
+	if (get_next_line_heredoc((char *)infile->value, fd))
+	{
+		ft_close_file(fd, (char *)infile->value);
+		free(filename);
+		return (EXIT_FAILURE);
+	}
+	free(infile->value);
+	infile->value = filename;
+	return (EXIT_SUCCESS);
+}
+
+static char	*create_filename_heredoc(char *path_tmp)
+{
+	int		i;
+	char	*name;
+
+	i = 0;
+	while (1)
+	{
+		name = join_path_index(path_tmp, i);
+		if (access(name, F_OK | W_OK) == -1)
+			break ;
+		free(name);
+		i++;
+	}
+	return (name);
+}
+
+static char	*join_path_index(char *path_tmp, int i)
+{
+	char	*index;
+	char	*name_index;
+	char	*path_name;
+
+	index = NULL;
+	name_index = NULL;
+	path_name = NULL;
+	index = ft_itoa(i);
+	if (!index)
+		return (NULL);
+	name_index = ft_strjoin("minishell_heredoc_", index);
+	free(index);
+	if (!name_index)
+		return (NULL);
+	path_name = ft_strjoin(path_tmp, name_index);
+	free(name_index);
+	return (path_name);
 }
 
 static int	get_next_line_heredoc(char *stop, int fd)

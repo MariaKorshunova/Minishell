@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:53:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/13 21:34:18 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 17:28:06 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ static void	ft_child_last_childprocess(t_data *data, t_exec **pipeline,
 	}
 	redirect_child_last(data, pipeline, pipefd);
 	ft_close_file(pipefd[0], NULL);
-	if (data->infile_flag == 1)
+	if (data->infile_flag > 0)
 		ft_close_file(data->infile_fd, NULL);
+	if (data->infile_flag == 2)
+		unlink(data->name_heredoc);
 	status_builtin = find_builtin(exec->cmd, data);
 	if (status_builtin == -1)
 	{
@@ -69,10 +71,7 @@ static void	redirect_child_last(t_data *data, t_exec **pipeline, int *pipefd)
 	if (dup2(data->infile_fd, STDIN_FILENO) == -1)
 	{
 		perror(PREFIX_ERROR);
-		if (data->outfile_flag == 1)
-			ft_close_file(data->outfile_fd, NULL);
-		if (data->infile_flag == 1)
-			ft_close_file(data->infile_fd, NULL);
+		ft_close_files_with_check_flag(data);
 		ft_close_file(pipefd[0], NULL);
 		ft_error_child_process(data, pipeline);
 	}
@@ -82,9 +81,7 @@ static void	redirect_child_last(t_data *data, t_exec **pipeline, int *pipefd)
 		{
 			perror (PREFIX_ERROR);
 			ft_close_file(pipefd[0], NULL);
-			ft_close_file(data->outfile_fd, NULL);
-			if (data->infile_flag == 1)
-				ft_close_file(data->infile_fd, NULL);
+			ft_close_files_with_check_flag(data);
 			ft_error_child_process(data, pipeline);
 		}
 	}

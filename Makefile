@@ -6,7 +6,7 @@
 #    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/19 17:01:51 by refrain          ###   ########.fr        #
+#    Updated: 2022/09/19 19:26:40 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ FILE_C		+=	$(addprefix execution/,\
 				exec_without_pipe.c\
 				exec.c\
 				execution.c\
-				file_operations.c\
+				file_close.c\
+				file_open.c\
 				heredoc.c\
 				open_files.c\
 				pipefd_operations.c\
@@ -77,6 +78,7 @@ FILE_C		+=	$(addprefix utils/,\
 				ft_strchr_pos.c\
 				ft_strjoin_with_endchar.c\
 				get_next_line.c\
+				get_path_tmp.c\
 				ft_strcmp.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\

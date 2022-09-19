@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/14 15:51:00 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 17:57:14 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ int	main(int argc, char **argv, char **envp)
 		if (!prompt)
 		{
 			printf("exit\n");
+			perror(PREFIX_ERROR);
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
 		}
 		if (execution(&data, prompt))
 		{
+			perror(PREFIX_ERROR);
 			free(prompt);
 			destructor_minishell(&data);
 			return (EXIT_FAILURE);
@@ -54,5 +56,8 @@ static void	init_data(t_data *data)
 	data->change_env = 0;
 	data->exit_status = 0;
 	data->exit_flag = 1;
-	signal_handler(data);
+	data->key_tmp[0] = "TMP";
+	data->key_tmp[1] = "TEMP";
+	data->key_tmp[2] = "TMPDIR";
+	data->key_tmp[3] = NULL;
 }	
