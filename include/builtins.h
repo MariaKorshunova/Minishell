@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:02:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 20:34:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 02:06:24 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			change_dir(char **cmd, char *home, char *pwd, char *oldpwd);
 int			lst_addback_new_key_value(t_key_val **lst, char *key, char *value);
 int			ft_unset(char **cmd, t_key_val *data);
 int			ft_export(char **cmd, t_data *data);
+int			export_without_args(t_data *data);
 
 char		*ft_cut_string(char *str);
 

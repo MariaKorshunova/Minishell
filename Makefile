@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/19 22:00:29 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/21 02:07:09 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,8 @@ FILE_C		+=	$(addprefix builtins/,\
 				error_builtins.c\
 				cd_change_dir.c\
 				ft_unset.c\
-				ft_export.c)
+				ft_export.c\
+				export_without_arg.c)
 
 FILE_C		+=	$(addprefix signals/,\
 				signal.c)
