@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 02:04:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/21 04:03:59 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 16:44:52 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ static void	ft_bubble_sort(char **arr)
 	}
 }
 
+static void	print_util(char *str, int i)
+{
+	printf("%c", str[i++]);
+	printf("\"");
+	while (str[i])
+		printf("%c", str[i++]);
+	printf("\"\n");
+}
+
 static int	ft_print_sorted_array(t_data *data, char *str)
 {
 	int		i;
@@ -57,17 +66,18 @@ static int	ft_print_sorted_array(t_data *data, char *str)
 		return (EXIT_FAILURE);
 	printf("declare -x ");
 	while (str[i] != '=')
+	{
 		printf("%c", str[i++]);
+		if (str[i] == '+')
+			i++;
+	}
 	if (!key_value_search_with_key(data->env, name))
 	{
 		printf("\n");
 		return (EXIT_SUCCESS);
 	}
-	printf("%c", str[i++]);
-	printf("\"");
-	while (str[i])
-		printf("%c", str[i++]);
-	printf("\"\n");
+	print_util(str, i);
+	free (name);
 	return (EXIT_SUCCESS);
 }
 

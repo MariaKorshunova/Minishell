@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:02:52 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/21 03:00:56 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 17:49:49 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ int			ft_unset(char **cmd, t_data *data);
 int			ft_export(char **cmd, t_data *data);
 int			export_without_args(t_data *data);
 int			ft_check_arg(char **cmd);
+int			ft_export_join(char **cmd, t_data *data, int i);
+int			add_val_to_export(t_data *data, char *newkey, char *newvalue);
 
 char		*ft_cut_string(char *str);
+char		*find_new_value(char **cmd, char *newkey, int i);
+char		*find_new_key(char **cmd, int i);
+char		*find_key(t_key_val *env, char	*key);
 
 void		ft_builtin_print_error(char *builtin, char *name, char *str_error);
 void		ft_export_unset_print_error(char *builtin, char *name,
