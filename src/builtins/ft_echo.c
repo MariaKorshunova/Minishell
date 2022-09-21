@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/21 17:49:08 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 20:14:20 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	print_cmd(char **cmd, int i)
 			i++;
 		else
 		{
-			printf("%s%c", cmd[i++], 32);
+			printf("%s", cmd[i++]);
+			if (i != index)
+				printf("%c", 32);
 			while (cmd && cmd[i])
 			{
 				printf("%s", cmd[i++]);
