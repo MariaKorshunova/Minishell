@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:18:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 14:59:52 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 17:14:15 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_child_first(t_data *data, t_exec **pipeline, t_exec *exec)
 	}
 	else if (data->child == 0)
 		ft_child_first_childprocess(data, pipeline, exec);
-	exec->pid_child = data->child;
 	return (EXIT_SUCCESS);
 }
 

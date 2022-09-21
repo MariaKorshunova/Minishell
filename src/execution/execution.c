@@ -24,9 +24,8 @@ int	execution(t_data *data, char *prompt)
 	add_history(prompt);
 	if (envp_list_to_chararray(data))
 		return (EXIT_FAILURE);
-	free_2dimensional_array((void **)data->bin_path);
-	// if (ft_get_path(data))
-	// 	return (EXIT_FAILURE);
+	if (ft_get_path(data))
+		return (EXIT_FAILURE);
 	pipeline = NULL;
 	parser_status = parser(data, prompt, &pipeline);
 	if (parser_status == -1)

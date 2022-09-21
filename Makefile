@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/21 15:11:50 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/21 16:10:43 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADER		=	$(addprefix include/,\
 CFLAGS		=	-I include
 
 CFLAGS		+=	-Wall -Wextra -Werror
-# CFLAGS		+=	-fsanitize=address -g
+CFLAGS		+=	-fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 

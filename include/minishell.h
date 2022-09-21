@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 14:57:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 17:14:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_exec
 	char			**cmd;
 	t_key_val		*infile;
 	t_key_val		*outfile;
-	pid_t			pid_child;
 	struct s_exec	*next;
 }	t_exec;
 
@@ -84,7 +83,7 @@ typedef struct s_data
 	int			infile_fd;
 	int			outfile_fd;
 	pid_t		child;
-	int			change_env;
+	pid_t		last_pid;
 	int			exit_status;
 	int			exit_flag;
 }	t_data;
