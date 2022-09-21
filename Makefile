@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/21 18:15:26 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/21 18:35:44 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ FILE_C		+=	$(addprefix parser/,\
 				exec_lstclear.c\
 				exec_lstcreate.c\
 				exec_lstfunction.c\
+				expand_asterisk.c\
 				expand_dollar.c\
 				pars_envp_lst.c\
 				pars_envp.c\

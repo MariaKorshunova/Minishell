@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 18:54:43 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 13:56:19 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 18:32:56 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int	parser(t_data *data, char *prompt, t_exec **exec)
 		lstclear_key_value(&token_list);
 		return (1);
 	}
+	if (expand_asterisk(token_list))
+	{
+		lstclear_key_value(&token_list);
+		return (1);
+	}	
 	*exec = pipeline(data, token_list);
 	lstclear_key_value(&token_list);
 	if (!*exec)
