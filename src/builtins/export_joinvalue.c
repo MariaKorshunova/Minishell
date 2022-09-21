@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:32:53 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/21 17:51:05 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:09:46 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	ft_export_join(char **cmd, t_data *data, int i)
 	newkey = find_new_key_for_joinval(cmd, i);
 	newvalue = find_new_value(cmd, newkey, i);
 	oldvalue = key_value_search_with_key(data->env, newkey);
-	while (cmd[i][j] != '+' && cmd[i][j] != '\0')
+	while (cmd[i][j] != '=' && cmd[i][j] != '\0')
 		j++;
-	if (cmd[i][j + 1] == '=')
+	if (cmd[i][j - 1] == '+')
 	{
 		if (!find_key(data->env, newkey))
 			lst_addback_new_key_value(&data->env, newkey, newvalue);
