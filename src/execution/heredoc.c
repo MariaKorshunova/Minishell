@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/16 16:58:29 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 19:56:47 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,7 @@ static int	get_next_line_heredoc(char *stop, int fd)
 		ft_putstr_fd(HEREDOC_PROMPT, 1);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
-		{
-			perror(PREFIX_ERROR);
-			return (EXIT_FAILURE);
-		}
+			return (EXIT_SUCCESS);
 		if (ft_strncmp(line, stop, len_limiter) == 0)
 		{
 			if (line[len_limiter] == '\n')

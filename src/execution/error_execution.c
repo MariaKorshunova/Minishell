@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 18:15:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 19:47:03 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_error_read_prompt(t_data *data)
 
 void	ft_error_execution(t_data *data, char *prompt)
 {
-	perror(PREFIX_ERROR);
 	printf("exit\n");
 	free(prompt);
 	destructor_minishell(data);
