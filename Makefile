@@ -6,7 +6,7 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/21 16:10:43 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/21 18:15:26 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,10 @@ FILE_C		+=	$(addprefix builtins/,\
 				error_builtins.c\
 				cd_change_dir.c\
 				ft_unset.c\
-				ft_export.c)
+				ft_export.c\
+				export_without_arg.c\
+				export_utils.c\
+				export_joinvalue.c)
 
 FILE_C		+=	$(addprefix signals/,\
 				signal.c)

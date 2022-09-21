@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 20:36:15 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 18:15:54 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_error_child_process(t_data *data, t_exec **pipeline)
 void	ft_error_read_prompt(t_data *data)
 {
 	printf("exit\n");
-	perror(PREFIX_ERROR);
 	destructor_minishell(data);
 	exit (EXIT_FAILURE);
 }

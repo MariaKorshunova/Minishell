@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 23:01:13 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 22:54:51 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 03:01:09 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	find_builtin(char **cmd, t_data *data)
 	else if (ft_strcmp(cmd[0], "export") == 0)
 	{
 		ft_export(cmd, data);
-		return (1);	
+		return (1);
 	}
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 	{
-		ft_unset(cmd, &data->env);
+		ft_unset(cmd, data);
 		return (1);
 	}
 	return (0);
