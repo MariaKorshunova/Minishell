@@ -5,101 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/14 20:01:54 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/19 20:08:16 by refrain          ###   ########.fr       */
+/*   Created: 2022/09/19 22:43:40 by jmabel            #+#    #+#             */
+/*   Updated: 2022/09/21 03:02:19 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-// void	ft_remove_env()
-// {
-// 	int	i;
-
-// 	i = 
-// }
-
-// int	ft_is_valid()
-// {
-// }
-
-int	test_find_lst_key_value(t_key_val *lst, char *value)
+static int	ft_unset_del_env(char **cmd, t_key_val **env, int i)
 {
-	t_key_val	*temp;
+	t_key_val	*tmp_env;
 
-	while (lst && lst->next)
+	tmp_env = *env;
+	if (!ft_strcmp(cmd[i], (char *)tmp_env->key))
 	{
-		temp = lst;
-		if (!ft_strcmp(value, temp->key))
-		{
-			free((char *)temp->key);
-			free((char *)temp->value);
-			return (0);
-		}
-		temp = temp->next;
+		*env = tmp_env->next;
+		lstdelone_key_value(tmp_env);
+		return (EXIT_SUCCESS);
 	}
-	return (1);
+	i++;
+	return (EXIT_SUCCESS);
 }
 
-t_key_val	*find_lst_key_value(t_key_val *lst, char *value)
+static int	ft_unset_util(char **cmd, t_key_val **env, int i)
 {
-	while (lst && lst->next)
-	{
-		if (!ft_strcmp(value, lst->key))
-			return (lst);
-		lst = lst->next;
-	}
-	return (NULL);
-}
-
-void	lst_delete_key_value(t_key_val **lst, t_key_val *new, char *value)
-{
+	t_key_val	*tmp_env;
 	t_key_val	*tmp;
 
-	if (!new || !lst || !value)
-		return ;
-	tmp = new;
-	if (tmp)
+	tmp_env = *env;
+	while (tmp_env->next)
 	{
-		free (tmp->key);
-		free (tmp->value);
-		free (tmp);
+		if (!ft_strcmp(cmd[i], (char *)tmp_env->next->key))
+		{
+			tmp = tmp_env->next;
+			tmp_env->next = tmp_env->next->next;
+			lstdelone_key_value(tmp);
+			return (EXIT_SUCCESS);
+		}
+		tmp_env = tmp_env->next;
 	}
+	i++;
+	return (EXIT_SUCCESS);
 }
 
-int	ft_unset(char **cmd, t_key_val *data)
+int	ft_unset(char **cmd, t_data *data)
 {
-	// char		*value;
-	// int			i;
-	t_key_val	*temp;
+	int			i;
 
-	// i = 1;
-	temp = find_lst_key_value(data, cmd[1]);
-	// while (cmd && cmd[i])
-	// {
-	// value = key_value_search_with_key(temp, cmd[i]);
-	while (temp)
+	i = 1;
+	if (!data->env)
+		return (EXIT_SUCCESS);
+	if (ft_check_arg(cmd))
 	{
-		if (!ft_strcmp(cmd[1], (char *)temp->key))
-		{
-			printf("key %s\n value %s\n", (char *)temp->key, (char *)temp->value);
-			if (find_lst_key_value(data, cmd[1]))
-				return (-1);
-			// lst_delete_key_value(&data, temp, cmd[1]);
-			// free((char *)temp->value);
-			// free((char *)temp->key);
-			break ;
-		}
-		temp = temp->next;
+		data->exit_status = 1;
+		return (data->exit_status);
 	}
-	
-		// if (!ft_is_valid(cmd[i]))
-		// {
-			ft_export_unset_print_error(cmd[0], cmd[1], "not a valid identifier");
-		// 	data->exit_status = 1;
-		// }
-		// i++;
-	
-	// data->exit_status = 0;
-	return (0);
+	while (cmd && cmd[i])
+	{
+		ft_unset_del_env(cmd, &data->env, i);
+		ft_unset_util(cmd, &data->env, i);
+		i++;
+	}
+	data->exit_status = 0;
+	return (data->exit_status);
 }
