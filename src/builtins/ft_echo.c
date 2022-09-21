@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/14 14:53:16 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:35:49 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	print_cmd(char **cmd, int i)
 			i++;
 		else
 		{
-			printf("%s%c", cmd[i++], 32);
+			printf("%s", cmd[i++]);
+			if (i != index)
+				printf("%c", 32);
 			while (cmd && cmd[i])
 			{
 				printf("%s", cmd[i++]);

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 03:11:50 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/21 18:05:15 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:27:14 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ static int	export_add_new_key_value(char **cmd, t_data *data, int i)
 
 	j = 0;
 	newkey = find_new_key(cmd, i);
+	ft_malloc_error(newkey);
 	newvalue = find_new_value(cmd, newkey, i);
+	ft_malloc_error(newvalue);
+	if (!newkey)
+		return (-1);
 	oldkey = find_key(data->env, newkey);
 	while (cmd[i][j] != '=' && cmd[i][j] != '\0')
 		j++;
@@ -65,6 +69,8 @@ int	ft_export(char **cmd, t_data *data)
 	{
 		ret = export_add_new_key_value(cmd, data, i);
 		ret = ft_export_join(cmd, data, i);
+		if (ret == -1)
+			return (-1);
 		i++;
 	}
 	data->exit_status = ret;
