@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:26:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 17:57:38 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 15:08:05 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_child(t_data *data, t_exec **pipeline, int len_exec)
 	else
 		close_pipe(data->pipe2);
 	if (wait_childs(data, len_exec))
+	// if (wait_childs(data, *pipeline))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

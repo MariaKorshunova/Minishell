@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:43 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/14 15:02:17 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 14:21:28 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int	ft_exit(char **cmd, t_data *data)
 	{
 		printf("exit\n");
 		data->exit_flag = 0;
-		data->exit_status = 0;
 		return (data->exit_status);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 21:02:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 14:57:06 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_exec
 	char			**cmd;
 	t_key_val		*infile;
 	t_key_val		*outfile;
+	pid_t			pid_child;
 	struct s_exec	*next;
 }	t_exec;
 

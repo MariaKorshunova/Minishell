@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 18:29:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/17 17:28:48 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:00:21 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_child_middle_odd(t_data *data, t_exec **pipeline, t_exec *exec)
 	}
 	else if (data->child == 0)
 		ft_child_middle_childprocess_odd(data, pipeline, exec);
+	exec->pid_child = data->child;
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 20:52:27 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 13:45:18 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 		free(prompt);
 	}
 	destructor_minishell(&data);
-	return (EXIT_SUCCESS);
+	return (data.exit_status);
 }
 
 static void	init_data(t_data *data)

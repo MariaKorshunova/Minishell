@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 22:05:13 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 13:55:23 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			ft_get_path(t_data *data);
 t_exec		*pipeline(t_data *data, t_key_val *token);
 
 /* parser.c */
-t_exec		*parser(t_data *data, char *prompt);
+int			parser(t_data *data, char *prompt, t_exec **exec);
 
 /* syntax_error.c */
 int			check_syntax_error(t_key_val *token_list);

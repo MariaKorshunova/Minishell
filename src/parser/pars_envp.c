@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:24:23 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 22:00:04 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:08:39 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	ft_get_path(t_data *data)
 
 	path = NULL;
 	path = key_value_search_with_key(data->env, "PATH");
+	if (!path)
+		return (EXIT_SUCCESS);
 	data->bin_path = ft_split(path, ':');
 	if (!data->bin_path)
 		return (EXIT_FAILURE);
