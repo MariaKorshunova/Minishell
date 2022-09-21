@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/16 16:58:29 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:55:34 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static int	get_next_line_heredoc(char *stop, int fd)
 	while (1)
 	{
 		ft_putstr_fd(HEREDOC_PROMPT, 1);
+		//reading
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{

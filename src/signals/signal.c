@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 01:21:26 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/12 13:33:49 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 22:09:55 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ static void	ctrlc_handler(void)
 		rl_on_new_line();
 		rl_redisplay();
 	}
+}
+
+// static void	ctrl_handler(void)
+// {
+	
+// }
+
+int	signal_handler_child(t_data *data)
+{
+	(void)data;
+	signal(SIGINT, (void *)ctrlc_handler);
+	signal(SIGQUIT, SIG_IGN);
+	return (0);
 }
 
 int	signal_handler(t_data *data)

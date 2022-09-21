@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_middle_odd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 18:29:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/17 17:28:48 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:54:09 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	ft_child_middle_odd(t_data *data, t_exec **pipeline, t_exec *exec)
 		return (EXIT_FAILURE);
 	}
 	else if (data->child == 0)
+	{
+		//childs
 		ft_child_middle_childprocess_odd(data, pipeline, exec);
+	}
 	return (EXIT_SUCCESS);
 }
 
