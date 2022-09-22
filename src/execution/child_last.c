@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:53:30 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/22 04:54:05 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/22 07:18:55 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_child_last(t_data *data, t_exec **pipeline, t_exec *exec, int len_exec)
 		return (EXIT_FAILURE);
 	}
 	if (data->child == 0)
-		//childs
 		ft_child_last_childprocess(data, pipeline, exec, pipefd);
 	data->last_pid = data->child;
 	return (EXIT_SUCCESS);

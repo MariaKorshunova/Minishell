@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:47:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 17:39:36 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/22 07:07:06 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 	while (data.exit_flag)
 	{
 		prompt = readline(PROMPT);
+		signal_handler_child(&data);
 		if (!prompt)
 			ft_error_read_prompt(&data);
 		if (execution(&data, prompt))

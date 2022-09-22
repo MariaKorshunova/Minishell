@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:59:10 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/22 04:52:57 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/22 07:19:02 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ int	ft_child_middle_even(t_data *data, t_exec **pipeline, t_exec *exec)
 		return (EXIT_FAILURE);
 	}
 	else if (data->child == 0)
-	{
-		//childs
 		ft_child_middle_childprocess_even(data, pipeline, exec);
-	}
 	return (EXIT_SUCCESS);
 }
 
