@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_without_pipe.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 21:57:31 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 21:52:35 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/22 18:54:10 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ static int	child_without_pipe(t_data *data, t_exec **pipeline,
 	if (data->child < 0)
 		return (EXIT_FAILURE);
 	else if (data->child == 0)
-	{
-		//childs
 		ft_exec(data, pipeline, exec);
-	}
 	wait(&(data->exit_status));
 	data->exit_status = data->exit_status % 255;
 	return (EXIT_SUCCESS);
