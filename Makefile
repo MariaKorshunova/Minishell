@@ -6,9 +6,10 @@
 #    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/13 22:00:12 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/22 18:53:10 by jmabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 .PHONY		:	all clean fclean re libft
 
@@ -24,7 +25,6 @@ HEADER		=	$(addprefix include/,\
 CFLAGS		=	-I include
 
 CFLAGS		+=	-Wall -Wextra -Werror
-CFLAGS		+=	-fsanitize=address -g
 
 LDFLAGS		=	-lreadline -L/Users/$(USER)/.brew/opt/readline/lib
 
@@ -37,6 +37,7 @@ LIBFT_H		= ./libft/libft.h
 FILE_C		=	main.c
 
 FILE_C		+=	$(addprefix parser/,\
+				change_init_env.c\
 				exec_fill.c\
 				exec_lstclear.c\
 				exec_lstcreate.c\
@@ -64,7 +65,8 @@ FILE_C		+=	$(addprefix execution/,\
 				exec_without_pipe.c\
 				exec.c\
 				execution.c\
-				file_operations.c\
+				file_close.c\
+				file_open.c\
 				heredoc.c\
 				open_files.c\
 				pipefd_operations.c\
@@ -76,7 +78,9 @@ FILE_C		+=	$(addprefix utils/,\
 				ft_strchr_pos.c\
 				ft_strjoin_with_endchar.c\
 				get_next_line.c\
+				get_path_tmp.c\
 				ft_strcmp.c\
+				key_value_lstadd.c\
 				key_value_lstcreate.c\
 				key_value_lstfunction.c\
 				key_value_lstclear.c\
@@ -91,10 +95,19 @@ FILE_C		+=	$(addprefix builtins/,\
 				ft_cd.c\
 				ft_env.c\
 				ft_exit.c\
-				builtin_utils.c)
+				builtin_utils.c\
+				cd_home_util.c\
+				error_builtins.c\
+				cd_change_dir.c\
+				ft_unset.c\
+				ft_export.c\
+				export_without_arg.c\
+				export_utils.c\
+				export_joinvalue.c)
 
 FILE_C		+=	$(addprefix signals/,\
-				signal.c)
+				signal.c\
+				heredoc_signal.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 

@@ -6,12 +6,13 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 17:19:22 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 19:10:43 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 13:06:15 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
+static int	open_infile_bypass(t_data *data, t_key_val *infile);
 static int	open_outfile_bypass(t_data *data, t_key_val *outfile);
 
 int	open_infile(t_data *data, t_key_val *infile)
@@ -19,24 +20,33 @@ int	open_infile(t_data *data, t_key_val *infile)
 	if (!infile)
 		return (EXIT_SUCCESS);
 	data->infile_flag = 1;
+	if (open_infile_bypass(data, infile))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	open_infile_bypass(t_data *data, t_key_val *infile)
+{
 	while (infile)
 	{
-		if (*(int *)infile->key == LESS)
+		if (open_infile_less(data, (char *)infile->value))
 		{
-			if (open_infile_less(data, (char *)infile->value))
-			{
-				ft_print_error(infile->value, strerror(errno));
-				return (EXIT_FAILURE);
-			}
-			if (infile->next)
-				ft_close_file(data->infile_fd, (char *)infile->value);
+			ft_print_error(infile->value, strerror(errno));
+			return (EXIT_FAILURE);
 		}
-		else if (*(int *)infile->key == DOUBLE_LESS)
+		if (infile->next)
 		{
-			if (ft_heredoc(data, infile))
-				return (EXIT_FAILURE);
-			if (infile->next)
-				ft_close_file(data->infile_fd, NULL);
+			ft_close_file(data->infile_fd, (char *)infile->value);
+			if (*(int *)infile->key == DOUBLE_LESS)
+				unlink((char *)infile->value);
+		}
+		else
+		{
+			if (*(int *)infile->key == DOUBLE_LESS)
+			{
+				data->infile_flag = 2;
+				data->name_heredoc = (char *)infile->value;
+			}
 		}
 		infile = infile->next;
 	}

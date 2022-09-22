@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 20:02:20 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 19:38:24 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/19 17:44:11 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 int	ft_env(t_data *data)
 {
-	while (data->env)
+	t_key_val	*temp;
+
+	temp = data->env;
+	while (temp)
 	{
-		printf("%s%c%s\n", (char *)data->env->key, '=',
-			(char *)data->env->value);
-		data->env = data->env->next;
+		if (temp->value)
+		{
+			printf("%s%c%s\n", (char *)temp->key, '=',
+				(char *)temp->value);
+		}
+		temp = temp->next;
 	}
-	return (0);
+	data->exit_status = 0;
+	return (data->exit_status);
 }

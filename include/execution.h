@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 18:16:28 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/13 22:00:44 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:36:35 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int			ft_child(t_data *data, t_exec **pipeline, int len_exec);
 /* error_execution.c */
 void		ft_print_error(char *name, char *str_error);
 void		ft_error_child_process(t_data *data, t_exec **pipeline);
+void		ft_error_read_prompt(t_data *data);
+void		ft_error_execution(t_data *data, char *prompt);
 
 /* exec_without_pipe.c */
 int			execution_without_pipe(t_data *data, t_exec **pipeline,
@@ -49,15 +51,18 @@ void		ft_exec(t_data *data, t_exec **pipeline, t_exec *exec);
 /* execution.c */
 int			execution(t_data *data, char *prompt);
 
-/* file_operations.c */
+/* file_close.c */
 void		ft_close_file(int fd, char *name);
+void		ft_close_files_with_check_flag(t_data *data);
+
+/* file_open.c */
 int			open_infile_less(t_data *data, char *infile);
 int			open_outfile_greater(t_data *data, char *name);
 int			open_outfile_doublegreater(t_data *data, char *name);
 void		init_file_flag(t_data *data);
 
 /* heredoc.c */
-int			ft_heredoc(t_data *data, t_key_val *infile);
+int			open_heredoc(t_data *data, t_exec *exec);
 
 /* open_files.c */
 int			open_infile(t_data *data, t_key_val *infile);

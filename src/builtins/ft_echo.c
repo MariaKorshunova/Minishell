@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 16:58:46 by refrain           #+#    #+#             */
-/*   Updated: 2022/09/07 21:46:22 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 20:14:20 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_max_index(char **cmd)
 {
 	int	index;
 
+	if (!cmd)
+		return (0);
 	index = 0;
 	while (cmd[index])
 		index++;
@@ -33,7 +35,9 @@ void	print_cmd(char **cmd, int i)
 			i++;
 		else
 		{
-			printf("%s%c", cmd[i++], 32);
+			printf("%s", cmd[i++]);
+			if (i != index)
+				printf("%c", 32);
 			while (cmd && cmd[i])
 			{
 				printf("%s", cmd[i++]);
@@ -48,9 +52,12 @@ int	ft_echo(char **cmd)
 {
 	int		i;
 	int		flag;
+	t_data	data;
 
 	i = 1;
 	flag = 0;
+	if (!cmd)
+		return (0);
 	if (cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
 	{
 		flag = 1;
@@ -59,5 +66,6 @@ int	ft_echo(char **cmd)
 	print_cmd(cmd, i);
 	if (flag == 0)
 		printf("\n");
-	return (0);
+	data.exit_status = 0;
+	return (data.exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/10 21:45:19 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 17:14:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,16 @@ typedef struct s_data
 	t_key_val	*env;
 	char		**env_arr;
 	char		**bin_path;
+	char		*key_tmp[4];
 	int			pipe1[2];
 	int			pipe2[2];
 	int			infile_flag;
 	int			outfile_flag;
+	char		*name_heredoc;
 	int			infile_fd;
 	int			outfile_fd;
 	pid_t		child;
-	int			change_env;
+	pid_t		last_pid;
 	int			exit_status;
 	int			exit_flag;
 }	t_data;
@@ -93,19 +95,27 @@ void		print_2dimensional_chararray(char **arr);
 /* .src/utils/envp_list_to_chararray.c */
 int			envp_list_to_chararray(t_data *data);
 
-/* ft_strchr_pos.c */
+/* .src/utils/ft_strchr_pos.c */
 int			ft_strchr_pos(char *s, int c);
+int			ft_strrchr_pos(char *s, int c);
 
-/* ft_strjoin_with_endchar.c */
+/* .src/utils/ft_strjoin_with_endchar.c */
 char		*ft_strjoin_with_endchar(char const *s1, char const *s2, char c);
 
-/* ft_strcmp.c */
+/* .src/utils/ft_strcmp.c */
 int			ft_strcmp(const char *s1, const char *s2);
+
+/* .src/utils/get_path_tmp.c */
+char		*get_path_tmp(t_data *data);
+
+/* .src/utils/key_value_lstadd.c */
+int			lst_addback_new_key_value(t_key_val **lst, char *key, char *value);
 
 /* .src/utils/key_value_lstcreate.c */
 t_key_val	*lstnew_key_value(void *key, void *value);
 void		lstadd_back_key_value(t_key_val **lst, t_key_val *new);
 int			lstnew_add_back_intkey_value(t_key_val **lst, int key, void *value);
+int			ft_put_new_value(t_key_val *env, char	*key, char *newval);
 
 /* .src/utils/key_value_lstfunction.c */
 t_key_val	*lstlast_key_value(t_key_val *lst);

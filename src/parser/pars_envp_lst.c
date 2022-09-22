@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pars_envp_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:29:21 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 18:30:01 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 17:49:17 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-static int	add_lst_env(t_key_val **lst, char *str, int j);
-static char	*pars_name_envp(char *str, int j, t_key_val	**lst);
-static char	*pars_value_envp(char *str, int j, t_key_val **lst, char *name);
 
 int	pars_envp_lst(t_key_val **lst, char **envp)
 {
@@ -34,7 +30,7 @@ int	pars_envp_lst(t_key_val **lst, char **envp)
 	return (EXIT_SUCCESS);
 }
 
-static int	add_lst_env(t_key_val **lst, char *str, int j)
+int	add_lst_env(t_key_val **lst, char *str, int j)
 {
 	t_key_val	*lstnew;
 	char		*name;
@@ -62,7 +58,7 @@ static int	add_lst_env(t_key_val **lst, char *str, int j)
 	return (EXIT_SUCCESS);
 }
 
-static char	*pars_name_envp(char *str, int j, t_key_val	**lst)
+char	*pars_name_envp(char *str, int j, t_key_val	**lst)
 {
 	char	*name;
 
@@ -75,7 +71,7 @@ static char	*pars_name_envp(char *str, int j, t_key_val	**lst)
 	return (name);
 }
 
-static char	*pars_value_envp(char *str, int j, t_key_val **lst, char *name)
+char	*pars_value_envp(char *str, int j, t_key_val **lst, char *name)
 {
 	char		*value;
 

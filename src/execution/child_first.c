@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_first.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:18:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/12 21:34:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/22 07:18:47 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_child_first(t_data *data, t_exec **pipeline, t_exec *exec)
 		ft_close_file(data->pipe1[0], NULL);
 		ft_close_file(data->pipe1[1], NULL);
 		return (EXIT_FAILURE);
-	}	
+	}
 	else if (data->child == 0)
 		ft_child_first_childprocess(data, pipeline, exec);
 	return (EXIT_SUCCESS);
@@ -59,13 +59,12 @@ static void	ft_child_first_childprocess(t_data *data, t_exec **pipeline,
 
 static void	redirect_child_first(t_data *data, t_exec **pipeline)
 {
-	if (data->infile_flag == 1)
+	if (data->infile_flag > 0)
 	{
 		if (dup2_infile_stdin(data))
 		{
 			perror(PREFIX_ERROR);
 			ft_close_file(data->pipe1[1], NULL);
-			ft_close_file(data->infile_fd, NULL);
 			if (data->outfile_flag == 1)
 				ft_close_file(data->outfile_fd, NULL);
 			ft_error_child_process(data, pipeline);
@@ -74,8 +73,10 @@ static void	redirect_child_first(t_data *data, t_exec **pipeline)
 	if (dup2(data->outfile_fd, STDOUT_FILENO) == -1)
 	{
 		perror(PREFIX_ERROR);
-		if (data->infile_flag == 1)
+		if (data->infile_flag > 0)
 			ft_close_file(data->infile_fd, NULL);
+		if (data->infile_flag == 2)
+			unlink(data->name_heredoc);
 		if (data->outfile_flag == 1)
 			ft_close_file(data->outfile_fd, NULL);
 		ft_close_file(data->pipe1[1], NULL);

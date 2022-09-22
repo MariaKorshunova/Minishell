@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:55 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/08 13:32:54 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 13:55:23 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 typedef struct s_data		t_data;
 typedef struct s_key_val	t_key_val;
 typedef struct s_exec		t_exec;
+
+/* change_init_env.c */
+int			change_init_env(t_key_val **env);
 
 /* exec_fill.c */
 int			fill_exec_by_condition(t_data *data, t_key_val **token,
@@ -66,6 +69,9 @@ int			lst_sum_len_content(t_list *lst);
 
 /* pars_envp_lst.c  */
 int			pars_envp_lst(t_key_val **lst, char **envp);
+int			add_lst_env(t_key_val **lst, char *str, int j);
+char		*pars_name_envp(char *str, int j, t_key_val	**lst);
+char		*pars_value_envp(char *str, int j, t_key_val **lst, char *name);
 
 /* pars_envp.c */
 int			pars_envp(t_data *data, char **envp);
@@ -75,7 +81,7 @@ int			ft_get_path(t_data *data);
 t_exec		*pipeline(t_data *data, t_key_val *token);
 
 /* parser.c */
-t_exec		*parser(t_data *data, char *prompt);
+int			parser(t_data *data, char *prompt, t_exec **exec);
 
 /* syntax_error.c */
 int			check_syntax_error(t_key_val *token_list);

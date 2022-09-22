@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_value_lstcreate.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 19:22:44 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/05 15:03:55 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 23:14:56 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,24 @@ int	lstnew_add_back_intkey_value(t_key_val **lst, int key, void *value)
 	}
 	lstadd_back_key_value(lst, lstnew);
 	return (EXIT_SUCCESS);
+}
+
+int	ft_put_new_value(t_key_val *env, char	*key, char *newval)
+{
+	t_key_val	*temp;
+
+	temp = env;
+	while (temp)
+	{
+		if (!ft_strcmp(key, (char *)temp->key))
+		{
+			free((char *)temp->value);
+			temp->value = ft_strdup(newval);
+			if (!(temp->value))
+				return (-1);
+			break ;
+		}
+		temp = temp->next;
+	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_list_to_chararray.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 16:11:26 by jmabel            #+#    #+#             */
-/*   Updated: 2022/07/25 17:57:29 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/19 19:27:12 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static char	*strjoin_envp_key_value(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
 	dest = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
 	if (dest == NULL)

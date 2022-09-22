@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_operations.c                                  :+:      :+:    :+:   */
+/*   file_open.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:30:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/13 21:23:06 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/17 17:21:43 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
-void	ft_close_file(int fd, char *name)
-{
-	if (close(fd) == -1)
-		ft_print_error(name, strerror(errno));
-}
 
 int	open_infile_less(t_data *data, char *infile)
 {

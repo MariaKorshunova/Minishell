@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 18:39:24 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 16:17:30 by refrain          ###   ########.fr       */
+/*   Created: 2022/09/22 18:43:24 by refrain           #+#    #+#             */
+/*   Updated: 2022/09/22 18:44:05 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+static void	heredoc_handler_util(int signal)
 {
-	int	i;
+	int		pid;
 
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] != '\0' && s2[i] != '\0' )
+	pid = waitpid(-1, NULL, WNOHANG);
+	if (signal == SIGQUIT)
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
+		write(1, "Quit: 3\n", 8);
 	}
-	if (s1[i] != '\0' || s2[i] != '\0')
-		return (s1[i] - s2[i]);
-	return (0);
+	if (signal == SIGINT)
+	{
+		if (!pid)
+			write(1, "\n", 1);
+		if (pid)
+		{
+			write(1, "\n", 1);
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+	}
+	exit (1);
+}
+
+void	signal_handler_heredoc(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, (void *)heredoc_handler_util);
 }
