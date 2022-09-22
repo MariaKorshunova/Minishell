@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:26:38 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 17:57:38 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 17:53:56 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,29 +68,18 @@ static int	ft_manage_middle_child(t_data *data, t_exec **pipeline,
 
 static int	wait_childs(t_data *data, int len_exec)
 {
-	int	i;
-	int	*status;
+	int		i;
+	int		status;
+	pid_t	child_pid;
 
-	i = 0;
-	status = (int *)malloc((len_exec + 1) * sizeof(int));
-	if (!status)
-		return (EXIT_FAILURE);
-	while (i < len_exec)
+	child_pid = wait(&status);
+	i = 1;
+	while (i <= len_exec)
 	{
-		if (wait(&(status[i])) == -1)
-		{
-			free(status);
-			return (EXIT_FAILURE);
-		}
+		if (WIFEXITED(status) && child_pid == data->last_pid)
+			data->exit_status = WEXITSTATUS(status);
+		child_pid = wait(&status);
 		i++;
 	}
-	data->exit_status = 0;
-	while (i > 0)
-	{
-		if (WIFEXITED(status[i]) != 0)
-			data->exit_status = WEXITSTATUS(status[i]);
-		i--;
-	}
-	free(status);
 	return (EXIT_SUCCESS);
 }

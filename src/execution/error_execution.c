@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 20:18:09 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 18:14:59 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/21 20:14:33 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_error_read_prompt(t_data *data)
 
 void	ft_error_execution(t_data *data, char *prompt)
 {
-	perror(PREFIX_ERROR);
 	printf("exit\n");
 	free(prompt);
 	destructor_minishell(data);

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:18:54 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 21:52:53 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/22 04:54:20 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_child_first(t_data *data, t_exec **pipeline, t_exec *exec)
 		ft_close_file(data->pipe1[0], NULL);
 		ft_close_file(data->pipe1[1], NULL);
 		return (EXIT_FAILURE);
-	}	
+	}
 	else if (data->child == 0)
 	{
 		//childs

@@ -6,7 +6,7 @@
 /*   By: refrain <refrain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:08:34 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/21 21:55:34 by refrain          ###   ########.fr       */
+/*   Updated: 2022/09/22 04:52:45 by refrain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,7 @@ static int	get_next_line_heredoc(char *stop, int fd)
 		//reading
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
-		{
-			perror(PREFIX_ERROR);
-			return (EXIT_FAILURE);
-		}
+			return (EXIT_SUCCESS);
 		if (ft_strncmp(line, stop, len_limiter) == 0)
 		{
 			if (line[len_limiter] == '\n')

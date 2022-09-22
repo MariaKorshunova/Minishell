@@ -17,16 +17,21 @@ static int	execution_pipe(t_data *data, t_exec **pipeline);
 int	execution(t_data *data, char *prompt)
 {
 	t_exec	*pipeline;
+	int		parser_status;
 
 	if (ft_strlen(prompt) == 0)
 		return (EXIT_SUCCESS);
 	add_history(prompt);
 	if (envp_list_to_chararray(data))
 		return (EXIT_FAILURE);
-	pipeline = NULL;
-	pipeline = parser(data, prompt);
-	if (pipeline == NULL)
+	if (ft_get_path(data))
 		return (EXIT_FAILURE);
+	pipeline = NULL;
+	parser_status = parser(data, prompt, &pipeline);
+	if (parser_status == -1)
+		return (EXIT_FAILURE);
+	if (parser_status == 1)
+		return (EXIT_SUCCESS);
 	if (execution_pipe(data, &pipeline))
 	{
 		lstclear_exec(&pipeline);

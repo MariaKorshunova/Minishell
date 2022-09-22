@@ -6,7 +6,7 @@
 /*   By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 18:53:33 by jmabel            #+#    #+#             */
-/*   Updated: 2022/09/19 21:02:32 by jmabel           ###   ########.fr       */
+/*   Updated: 2022/09/21 17:14:53 by jmabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_data
 	int			infile_fd;
 	int			outfile_fd;
 	pid_t		child;
-	int			change_env;
+	pid_t		last_pid;
 	int			exit_status;
 	int			exit_flag;
 }	t_data;
