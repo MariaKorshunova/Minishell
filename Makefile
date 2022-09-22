@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmabel <jmabel@student.42.fr>              +#+  +:+       +#+         #
+#    By: refrain <refrain@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/14 16:43:04 by jmabel            #+#    #+#              #
-#    Updated: 2022/09/21 20:13:14 by jmabel           ###   ########.fr        #
+#    Updated: 2022/09/22 18:48:14 by refrain          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,8 @@ FILE_C		+=	$(addprefix builtins/,\
 				export_joinvalue.c)
 
 FILE_C		+=	$(addprefix signals/,\
-				signal.c)
+				signal.c\
+				heredoc_signal.c)
 
 SRCS		=	$(addprefix src/, $(FILE_C))
 
